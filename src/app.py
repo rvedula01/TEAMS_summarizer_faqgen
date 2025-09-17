@@ -732,53 +732,47 @@ MAX_CHARS_PER_CHUNK = 3000
 
 def count_pages_in_docx(docx_path):
     """
-    Count pages in a Word document using a cross-platform approach.
-    On Windows, uses Word for accurate count via PDF conversion.
-    On Linux/Streamlit Cloud, estimates based on content length and formatting.
+    Estimate the number of pages in a Word document.
+    
+    This function provides a cross-platform way to estimate the number of pages
+    by analyzing the document's content (words, images, tables) rather than
+    relying on platform-specific features.
     """
     try:
-        # On Windows, use the COM approach for better accuracy
-        if platform.system() == 'Windows':
-            with tempfile.NamedTemporaryFile(suffix='.pdf', delete=False) as temp_pdf:
-                temp_pdf_path = temp_pdf.name
-            
-            try:
-                # Convert DOCX to PDF
-                convert_docx_to_pdf(docx_path, temp_pdf_path)
-                
-                # Count pages in the PDF
-                with open(temp_pdf_path, 'rb') as f:
-                    pdf = PdfReader(f)
-                    return len(pdf.pages)
-            finally:
-                # Clean up the temporary PDF
-                if os.path.exists(temp_pdf_path):
-                    try:
-                        os.remove(temp_pdf_path)
-                    except:
-                        pass
-        
-        # For Linux/Streamlit Cloud, use a more sophisticated estimation
         from docx import Document
-        from docx.oxml import parse_xml
-        from docx.oxml.ns import nsdecls
+        import docx.oxml
         
-        doc = Document(docx_path)
+        # Default to 1 page if anything goes wrong
+        default_pages = 1
         
-        # Count words in paragraphs
-        word_count = sum(len(para.text.split()) for para in doc.paragraphs if para.text.strip())
-        
-        # Count images and tables (each takes up space)
-        image_count = len(doc.inline_shapes)
-        table_count = len(doc.tables)
-        
-        # Estimate pages based on content
-        # - Assume ~500 words per page
-        # - Each image/table is roughly equivalent to 100 words
-        estimated_pages = (word_count + (image_count * 100) + (table_count * 100)) / 500
-        
-        # Ensure at least 1 page and round up
-        return max(1, int(estimated_pages) + (1 if estimated_pages % 1 > 0.1 else 0))
+        try:
+            doc = Document(docx_path)
+            
+            # Count words in paragraphs (only non-empty paragraphs)
+            word_count = 0
+            for para in doc.paragraphs:
+                if para.text.strip():
+                    word_count += len(para.text.split())
+            
+            # Count images and tables (each takes up space)
+            image_count = len(doc.inline_shapes) if hasattr(doc, 'inline_shapes') else 0
+            table_count = len(doc.tables) if hasattr(doc, 'tables') else 0
+            
+            # Estimate pages based on content
+            # - Assume ~500 words per page
+            # - Each image/table is roughly equivalent to 100 words
+            estimated_pages = (word_count + (image_count * 100) + (table_count * 100)) / 500
+            
+            # Ensure at least 1 page and round up
+            return max(1, int(estimated_pages) + (1 if estimated_pages % 1 > 0.1 else 0))
+            
+        except Exception as e:
+            print(f"Warning: Could not estimate pages using python-docx: {e}")
+            return default_pages
+            
+    except ImportError:
+        print("Warning: python-docx not available, using default page count")
+        return 1  # Default to 1 page if python-docx is not available
         
     except Exception as e:
         print(f"Warning: Could not count pages accurately: {e}")
