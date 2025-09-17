@@ -7,6 +7,13 @@ Created on Fri Jun  6 15:18:14 2025
 
 import os
 import sys
+from pathlib import Path
+from dotenv import load_dotenv
+
+# Load environment variables from .env file in the project root
+dotenv_path = Path(__file__).parent.parent / '.env'
+load_dotenv(dotenv_path=dotenv_path)
+
 import re
 import json
 import ast

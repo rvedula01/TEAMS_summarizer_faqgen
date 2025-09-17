@@ -12,11 +12,15 @@ from dotenv import load_dotenv
 from src.text_processing import _split_raw_into_chunks
 import ast
 
-load_dotenv()
+from pathlib import Path
+
+# Load environment variables from .env file in the project root
+dotenv_path = Path(__file__).parent.parent / '.env'
+load_dotenv(dotenv_path=dotenv_path)
 
 api_key = os.getenv('OPENAI_API_KEY')
 if not api_key:
-    raise ValueError("OPENAI_API_KEY environment variable not set. Please set it in a .env file or your environment.")
+    raise ValueError("OPENAI_API_KEY environment variable not set. Please set it in a .env file in the project root.")
 _client = openai.OpenAI(api_key=api_key)
 
 

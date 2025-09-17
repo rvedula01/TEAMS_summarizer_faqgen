@@ -9,10 +9,12 @@ Created on Fri Jun  6 15:16:46 2025
 
 import os
 import openai
+from pathlib import Path
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
+# Load environment variables from .env file in the project root
+dotenv_path = Path(__file__).parent.parent / '.env'
+load_dotenv(dotenv_path=dotenv_path)
 
 def call_openai_chat(prompt: str, model: str = "gpt-3.5-turbo") -> str:
     """
