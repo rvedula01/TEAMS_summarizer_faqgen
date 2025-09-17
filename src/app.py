@@ -60,6 +60,7 @@ from file_io import (
 from text_processing import clean_transcript, summarize_transcript, chunked_clean_and_summarize
 from text_processing import chunked_clean_and_summarize, _split_raw_into_chunks
 from aggregator import read_chunk_summaries, summarize_timeline, summarize_table, extract_single_markdown_table
+from openai_client import call_openai_chat
 
 # Import the merge functionality
 from merge_chat_transcript import merge_chat_and_transcript, convert_chat_only
@@ -233,11 +234,16 @@ def _process_chunk_for_faqs(chunk: str) -> List[Dict[str, str]]:
     Helper function to process a single chunk of text for FAQs using OpenAI.
     """
     try:
+        print("\n=== Starting FAQ Extraction ===")
+        print(f"Chunk size: {len(chunk)} characters")
+        
         # First, try to extract any existing Q&A pairs directly from the text
         qa_pairs = _extract_existing_qa_pairs(chunk)
         if qa_pairs:
             print(f"Found {len(qa_pairs)} Q&A pairs directly in the text")
             return qa_pairs
+        
+        print("No direct Q&A pairs found, using LLM to generate them...")
             
         # If no direct Q&A pairs found, use the LLM to generate them
         prompt = f"""
@@ -274,40 +280,118 @@ Text to analyze:
 {chunk}
 """
         
+        print("Sending request to OpenAI...")
         response = call_openai_chat(prompt=prompt, model="gpt-4o")
         
+        if not response:
+            print("ERROR: Empty response from OpenAI")
+            return []
+            
         # Print raw response for debugging
-        print(f"\nRaw response content: {response}")
+        print(f"\n=== Raw response from OpenAI ===")
+        print(f"Response type: {type(response)}")
+        print(f"Response length: {len(response)} characters")
+        print(f"Response preview: {response[:200]}...")
         
         # Remove any code block markers and trim whitespace
         cleaned_content = response.replace("```json", "").replace("```", "").strip()
         
         # Try multiple parsing methods
-        try:
-            # Try json.loads first
-            faqs = json.loads(cleaned_content)
-            if isinstance(faqs, list) and all(isinstance(item, dict) and 'question' in item and 'answer' in item for item in faqs):
-                return faqs
-            print(f"JSON parsed content doesn't match expected format: {faqs}")
-        except Exception as e:
-            print(f"json.loads failed: {e}")
+        print("\nAttempting to parse response...")
+        
+        # First, try to find JSON array in the response
+        json_start = cleaned_content.find('[')
+        json_end = cleaned_content.rfind(']') + 1
+        
+        if json_start >= 0 and json_end > json_start:
+            json_str = cleaned_content[json_start:json_end]
+            print(f"Extracted JSON string (length: {len(json_str)}): {json_str[:100]}...")
             
-            # Try ast.literal_eval as backup
             try:
-                faqs = ast.literal_eval(cleaned_content)
-                if isinstance(faqs, list) and all(isinstance(item, dict) and 'question' in item and 'answer' in item for item in faqs):
-                    return faqs
-                print(f"ast.literal_eval parsed content doesn't match expected format: {faqs}")
-            except Exception as e2:
-                print(f"ast.literal_eval failed: {e2}")
+                # Try json.loads first
+                faqs = json.loads(json_str)
+                print(f"Successfully parsed JSON with {len(faqs) if isinstance(faqs, list) else 0} items")
                 
-        # If all parsing attempts fail, return empty list
-        print(f"\nFailed to parse FAQ response after all attempts:")
-        print(f"Cleaned content: {cleaned_content}")
+                if isinstance(faqs, list) and len(faqs) > 0:
+                    # Validate each item in the list
+                    valid_faqs = []
+                    for i, item in enumerate(faqs):
+                        if not isinstance(item, dict):
+                            print(f"Warning: Item {i} is not a dictionary: {item}")
+                            continue
+                            
+                        if 'question' not in item or 'answer' not in item:
+                            print(f"Warning: Item {i} is missing required fields: {item}")
+                            continue
+                            
+                        # Convert values to strings and clean them
+                        question = str(item.get('question', '')).strip()
+                        answer = str(item.get('answer', '')).strip()
+                        
+                        if question and answer:  # Only add if both fields are non-empty
+                            valid_faqs.append({
+                                'question': question,
+                                'answer': answer
+                            })
+                    
+                    if valid_faqs:
+                        print(f"Successfully extracted {len(valid_faqs)} valid FAQs")
+                        return valid_faqs
+                    
+                    print("No valid FAQs found after validation")
+                else:
+                    print("No FAQs found in the parsed JSON")
+                    
+            except json.JSONDecodeError as e:
+                print(f"JSON decode error: {e}")
+                # Fall through to try other parsing methods
+            except Exception as e:
+                print(f"Unexpected error parsing JSON: {e}")
+                # Fall through to try other parsing methods
+        
+        # If we get here, try ast.literal_eval as a fallback
+        print("Trying ast.literal_eval as fallback...")
+        try:
+            faqs = ast.literal_eval(cleaned_content)
+            print(f"ast.literal_eval parsed content with {len(faqs) if isinstance(faqs, list) else 0} items")
+            
+            if isinstance(faqs, list) and len(faqs) > 0:
+                # Validate each item in the list
+                valid_faqs = []
+                for i, item in enumerate(faqs):
+                    if not isinstance(item, dict):
+                        continue
+                        
+                    question = str(item.get('question', '')).strip()
+                    answer = str(item.get('answer', '')).strip()
+                    
+                    if question and answer:  # Only add if both fields are non-empty
+                        valid_faqs.append({
+                            'question': question,
+                            'answer': answer
+                        })
+                
+                if valid_faqs:
+                    print(f"Successfully extracted {len(valid_faqs)} valid FAQs using ast.literal_eval")
+                    return valid_faqs
+                
+                print("No valid FAQs found after ast.literal_eval validation")
+            else:
+                print("No FAQs found in the ast.literal_eval result")
+                
+        except Exception as e:
+            print(f"ast.literal_eval failed: {e}")
+                
+        # If we get here, all parsing attempts have failed
+        print("\n=== FAQ Extraction Failed ===")
+        print("All parsing attempts failed. Raw cleaned content:")
+        print(cleaned_content[:500] + ("..." if len(cleaned_content) > 500 else ""))
         return []
             
     except Exception as e:
         print(f"Error processing chunk for FAQs: {e}")
+        import traceback
+        traceback.print_exc()
         return []
 
 def _extract_existing_qa_pairs(text: str) -> List[Dict[str, str]]:
