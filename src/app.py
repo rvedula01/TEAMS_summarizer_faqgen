@@ -1276,6 +1276,20 @@ def main():
                 file_type = get_file_type(file.name)
                 if file_type == 'transcript' and transcript_file is None:
                     transcript_file = file
+                    
+                    # Save the uploaded file temporarily to count pages
+                    temp_path = os.path.join(tempfile.gettempdir(), file.name)
+                    with open(temp_path, "wb") as f:
+                        f.write(file.getbuffer())
+                    
+                    # Calculate and store total pages in session state
+                    st.session_state['total_pages'] = count_pages_in_docx(temp_path)
+                    
+                    # Clean up the temporary file
+                    try:
+                        os.remove(temp_path)
+                    except:
+                        pass
                 elif file_type == 'chat' and chat_file is None:
                     chat_file = file
                 
@@ -1603,8 +1617,10 @@ def main():
                                 unsafe_allow_html=True
                             )
                             
-                            total_pages = total_pages if 'total_pages' in locals() or 'total_pages' in globals() else 1
-                            # Update progress
+                            # Get total_pages from session state or default to 1
+                            total_pages = st.session_state.get('total_pages', 1)
+                            
+                            # Calculate current page and progress
                             current_page = min((i + 1) * pages_per_chunk, total_pages)
                             progress_percentage = current_page / total_pages
                             progress_bar.progress(progress_percentage)
