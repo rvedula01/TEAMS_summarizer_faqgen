@@ -8,12 +8,15 @@ Created on Mon Jun  9 15:14:48 2025
 
 import os
 from dotenv import load_dotenv
+from pathlib import Path
 from openai_client import call_openai_chat
 from file_io import save_text_to_docx
 from text_processing import chunked_clean_and_summarize
 import re
-# Load environment variables
-load_dotenv()
+
+# Load environment variables from .env file in the project root
+dotenv_path = Path(__file__).parent.parent / '.env'
+load_dotenv(dotenv_path=dotenv_path)
 
 # Folder containing chunked summaries
 SOURCE_FOLDER = "debug_chunks"

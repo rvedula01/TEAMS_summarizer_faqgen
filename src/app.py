@@ -72,6 +72,7 @@ os.environ['STREAMLIT_SERVER_FILE_WATCHER_TYPE'] = 'none'
 
 os.environ['STREAMLIT_FILE_WATCHER'] = 'none'
 
+st.write("API Key exists:", os.getenv("OPENAI_API_KEY") is not None)
 
 def replace_png_placeholder_fixed(match):
     """

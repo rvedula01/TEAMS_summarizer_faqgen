@@ -6,10 +6,12 @@ import re
 from datetime import datetime
 from typing import Dict, List, Tuple, Optional
 from dotenv import load_dotenv
+from pathlib import Path
 import openai
 
-# Load environment variables from .env file
-load_dotenv()
+# Load environment variables from .env file in the project root
+dotenv_path = Path(__file__).parent.parent / '.env'
+load_dotenv(dotenv_path=dotenv_path)
 from docx import Document
 from docx.document import Document as DocumentType
 from docx.oxml.table import CT_Tbl
