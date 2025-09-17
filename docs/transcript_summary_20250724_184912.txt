@@ -1,0 +1,374 @@
+=== TRANSCRIPT SUMMARY REPORT ===
+
+EXECUTIVE SUMMARY:
+==================================================
+The meeting focused on addressing a critical network incident at a US factory site, triggered by a power outage that impacted the network room. This incident was escalated to a Priority 1 (P1) due to its significant effect on operations, necessitating a bridge call and strict adherence to communication protocols for effective incident management. Key contributors included Ryan, who managed communication efforts and confirmed network stability, and Neerav, who led the technical resolution and Root Cause Analysis (RCA). Praveen provided updates on the network status and coordinated with electricians, while Harish addressed power reliability by planning a UPS backup solution. Goutham facilitated stakeholder communication and coordinated with the telco for priority ticketing, with Chandhan and Aryan assisting in troubleshooting and ensuring the exchange of technical details.
+
+Significant decisions included the escalation of the incident to a major status, identifying the root cause as a power failure, and planning a UPS backup installation within three weeks to enhance power reliability. The Trump server issue was prioritized, and ongoing issues with access points and switches were addressed through coordinated efforts. Key action items involve Neerav continuing to monitor network devices and work on the RCA, Harish overseeing the UPS installation, and Goutham managing communications and telco collaboration. Aryan and Chandhan will ensure the sharing of necessary templates and resolve access point issues, respectively. The incident began at 2:42 PM local time, with responses by 3:29 PM, and continuous updates are vital to keep all parties informed.
+
+COMPREHENSIVE SUMMARY:
+==================================================
+The discussion revolves around a critical network incident at a US factory site, primarily caused by a power outage affecting the network room. The incident was escalated to a Priority 1 (P1) due to its impact on operations, prompting the initiation of a bridge call and adherence to communication protocols for efficient incident management.
+
+**Key Speakers and Their Contributions:**
+- **Ryan** emphasized the importance of raising a P1 incident and coordinated communication efforts, ensuring all stakeholders were informed. He also confirmed the restoration of network devices and validated their stability.
+- **Neerav** focused on the technical resolution, confirming the impact on all applications and actively investigating issues with specific network devices and switches. He was tasked with working on the Root Cause Analysis (RCA) and coordinating with team members for further validation.
+- **Praveen** provided updates on the network status, confirmed the timeline of the incident, and liaised with electricians to resolve the power issue.
+- **Harish** addressed power reliability concerns, overseeing the implementation of a UPS backup solution to prevent future outages. He also prioritized resolving the Trump server issue.
+- **Goutham** facilitated communication and ensured that all necessary updates and results were disseminated to stakeholders. He also coordinated with the telco for priority ticketing.
+- **Chandhan** and **Aryan** assisted in troubleshooting network device issues and ensured the exchange of necessary technical details and templates for future incidents.
+
+**Important Decisions and Conclusions:**
+- The incident was escalated to a major incident due to its critical nature, and a P1 incident process was followed.
+- The root cause was identified as a power failure, with electricians working to restore power to the network room.
+- A UPS backup solution is planned to enhance power reliability, with installation scheduled in three weeks.
+- The Trump server issue was prioritized, and ongoing issues with access points and switches were addressed through coordinated efforts.
+
+**Action Items and Next Steps:**
+1. **Neerav** will continue to monitor and validate network devices, work on the RCA, and coordinate with Chandhan for unresolved issues.
+2. **Harish** will oversee the UPS installation and ensure power backup solutions are implemented.
+3. **Goutham** will send out communications about the network status and collaborate with the telco for priority ticketing.
+4. **Aryan** will share necessary templates and calling numbers with Neerav for future incidents.
+5. **Chandhan** will assist in resolving access point issues and ensure technical findings are documented.
+
+**Critical Information:**
+- The incident began at 2:42 PM local time, with devices responding by 3:29 PM.
+- The site ID involved is XXXX, and the incident time is confirmed as 1843 GMT.
+- Continuous updates and communication are crucial to ensure all parties are informed of the situation and any changes in status.
+- The sharing of forms, templates, and calling numbers is essential for streamlining future incident management processes.
+
+DETAILED CHUNK SUMMARIES:
+==================================================
+
+Chunk 1:
+--------------------
+**Summary:**
+
+**Key Speakers and Main Points:**
+1. **Ryan** - Initiates the conversation with Neerav and Aryan, discussing communication protocols for contacting the service desk. Ryan emphasizes the importance of raising a P1 (Priority 1) and initiating a bridge for critical issues.
+2. **Neerav ABC/XYZ** - Highlights the critical nature of the issue at a US factory site, where both AB systems are unreachable due to a power issue. Neerav stresses the need to follow the process for P1 incidents and notifications.
+3. **Aryan** - Agrees to share the service number 121 with Ryan after the call and inquires about the specific issue at the site.
+4. **Praveen** - Confirms that the entire factory's network is down due to a power outage lasting 10 to 15 minutes.
+
+**Important Decisions or Conclusions:**
+- The decision to initiate a P1 incident and a bridge call was made to address the critical network issue at the factory site.
+- It was concluded that the power issue is the cause of the network downtime, affecting the site's operations.
+
+**Action Items or Next Steps:**
+1. Aryan will share the service number 121 with Ryan after the call.
+2. The team will proceed with the P1 incident process and send necessary notifications as per protocol.
+3. Praveen and the team will continue monitoring the situation and work towards restoring network connectivity at the factory site.
+
+**Critical Information That Should Not Be Lost:**
+- The factory site in the US is critical and currently isolated due to a network issue caused by a power outage.
+- The P1 incident and bridge initiation are crucial steps in addressing and resolving the issue.
+- Communication protocols, including the use of service desk numbers and pressing specific options, are vital for efficient incident management.
+
+Chunk 2:
+--------------------
+**Summary:**
+
+**Key Speakers and Their Main Points:**
+- **Ryan (A):** Ryan is actively seeking clarification on the current status of the network and the impact of the power issue. He asks about the applications affected and the ongoing investigations to resolve the problem.
+- **Neerav (N):** Neerav confirms that all applications are affected by the network issue and mentions that they are waiting for confirmation from onsite users about the status of the network equipment. He highlights that the network room, specifically the network devices, are the focus of the issue.
+- **Raveen (P):** Raveen clarifies that the main power in the building is operational, but the network room, where critical network equipment is housed, is still without power. He emphasizes that electricians are working on resolving the issue, and the team is dependent on their progress.
+
+**Important Decisions or Conclusions:**
+- The main power in the building is functioning, but the network room's power issue is causing a complete network outage.
+- The resolution of the network issue is contingent upon the electricians restoring power to the network room.
+
+**Action Items or Next Steps:**
+- Await confirmation from onsite users regarding the status of the network equipment once power is restored.
+- Continue to monitor the progress of the electricians working on the power issue in the network room.
+- Maintain communication to update all stakeholders on the status and resolution of the network outage.
+
+**Critical Information That Should Not Be Lost:**
+- The entire network is down due to a power issue in the network room, impacting all applications.
+- The resolution is dependent on the electricians restoring power to the specific room housing network equipment.
+- Continuous updates and communication are essential to ensure all parties are informed of the situation and any changes in status.
+
+Chunk 3:
+--------------------
+**Summary:**
+
+**Key Speakers and Their Main Points:**
+
+1. **Ryan**: 
+   - Elevated the issue to a major incident and will send a notification.
+   - Inquired about the estimated time of resolution from the electrician.
+   - Provided a recap of the situation, highlighting the critical nature of the site and the power failure that led to network issues.
+   - Confirmed that the network devices are back up and being validated.
+
+2. **Praveen**:
+   - Confirmed that no estimated time of arrival (ETA) was provided by the electrician.
+   - Shared the timeline of the incident, noting that the issue started at 2:42 PM local time and devices began responding at 3:29 PM.
+
+3. **Neerav**:
+   - Noted that the board devices are showing up and is in the process of logging into them for further checks.
+   - Confirmed the site ID as XXXX.
+
+4. **Goutham**:
+   - Acknowledged the site ID and thanked others for the information.
+
+**Important Decisions or Conclusions:**
+
+- The incident has been escalated to a major incident due to its impact on a critical site.
+- Network devices are back online, and validations are ongoing to ensure stability.
+
+**Action Items or Next Steps:**
+
+- Ryan will send out a notification regarding the major incident status.
+- Praveen will continue to liaise with the electrician for updates on the power issues.
+- Neerav will check with site users and continue logging into devices for further validation.
+
+**Critical Information That Should Not Be Lost:**
+
+- The incident began at 2:42 PM local time (18:42 GMT) and devices started responding at 3:29 PM (19:29 GMT).
+- The site ID involved in the incident is XXXX.
+- The root cause of the issue was a power failure at the site, leading to network isolation.
+
+Chunk 4:
+--------------------
+In this transcript segment, several key speakers are involved in addressing technical issues at a site. The main speakers include Neerav, Ryan, Praveen, and Goutham.
+
+- **Neerav** is responsible for ensuring that all devices on site are operational. He reports that multiple switches were rebooted and are now reachable, though some are still pending updates. He also investigates a specific switch (Switch XX) that is experiencing instability.
+
+- **Ryan** is coordinating communication and confirms with Praveen about the status of devices at the site. He also plans to involve the user who raised the ticket to identify the local site contact.
+
+- **Praveen** is part of the global network services team and is tasked with confirming the operational status of the devices. He suggests checking if the devices that went down are connected to a single power source and provides details about issues with Wi-Fi access points (APs) not joining the controller. He also shares information about the switches and IDs in the chat.
+
+- **Goutham** seeks clarification on the site contact and the responsibility for power connectivity issues, confirming that these will be handled locally.
+
+**Important Decisions or Conclusions:**
+- The issue with the devices is being actively investigated, with a focus on power sources and connectivity.
+- Local site contact needs to be identified to address power connectivity issues.
+
+**Action Items or Next Steps:**
+- Neerav will continue to monitor and update the status of the remaining switches.
+- Praveen will work on getting a list of Wi-Fi APs not connected to the controller.
+- Ryan will involve the user who raised the ticket to identify the local site contact.
+
+**Critical Information:**
+- Multiple switches were power rebooted and are now reachable.
+- Some Wi-Fi APs are not connected to the controller, and a list is being compiled.
+- Switch XX is experiencing fluctuations and needs further investigation.
+
+Chunk 5:
+--------------------
+**Summary:**
+
+**Key Speakers and Main Points:**
+
+1. **Raveen**: 
+   - Experiencing packet loss and suspects issues with the link or ether channel.
+   - Concerned about link flapping affecting connectivity.
+   - Identified issues with Switch 2 in the receiving area, which is unstable.
+
+2. **Neerav (ABC/XYZ)**:
+   - Acknowledges Raveen's concerns and agrees, noting command delays.
+   - Investigating the issues with Switch 2.
+
+3. **Gautham**:
+   - Provided an update on network devices at the Floura Site, which faced power-related downtime but are now stable.
+   - Questioned the lack of backup power for network devices and plans for UPS installation.
+
+4. **Ryan**:
+   - Asked for updates on the status of the devices.
+
+5. **Harish**:
+   - Explained the power outage was due to external damage and transformer failure.
+   - Working on a UPS backup solution and confirmed a contractor is scheduled for UPS installation in three weeks.
+   - Clarified the issue with Switch 2, noting a bad second stack switch was removed.
+
+**Important Decisions or Conclusions:**
+
+- A UPS backup solution is being planned and a contractor is scheduled for installation in three weeks to address power reliability issues.
+- Neerav is actively investigating the instability of Switch 2.
+
+**Action Items or Next Steps:**
+
+1. **Neerav**: Continue investigating the issues with Switch 2 to determine the cause of its instability.
+2. **Harish**: Oversee the UPS installation and ensure the backup power solution is implemented as planned.
+3. **Team**: Monitor the network stability at the Floura Site following the recent power-related downtime.
+
+**Critical Information That Should Not Be Lost:**
+
+- The Floura Site experienced power-related downtime due to external damage and transformer failure.
+- A UPS backup solution is being implemented to prevent future power-related issues.
+- Switch 2 in the receiving area is unstable, and Neerav is investigating the cause.
+
+Chunk 6:
+--------------------
+**Summary:**
+
+**Key Speakers and Main Points:**
+1. **Raveen** - Initiates the discussion by mentioning that three Access Points (APs) have not joined the controller yet. Raveen requests updates on the status of these APs.
+2. **Harish** - Provides updates on the status of the APs, noting that one AP in the war room is blinking green and red, indicating a potential issue. Harish also checks the APs in the HR area and reports on their status.
+3. **Eerav** - Inquires about the uplink switch for the APs and mentions receiving an email from the support team about issues with the switch. Eerav takes action by bouncing the port to resolve connectivity issues and notes that similar issues have been resolved this way in the past.
+
+**Important Decisions or Conclusions:**
+- The team identifies that the APs are experiencing connectivity issues, likely due to problems with the uplink switch.
+- Eerav decides to bounce the port to attempt to resolve the connectivity issues, a method that has been successful in the past.
+
+**Action Items or Next Steps:**
+- Eerav will monitor the APs after bouncing the port to see if they come back online.
+- Harish will continue to check the status of the APs to ensure they are functioning correctly.
+- The team will need to address the issue with the switch to prevent future connectivity problems.
+
+**Critical Information That Should Not Be Lost:**
+- The APs are not connecting to the controller, likely due to issues with the uplink switch.
+- Bouncing the port has been identified as a potential solution, based on past experiences.
+- The APs may be downloading new code, as indicated by the blinking green and red lights, suggesting they might have lost their image.
+
+Chunk 7:
+--------------------
+**Summary:**
+
+**Key Speakers and Their Main Points:**
+1. **Harish** - Noted that the Trump server is down and indicated a need to prioritize addressing this issue.
+2. **Praveen (Raveen)** - Emphasized the importance of focusing on the server issue and suggested that Harish should prioritize it over the call. Later, Praveen agreed to send out a communication about the network status, noting that some wireless access points might still be down.
+3. **Goutham** - Highlighted the need for impact numbers and a root cause analysis (RCA). He requested collaboration with the telco to fill out a form for a priority ticket. He also asked about sending a communication regarding the network status.
+4. **Neerav** - Confirmed the status of the controller and suggested inviting Chandhan Chaudh from the Linux team to assist with unresolved issues. He communicated the current situation to Chandhan.
+5. **Chandhan** - Joined the conversation to assist with the issues related to the access points (APs).
+
+**Important Decisions or Conclusions:**
+- The decision was made to prioritize fixing the Trump server issue.
+- A communication will be sent out to inform stakeholders about the network status, with a note about potential remaining issues with some wireless access points.
+- The involvement of Chandhan Chaudh from the Linux team was agreed upon to help resolve the remaining issues.
+
+**Action Items or Next Steps:**
+1. **Harish** - To prioritize and work on the Trump server issue.
+2. **Goutham** - To send out a communication about the network status and collaborate with the telco for the priority ticket.
+3. **Neerav** - To coordinate with Chandhan Chaudh and verify the status of the access points.
+4. **Chandhan** - To assist in resolving the issues with the access points.
+
+**Critical Information That Should Not Be Lost:**
+- The Trump server is currently down, and resolving this is a priority.
+- Some wireless access points may still be down even after the network is back up.
+- Collaboration with the telco is necessary for completing the priority ticket.
+- Chandhan Chaudh's involvement is crucial for addressing the remaining technical issues.
+
+Chunk 8:
+--------------------
+**Summary of Transcript Segment:**
+
+**Key Speakers and Their Main Points:**
+1. **Harish** - Mentioned as a local contact for the site, though his direct input in this segment is not detailed.
+2. **Eerav (ABC/XYZ)** - Discussed the status of the network devices, mentioning that they can ping the IP addresses and have attempted to resolve issues by bouncing the port on switch #10. Eerav also noted a known issue with switch #2 and provided specific device identifiers (e.g., AP 1212).
+3. **Handhan (ABC/DEF)** - Engaged in troubleshooting, checking the status of devices and attempting to log into systems to diagnose issues further. Acknowledged the problem with specific devices (AB 4:45 and 12:00) and was actively working on resolving it.
+4. **Raveen** - Provided clarification in the chat about device identifiers (corrected to ab-02 from ap-07) and was involved in the discussion about the connection issues.
+
+**Important Decisions or Conclusions:**
+- There is a known issue with switch #2, which has been communicated with the project team, indicating ongoing troubleshooting efforts.
+- Handhan is actively working to resolve the connectivity issues by logging into the system and checking device statuses.
+
+**Action Items or Next Steps:**
+- Handhan is to continue troubleshooting by logging into the system and checking the devices' statuses.
+- Further investigation into the "details handshake expired" error is needed to resolve the connection failure.
+- Eerav and Handhan to coordinate on resolving the issues with the specific devices mentioned (AB 4:45 and 12:00).
+
+**Critical Information That Should Not Be Lost:**
+- The specific devices and switches involved in the issue (e.g., AB 4:45, 12:00, switch #10, switch #2).
+- The known issue with switch #2 and the ongoing communication with the project team regarding this.
+- The correction of device identifiers from ap-07 to ab-02 as noted by Raveen.
+- The "details handshake expired" error that requires further investigation to resolve the connection issues.
+
+Chunk 9:
+--------------------
+**Summary:**
+
+**Key Speakers and Their Main Points:**
+1. **Raveen** - Inquired about the steps needed to fix an issue and suggested leaving a ticket open until certain conditions are met.
+2. **Ryan** - Requested that a ticket be assigned to Raveen's group for closure.
+3. **Eerav (ABC/XYZ)** - Argued against reassigning the ticket, stating that their team typically resolves such issues. Suggested starting a PBI (Product Backlog Item) and working with Harish on a network outage issue.
+4. **Harish** - Asked for clarification on what was needed from him.
+5. **Goutham** - Agreed with the proposed plan.
+
+**Important Decisions or Conclusions:**
+- The ticket will remain with the OBS team, and they will handle the resolution using their established process.
+- The bridge call is not necessary to remain open as the critical part of the issue (Sev one) is resolved.
+
+**Action Items or Next Steps:**
+- Eerav will open a new incident for the remaining issues (three ABC) to be addressed separately.
+- Raveen will keep the ticket open until the ABC issues are fully resolved.
+- The team will proceed with starting a PBI and collaborating with Harish on the network outage.
+
+**Critical Information That Should Not Be Lost:**
+- The decision to not reassign the ticket and to handle it within the current team.
+- The resolution of the Sev one issue, which negates the need for an ongoing bridge call.
+- The plan to open a separate incident for the remaining issues to ensure they are addressed properly.
+
+Chunk 10:
+--------------------
+**Summary:**
+
+**Key Speakers and Their Main Points:**
+- **Neerav (ABC/XYZ):** Neerav is involved in resolving an issue and is asked to work on the Root Cause Analysis (RCA). He also shares technical details in the chat regarding a device and discusses incident times.
+- **Harish:** Harish questions about the ABC code download issues and inquires about lingering customer issues. He is actively seeking updates and confirmations.
+- **Goutham:** Goutham asks if separate incidents are needed for issues or if they can be included with power outages. He also requests Neerav to work on the RCA and asks Harish about any unresolved customer issues.
+- **Chandhan (ABC/DEF):** Chandhan reports an issue with viewing the IP address on a switch, which seems to be resolved after reloading.
+- **Aryan:** Aryan discusses the restoration time and confirms the incident time with Neerav, referencing information provided by Praveen.
+
+**Important Decisions or Conclusions:**
+- Neerav is tasked with working on the RCA for the issue.
+- There is a discussion about whether to create separate incidents for issues or include them with power outages.
+- The incident time is confirmed as 1843 GMT, despite an earlier time being mentioned by Praveen.
+
+**Action Items or Next Steps:**
+- Neerav will work on the RCA to identify the root cause of the issue.
+- Goutham and Harish will monitor and address any lingering customer issues.
+- The team needs to decide on the handling of separate incidents versus including them with power outages.
+
+**Critical Information That Should Not Be Lost:**
+- The confirmed incident time is 1843 GMT, which is crucial for documentation and further analysis.
+- Technical details shared by Neerav regarding the device and its IP addresses are important for troubleshooting and resolution.
+- The communication between team members highlights the need for clarity on incident handling and restoration times.
+
+Chunk 11:
+--------------------
+**Summary:**
+
+**Key Speakers and Main Points:**
+1. **Chandhan (ABC/DEF):** Raised concerns about the continuous reloading of certain ABCs and sought assistance. Suggested that an email be sent to the customer to obtain the console or, if unavailable, to send the Field Engineer (Fe) to the site.
+2. **Neerav (ABC/XYZ):** Agreed with Chandhan's approach and confirmed that he would finalize comments on the incident, aiming for a resolution soon. Also mentioned raising a new ticket for troubleshooting and requested Aryan to share some numbers.
+3. **Goutham:** Facilitated communication between Chandhan and Neerav, ensuring that Chandhan's concerns were addressed.
+4. **Aryan:** Agreed to share the requested numbers with Neerav and confirmed that he would do so one-on-one.
+
+**Important Decisions or Conclusions:**
+- A new ticket will be raised for troubleshooting the issue with the ABCs.
+- An email will be sent to the customer to obtain the console, or a Field Engineer will be dispatched if the console is unavailable.
+
+**Action Items or Next Steps:**
+1. Chandhan will send an email to the customer regarding the console.
+2. Neerav will finalize the incident comments and update Goutham and Aryan.
+3. Aryan will share the requested numbers with Neerav.
+4. Neerav will raise a new ticket for the issue and share it with Chandhan for further findings.
+
+**Critical Information That Should Not Be Lost:**
+- The issue involves the continuous reloading of certain ABCs.
+- A new ticket will be raised for troubleshooting, and Chandhan's findings will be shared on this ticket.
+- Goutham requested that future engagements use a specific form as part of their task metrics.
+
+Chunk 12:
+--------------------
+In this transcript segment, the key speakers are Neerav, Goutham, and Aryan. The discussion revolves around resolving an incident and ensuring future communication processes are streamlined.
+
+- **Key Speakers and Their Main Points:**
+  - **Neerav**: Initially noted the inability to engage a bridge for the incident but later confirmed that a bridge was opened, which was supportive. Neerav agreed to share a form via email and informed his team to use it in the future. He also requested a template and calling number for future reference.
+  - **Goutham**: Confirmed that the incident was showing results and agreed to send out results from their end. Expressed gratitude for the assistance received.
+  - **Aryan**: Agreed to share the requested template and calling number with Neerav and confirmed he would ping Neerav in the chat.
+
+- **Important Decisions or Conclusions:**
+  - The incident has been resolved, and results are confirmed on both ends.
+  - A form will be shared and used by Neerav's team for future incidents.
+  - Neerav will receive a template and calling number for future reference.
+
+- **Action Items or Next Steps:**
+  - Aryan will share the template and calling number with Neerav.
+  - Goutham will send out the results from their end.
+  - Neerav will inform his team to use the shared form for future incidents.
+
+- **Critical Information That Should Not Be Lost:**
+  - The resolution of the incident and confirmation of results.
+  - The sharing of a form for future use by Neerav's team.
+  - The exchange of a template and calling number for future incidents to ensure smoother communication.

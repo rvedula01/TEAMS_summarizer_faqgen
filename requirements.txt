@@ -1,0 +1,13 @@
+streamlit>=1.22.0
+python-docx>=0.8.11
+docx2pdf>=0.1.8
+PyPDF2>=2.10.0
+nltk>=3.7
+openai>=0.27.0
+python-dotenv>=0.19.2
+numpy>=1.21.0
+pandas>=1.3.0
+sentence-transformers>=2.2.0
+bert-score>=0.3.11
+pythoncom>=0.0.1
+pywin32>=300; sys_platform == 'win32'

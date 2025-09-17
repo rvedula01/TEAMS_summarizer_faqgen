@@ -1,0 +1,1 @@
+This suggests that the reboot could be the cause of the issue. • The server was not restarted over the weekend as part of the patching, which is unusual for a production machine. • There is a disagreement between team members on whether the issue is server-specific or application-specific. This needs to be clarified to determine the appropriate course of action.

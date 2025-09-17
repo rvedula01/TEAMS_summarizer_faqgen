@@ -1,0 +1,10 @@
+"0:00 Speaker 1 The reboot seems to be the potential cause of the issue; the server, unusually for a production machine, was not restarted over the weekend as part of the patching process; there's a discrepancy among team members regarding whether the issue is server-specific or application-specific; this distinction needs clarification to determine the correct course of action."
+
+| Action Item                                                      | Owner            |
+|------------------------------------------------------------------|------------------|
+| • Investigate the potential cause of the issue related to the reboot | Speaker 1 |
+| • Clarify the discrepancy among team members regarding whether the issue is server-specific or application-specific | Speaker 1 |
+
+**Observations/Follow-Up**
+• The server was not restarted over the weekend as part of the patching process, which is unusual for a production machine. This could potentially be the cause of the issue.
+• There is a discrepancy among team members regarding whether the issue is server-specific or application-specific. This distinction needs to be clarified to determine the correct course of action.

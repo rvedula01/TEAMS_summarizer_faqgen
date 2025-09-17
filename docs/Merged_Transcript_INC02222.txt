@@ -1,0 +1,1325 @@
+Transcript
+
+June 24, 2025, 03:20PM 
+
+Aryan   0:29
+Hi, nitish.
+
+Neerav ABC/XYZ   0:30
+Hello, Aryan.
+Thank you so much for initiating this bridge.
+
+Aryan   0:34
+I think nobody's just tell me one thing like which means you're trying to contact to us.
+
+Neerav ABC/XYZ   0:42
+Yes, that was the first thing I wanted to ask you.
+We have a global number that is starting with plus one and maybe the Atos desk number.
+That we use to contact.
+In past.
+
+Aryan   0:55
+OK, great.
+No. You can reach to us by like calling service desk they can.
+
+Neerav ABC/XYZ   0:57
+But I.
+
+Aryan   1:03
+If you ask them to raise a P1 and you need to initiate a bridge service desk will they can contact us. Also there is a option blind option 7. If you try try calling service desk number and just have to blindly press the.
+
+Neerav ABC/XYZ   1:17
+Can you?
+Can you share me this services number 121?
+
+Aryan   1:21
+Yeah, I'll. I'll do that after the call.
+
+Neerav ABC/XYZ   1:23
+OK.
+
+Aryan   1:23
+I'll do that.
+OK, OK.
+Tell me what is the issue?
+
+Neerav ABC/XYZ   1:27
+OK.
+So it's a high critical site located in us.
+It's AI.
+Think it's a factory site in the Site and everyone has eye on this site. Especially so we receive an incident and we just check that both of the AB are not reachable to us.
+
+Aryan   1:34
+Mm hmm.
+
+Neerav ABC/XYZ   1:47
+We were just checking something and meanwhile we got a notification from Praveen as Praveen. I I think Praveen has also joined this bridge.
+So the poll is the one we initially connect.
+If, if Site has any issue, so Praveen just confirmed that there is some power issue going on on this site, that's why.
+We had got unreachable so as a part of the process we need to initiate a a P1 which we know that there is.
+Some power issue, as confirmed by Praveen. So on site persons are already checking for that because that was something related to building electricity that make the circuit breaker trip and they are checking on it.
+But we need to initiate a bridge and need to send the notification as per the process.
+So that's why I contacted you.
+To initiate that bridge.
+
+Aryan   2:50
+OK.
+Hi. Hi, Praveen.
+Thanks for joining the call.
+Can you tell me is entire factories down right now?
+
+Praveen   2:58
+So it's down.
+The network is down OK.
+
+Aryan   3:02
+OK.
+
+Praveen   3:03
+The whole plant, the whole plant lost power for 10 or 15 minutes, but when it came back, the telco room where some of the network gear is, the power is still bad in that room.
+And they're trying to figure out why.
+So the factory itself is running.
+They have lights, they have power.
+It's just that one room.
+Where some of our equipment is is totally down and that means their entire network is down.
+
+Aryan   3:27
+OK.
+So. So right now, what are the applications that you are using?
+That is, that is getting impacted with that.
+
+Neerav ABC/XYZ   3:37
+All the application.
+
+Praveen   3:38
+I think it's for that one site all. All the applications, yeah.
+
+Aryan   3:39
+OK.
+
+Neerav ABC/XYZ   3:41
+Obl.
+S.
+
+Aryan   3:47
+OK.
+So right now, as you have confirmed that the power is back now and still the Internet is not up.
+So, Neerav, what what you are investigating?
+Like what else we are doing now?
+
+Neerav ABC/XYZ   4:02
+We are just waiting for the confirmation from the onsite users if they have checked everything is back.
+Now what are the?
+
+Praveen   4:10
+No.
+Yeah, yeah, nothing's back because the entire network is down.
+
+Neerav ABC/XYZ   4:14
+Yeah, exactly.
+I I was just referring to the network room, especially in the network devices, yeah.
+
+Praveen   4:16
+Yeah.
+So the electricians are are looking into the the problem. OK, we're we're kind of helpless until the electricians get the power back in that room, OK.
+
+Neerav ABC/XYZ   4:29
+Mm hmm.
+Yeah, exactly.
+
+Aryan   4:50
+OK, sorry I missed that.
+So Praveen, you're saying that like the power is up now or it's still the iteration is working on that?
+
+Praveen   4:59
+No, no, let me say. I'm gonna say it one more time.
+
+Aryan   5:03
+Mm hmm.
+
+Praveen   5:03
+The main power in the building is up.
+There is one room in the building that the power has failed.
+
+Aryan   5:06
+Mm hmm.
+
+Praveen   5:09
+It is the room where we have some of our network equipment.
+The electricians are trying to resolve that now.
+
+Aryan   5:13
+OK.
+
+Praveen   5:15
+That's why the whole network is down.
+
+Aryan   5:18
+OK, OK. So for your information for all that I have elevated this ticket to a major incident and will will send a notification so.
+
+Praveen   5:29
+OK.
+Very good.
+
+Aryan   5:35
+Praveen, can you confirm that as per the electrician, how much time they will take any approx.
+
+Praveen   5:41
+They have not given me an ETA.
+They've not given me a time yet.
+
+Aryan   5:47
+OK. OK, fine.
+
+Praveen   5:47
+I'll try to find out.
+
+Aryan   5:49
+Sure. Thank you.
+
+Neerav ABC/XYZ   10:44
+A poll I can see the board devices are showing up to me and I'm just logging into the devices to check and by the time you can check with the site users as well, I'm just logging into the devices.
+
+Praveen   11:03
+OK.
+Yeah.
+OK.
+I'll do some checking.
+
+Aryan   11:11
+Thanks. Thank you, Goutham, for joining the call.
+So as a recap, I can tell you this is a critical site at us.
+Actually there is a power failure at the site and when the power came back that there is a room network room that there have still some power issues.
+And for that, Praveen informed us that the electrician was working on that due to that the network devices went down and.
+Site got isolated completely.
+So that we have raised this up Even so right now, as Neerav confirmed that the devices are back up.
+
+Goutham   11:41
+OK.
+
+Aryan   11:46
+So all is checking on that and validating.
+
+Goutham   11:51
+Carter, thank you.
+So we have the site ID or.
+
+Neerav ABC/XYZ   11:59
+Yes, we have the site ID, it's XXXX.
+
+Goutham   12:03
+XXXX, OK. Got it. Thanks.
+
+Neerav ABC/XYZ   12:04
+Yes.
+And I can see the devices are up from last 7 minutes only and both's coming up they've made the.
+Adjudicency and now I can see most of the tunnels are up.
+
+Aryan   16:34
+Praveen, can you confirm that from when the site has site is down?
+The issue occur.
+
+Praveen   16:45
+Yeah, stand by.
+I'll put it in the chat, OK?
+
+Aryan   17:13
+OK.
+This 242 that is Eastern Time correct.
+
+Praveen   17:57
+Yes, I I just put the GMT in the.
+
+Aryan   18:01
+OK.
+OK.
+So I'll put this as a start time.
+
+Praveen   18:33
+Can you check all of the?
+Which is on site, Neerav.
+Make sure they all came up.
+
+Neerav ABC/XYZ   18:46
+Yes, Bol, I'm just checking on them.
+
+Praveen   18:52
+OK.
+Thank you.
+
+Aryan   19:56
+So Praveen, you're confirming that at 3:29 PM, the devices are started working.
+So the users at the site, they're able to log in or use their operations.
+
+Praveen   20:09
+Yeah, I'll have to let me check in with them.
+I haven't actually talked to the end users. I've been looking at the network, but let me let me try to reach out to a couple guys.
+
+Aryan   20:17
+Yeah.
+
+Praveen   22:04
+Are checking all their services and stuff, so just stand by.
+
+Goutham   22:10
+OK.
+So this the if also if the part clearly that happened right is the site having just one power source or the devices can these devices that went down are connected to one power source.
+Can we just also check that in parallel?
+
+Praveen   22:34
+We'll have to check that.
+We'll have to ask them afterwards.
+That should be part of the of the problem ticket when when the problem ticket gets brought up, we should have them check. I think it was a major. I think it was a a major issue from the substation that that caused the power to be down.
+
+Goutham   22:43
+OK.
+OK.
+
+Praveen   22:51
+But we, but we have to check on the demo not there.
+We'll have to ask them, but that should be part of the problem ticket. When a problem ticket gets created, OK?
+
+Goutham   22:59
+Got it.
+Praveen, by any chance do you have the count of users impacted on the particular site? Lawrence.
+
+Praveen   27:23
+I do not know.
+
+Goutham   27:26
+OK.
+
+Neerav ABC/XYZ   28:20
+I have seen multiple switches and I can see all of them were power rebooted, but now they are reachable.
+Some of them are left and taking the rest of the switches and will update soon.
+
+Goutham   28:36
+Thanks, Neerav.
+
+Praveen   28:37
+OK.
+On the test I am seeing a couple of the Wi-Fi APS don't seem to be joined to a controller.
+I'm kinda trying to get a list right now.
+
+Neerav ABC/XYZ   32:38
+OK, OK.
+
+Goutham   37:01
+Just for my understanding, Praveen, you're you're the site contact for Site, right or?
+
+Praveen   37:08
+No, I am on the network team.
+I'm on the glbal netk svices team.
+
+Goutham   37:13
+Oh, it's GBS, OK.
+
+Praveen   37:14
+Yeah, GBS. Yeah.
+
+Goutham   37:17
+G.
+Sorry, GBS. Yeah, got it.
+So Praveen does the like.
+The power connectivity does, does this come under your team or this would come generally on the side contact, right?
+
+Praveen   37:40
+This, this, this will be on the local site. Contact yeah.
+
+Goutham   37:44
+Yeah. OK.
+Aryan, can we just check who's the local side content and get them on the call?
+
+Aryan   37:52
+Yeah, let me engage that user who raised the ticket.
+
+Goutham   37:58
+OK.
+
+Praveen   41:12
+Neerav, you still there?
+
+Neerav ABC/XYZ   41:17
+Yes, Praveen.
+
+Praveen   41:19
+It looks like Switch XX is having problems.
+It's like not stable.
+Like it's going up and down.
+
+Neerav ABC/XYZ   41:25
+Let me check.
+Let me let me check just read.
+No, this switch is up from last 36 minutes, which is matching the time with other switches as well.
+Let me just check something more.
+
+Praveen   42:32
+I'm getting packet loss when I ping it.
+It's like not, so I don't know if.
+
+Neerav ABC/XYZ   42:34
+OK.
+
+Praveen   42:36
+I don't know if there's a link flapping or you know something's wrong with the ether channel or something.
+
+Neerav ABC/XYZ   42:41
+And maybe you're right. Because when I run the command, I'm also got stuck in between.
+
+Praveen   43:06
+Yes.
+
+Aryan   46:32
+Hi. Hi.
+Thanks for joining the call.
+
+Harish   46:33
+Hey.
+
+Aryan   46:36
+Can you?
+Can you?
+Update what is the current update?
+What is the current status of the devices?
+
+Harish   46:42
+We're we're back up.
+The telco room and was down the.
+Hat one of the legs too, into the building for power, was down.
+The neutral was was.
+Bad they had to fix some stuff so.
+It was a it was a power outage. Look like somebody hit a telephone pole from outside the building and.
+The the.
+Transformer blew up basically.
+
+Goutham   47:17
+OK, so Heet one quick question. Like do they have just?
+Is there no backup power for the network devices or the they're only on the direct power connection?
+
+Harish   47:28
+The telco room is on just main power, but we have a project to replace the UPS batteries. The batteries are are bad and we just got a quote today to also run UPS power to the telco room for backup power.
+
+Goutham   47:39
+OK.
+
+Harish   47:47
+So we've already identified the issue.
+We already have about 3 weeks from from today, we will have a contractor in to fix it, but we just didn't have it for this time.
+
+Goutham   48:01
+Got it.
+OK, understood.
+So.
+All our annotesha are we still still want to check further?
+
+Praveen   48:14
+Yeah, I I we got we got a couple things kinda going on still, Harish.
+
+Goutham   48:19
+OK.
+
+Praveen   48:20
+Switch 2, which is out in the receiving area.
+Harish, that one seems to be going up and downesh from ABC is looking at it trying to figure out why I don't know what's going on with it, but it's it's unstable.
+
+Harish   48:29
+Switch switch to is that's. That's the one with the.
+The bad second stack switch in on it.
+
+Praveen   48:38
+Yeah, but that was pulled out right?
+That's not still sitting there, is it?
+
+Harish   48:41
+No. Yeah, it's still sitting there.
+
+Praveen   48:43
+Oh. Oh crap.
+
+Harish   48:44
+Yeah.
+
+Praveen   48:44
+That probably should have been pulled out.
+
+Harish   48:45
+Yep.
+
+Praveen   48:47
+OK.
+Well, I'm not sure if that's why it's having trouble being erratic.
+Neerav is looking into it.
+
+Harish   48:51
+I am.
+OK.
+
+Praveen   48:54
+I've also got three APS that have not joined the controller yet.
+Let me let me update that list and see if it's changed.
+One is that ABCD in the war room still there.
+
+Harish   49:10
+Oh, I don't know.
+I had to have to check.
+
+Praveen   49:15
+I don't know if you can. I I think it's close to you.
+I don't know if you can go in there and see what its light status is.
+
+Harish   49:18
+Yeah. Yeah, let me see.
+I don't have access into.
+I gotta pull a key.
+Hold on.
+
+Praveen   49:26
+Oh, OK.
+There's also one in the HR area, which I'm not sure if you have access to that too.
+
+Harish   49:33
+I see.
+I see it.
+ABCDE blinking green and red.
+What's the number of the one in the HR area?
+
+Praveen   49:51
+4AP4.
+
+Neerav ABC/XYZ   49:59
+OK, by any chance do we know about these AP? What is the uplink switch for these APS?
+
+Praveen   50:07
+I posted it in the chat.
+
+Neerav ABC/XYZ   50:09
+OK, OK, let me see.
+OK.
+
+Harish   50:18
+Never.
+So where where's?
+
+Praveen   50:21
+Sorry, what?
+
+Harish   50:23
+Oh, no. I was talking to.
+You said it's in the HR area.
+
+Praveen   50:28
+Yeah.
+Let me just double check that.
+Make sure I.
+
+Harish   50:33
+OK.
+I see the AB&T booster.
+HR.
+So there's gotta be over here.
+
+Praveen   50:53
+They may have lost their code and they may be downloading.
+
+Harish   51:41
+Is it?
+Is it working?
+No, still not.
+
+Praveen   51:48
+Was that a question for me?
+
+Harish   51:48
+What AEA 05?
+
+Praveen   51:50
+Oh, OK.
+
+Harish   52:00
+I see three.
+
+Neerav ABC/XYZ   52:21
+Write about the switch 02. I can see any e-mail also from the support team.
+That there was some issue with this tech of that switch.
+Maybe that's why we are losing.
+The connectivity for that switch and for the ABCD and 04 I have bounced the port.
+And.
+Let's see if they are coming back quickly.
+
+Praveen   52:49
+OK.
+Yeah, he said 40.
+45 was blinking red and green, which I think means it's downloading right.
+
+Neerav ABC/XYZ   52:59
+Sometimes they got stuck because I can see all the others.
+I see 43 ABD are up in they are working so.
+But just bounced it because I have seen this in past AP got stuck and we Bouns report and they will be back more much sooner.
+
+Harish   53:19
+Check is a is that ABC still having issues cause?
+I've checked everything in this area and everything looks great or blue.
+
+Praveen   53:31
+Yeah, me refresh my screen.
+
+Neerav ABC/XYZ   53:35
+Me too.
+
+Praveen   53:38
+Yeah, I'm still not seeing 4.
+Umm.
+
+Harish   53:41
+Well I need.
+I'm not sure exactly where four is at 'cause I see three.
+
+Praveen   53:46
+Yeah. So.
+Yeah, I never actually saw it personally, but maybe it's not. Maybe it's HR.
+Maybe I'm mistaken, but you know where the you know where the turnstiles are.
+And then there's a there's a bunch of offices behind those turnstiles.
+
+Harish   53:55
+Yes.
+Oh, that's like the nursing nurses area. Yeah, yeah, yeah.
+
+Praveen   54:02
+Oh, is that what that is?
+OK, OK.
+My my my mistake.
+But yeah, it's in there.
+
+Harish   54:06
+OK.
+So but it's it's it's on the other side of the door.
+
+Praveen   54:09
+No, it's still down.
+OK.
+
+Harish   54:12
+I gotta go.
+
+Praveen   54:12
+Yeah, I don't.
+If you can even see it from the window so.
+OK12 is back, 12 is one of the ones that was down and that one came back.
+
+Harish   54:17
+Umm.
+
+Neerav ABC/XYZ   54:22
+Hey.
+
+Harish   54:37
+I know.
+All right.
+
+Praveen   54:41
+OK and looks like 40.
+Well, actually, let me just check and see if it's on the controller.
+
+Neerav ABC/XYZ   54:56
+You said.
+
+Praveen   54:56
+Yeah. OK, 12 is not on the controller, so it's pinging.
+
+Neerav ABC/XYZ   54:59
+Yes, exactly.
+
+Praveen   55:00
+It's just not on the controller, yeah.
+
+Harish   55:04
+Alright.
+Hey I found it.
+It's it's blinking green and red.
+
+Praveen   55:11
+OK.
+Yeah, I think they're downloading new code.
+I think that's what that means.
+
+Harish   55:16
+Yeah.
+
+Praveen   55:16
+So they must have.
+They must have lost their image and they gotta reload. So we'll just we'll have to wait for them.
+There's nothing really we can do.
+
+Harish   55:22
+Right.
+
+Praveen   55:24
+OK. Did I hear you say one of your servers is down?
+
+Harish   55:27
+And.
+Yeah, it's the Trump server's down right now.
+
+Praveen   55:30
+OK, OK.
+
+Harish   55:31
+It's not the.
+
+Praveen   55:31
+Yeah, yeah. If that's your priority, then you go ahead and you work that I don't want you being on this call. If you've got to work that.
+
+Harish   55:37
+Yeah, I need to.
+So I'll go ahead and drop here in a minute, but.
+
+Praveen   55:39
+OK.
+
+Harish   55:43
+Yeah, I gotta figure that out.
+
+Goutham   55:43
+Yeah, he just a quick word. Like we'll need somebody who can give us the impact numbers, like how many users got impacted and who will be working on the RCA since this will need somebody from your end to work with the telco and just to fill out the.
+
+Praveen   55:45
+OK.
+
+Goutham   56:01
+Form for this priority ticket.
+
+Harish   56:06
+Arrow send me an e-mail.
+I got stuff to do right now. I can I can.
+Deal with that in a little bit.
+I got to drop guys.
+
+Goutham   56:16
+OK.
+
+Praveen   56:17
+OK.
+
+Neerav ABC/XYZ   58:10
+Praveen AB #12 is on controller. I can see it.
+
+Praveen   58:28
+OK.
+Very good.
+
+Goutham   1:04:26
+So Praveen and Neerava, should we send out?
+A.
+A repaired com.
+So that let everybody know the network is back up or is still not sure about that.
+
+Praveen   1:04:37
+Yeah.
+No. Why don't you send it out?
+Just tell them I'm put in there. That you know, there may still be one or two wireless access points that are still down, OK.
+
+Goutham   1:04:48
+Look OK.
+
+Praveen   1:11:54
+Right. I'm not sure there's any value in keeping this open.
+We have a couple more ABC to their downloading their code, but other than that I'm I'm I'm not. I think everything is back.
+
+Neerav ABC/XYZ   1:12:06
+Yes, Praveen. But for just to check that to make it sure I have invited Chandhan Chaudh who is from the Linux per team and have joined.
+So I'm just telling him the current situation if he can help us on it. Otherwise we will proceed the way you want to, OK?
+
+Praveen   1:12:30
+OK.
+
+Neerav ABC/XYZ   1:12:31
+So Chandhan, there are some ABC on the I'm just repasting those once again.
+
+Chandhan ABC/DEF   1:12:40
+OK.
+
+Neerav ABC/XYZ   1:12:43
+So these are the APS which are not coming up on the controller and Praveen has verified with the help of Harish who is a local contact for this site and they are just blinking red and green.
+
+Chandhan ABC/DEF   1:12:56
+Thank you.
+
+Neerav ABC/XYZ   1:12:59
+OK, we can see these are up on the DEF and we can ping the IP address of these ABC as well.
+
+Chandhan ABC/DEF   1:12:59
+OK.
+
+Neerav ABC/XYZ   1:13:08
+I have bounced the port, port, switch, #10, port, switch #10.
+
+Chandhan ABC/DEF   1:13:08
+OK.
+
+Neerav ABC/XYZ   1:13:12
+There are two ABC, 45 and 04.
+I bounced the port around 10 to 15 minutes ago but still they are not up on the controller and.
+
+Chandhan ABC/DEF   1:13:23
+OK.
+Let me check.
+
+Neerav ABC/XYZ   1:13:25
+The.
+
+Chandhan ABC/DEF   1:13:25
+Let me finish the check.
+
+Neerav ABC/XYZ   1:13:27
+Yeah, and the switch.
+
+Chandhan ABC/DEF   1:13:27
+It is 731.
+
+Neerav ABC/XYZ   1:13:29
+The last switch switch 02 is a wellknown issue.
+There was a running e-mail with the project team as well that there was.
+It's API.
+OK, OK.
+Now let me correct it.
+Once we one AP is 1212, which is on the switch #2.
+
+Chandhan ABC/DEF   1:14:05
+Yeah, it's a big problem, OK.
+So AB 4:45 and 12:00.
+
+Neerav ABC/XYZ   1:14:12
+Yes.
+Their respective switches are also mentioned in front of them. OK.
+
+Chandhan ABC/DEF   1:14:18
+Yeah, that will be able to let me just check on the petrol on.
+Yeah, I'm just logging to the computer.
+The causer is still loading.
+
+Praveen   1:18:38
+Sorry, we're somebody talking to me.
+
+Chandhan ABC/DEF   1:18:43
+Yeah, I'm just logging to the device.
+The browser is still loading, just give me a few more minutes, but I will just check from the QWE and.
+
+Praveen   1:18:49
+OK.
+OK.
+Chandhan, I saw your your post.
+
+Chandhan ABC/DEF   1:27:50
+S.
+
+Praveen   1:27:50
+What? What does that mean? Do we have to?
+
+Chandhan ABC/DEF   1:27:55
+Yeah, I can see the detail is expired error.
+
+Praveen   1:27:55
+Reconnected or.
+
+Chandhan ABC/DEF   1:28:01
+Details handshake expired the log the last connection failure I can see.
+I'm just checking some more info on it.
+Just shared the snap on the chat.
+
+Praveen   1:28:29
+Do you know what we have to do to fix it, or is that what you're looking at now?
+
+Aryan   1:28:59
+Yeah. Hi, hit. Thanks for joining again.
+Actually, this ticket need to be.
+Assigned to your group, so we need to close this in your bucket.
+So can you own this ticket and close it?
+
+Neerav ABC/XYZ   1:29:45
+Aryan till the time I heat is on mute. I just want to add one comment here.
+Whenever this kind of issue arises and they got resolved.
+Ticket is always resolved by us and we kept the ticket with us.
+So I don't think there is a reassignment required for this incident to send it to hit.
+
+Aryan   1:30:13
+OK, OK.
+
+Harish   1:30:13
+What? What?
+Alright, I'm here.
+What? What do you need from me?
+
+Praveen   1:30:19
+Umm.
+
+Neerav ABC/XYZ   1:30:20
+Yeah, Praveen gone.
+
+Praveen   1:30:22
+Yeah, yeah.
+So yeah, let's leave the ticket with OBS.
+You can.
+Just, you know, treat this as power and start a PBI and we'll work with Harish using your process for for the network outage in the ZXC, OK, OK.
+
+Neerav ABC/XYZ   1:30:29
+Hiya.
+Yeah, exactly right.
+Yes, yes.
+So Praveen, we are going to resolve this incident and with that I just want to want to know.
+I mean the confirmation from you, do we still need to be on this bridge for these AB or we can check in them on the background and we can send the e-mail?
+
+Praveen   1:30:52
+No.
+Right. I don't think you need to be on the bridge, but I would like to leave the ticket open until the at ABC  are fixed.
+If that's OK, but but I don't think we need the bridge open because the Sev one part is resolved.
+
+Neerav ABC/XYZ   1:31:08
+For for these three ABC, for for I just adding one more comment for these three ABC, I can open one more incident and I think we can work on them on separately, OK and.
+
+Praveen   1:31:09
+Does that sound fair?
+Yeah.
+OK.
+
+Goutham   1:31:22
+Yeah.
+
+Praveen   1:31:23
+OK.
+
+Neerav ABC/XYZ   1:31:25
+We'll resolve this incident OK.
+
+Praveen   1:31:26
+OK.
+I'm OK with that.
+
+Goutham   1:31:27
+Anyways.
+
+Neerav ABC/XYZ   1:31:28
+So I'm resolving this.
+
+Harish   1:31:29
+Hey.
+
+Neerav ABC/XYZ   1:31:30
+Yes, anyone saying something?
+
+Harish   1:31:33
+Yeah, I was just asking, Praveen, what? What's wrong with the ABC?
+
+Goutham   1:31:33
+Yeah, no.
+
+Harish   1:31:37
+Are they not downloading their code or?
+
+Praveen   1:31:39
+Yeah. So the three ABC are they've all got individual issues.
+So we're trying to get them resolved.
+I don't know if we'll need your help, but we're going to try to see if we can get them resolved, OK.
+
+Harish   1:31:50
+OK.
+Alright, just let me know. Alright, that's fine.
+
+Praveen   1:31:52
+Yeah, yeah, yeah.
+One of them is AB12, which is out in the receiving area, so that one might be important.
+But we're gonna see what we can do about them, OK?
+
+Harish   1:32:03
+OK.
+Thank you.
+
+Praveen   1:32:05
+OK.
+
+Goutham   1:32:07
+OK. And heated, do you need there were other things you are working on?
+Do you need an incident for those or we can club it with this since this is for the power outages that that's the main trigger for the other issues as well.
+
+Harish   1:32:21
+Now they're they're all resolved now.
+
+Goutham   1:32:24
+OK.
+Got it, got it.
+
+Harish   1:32:25
+Yeah.
+
+Goutham   1:32:29
+So, Neerav, you'll be working on the RCA?
+
+Neerav ABC/XYZ   1:32:34
+So obvious will work on the RCA.
+So for now I'm just resolving this incident and once the problem ticket got generated so problem manager probably work on it.
+
+Goutham   1:32:47
+Look.
+
+Neerav ABC/XYZ   1:32:48
+OK.
+So I'm resolving this incident and will let you know within some time, OK.
+
+Goutham   1:32:49
+So.
+Yeah. And for the from the customer end, Harish, all the ABC at least all the Internet and everything is back up, right? Or is there still any looming issues that you got reports of?
+
+Harish   1:33:09
+No, that's that's correct.
+The the 1st shift has gone home, so I just talked to the the plant manager.
+They're going to call me. They start.
+3rd shift in a couple hours, they're going to call me if they run into any issues, but as of right now, everything looks to be good.
+
+Goutham   1:33:30
+OK.
+Got it. Thank you.
+So smithtish, once you resolve it, we'll send out the resolve comms from our end as well.
+Think.
+We don't have anything else.
+Let us know if you can draw.
+
+Neerav ABC/XYZ   1:33:48
+Yes, just allow me one minute only.
+
+Goutham   1:33:50
+Sure.
+
+Praveen   1:33:54
+I need to drop for another call myself, so I'm gonna go ahead and drop off.
+I'll stay on the chat if you guys have questions for me, but you know, I'll let natash and and wrap this part up and OK.
+
+Chandhan ABC/DEF   1:34:04
+But.
+
+Neerav ABC/XYZ   1:34:04
+Yes, Praveen.
+Sure, Praveen.
+
+Goutham   1:34:07
+Thank you, Praveen.
+
+Praveen   1:34:07
+Thank you. OK, bye.
+
+Aryan   1:34:11
+Yeah, I think Harish, you also can drop.
+Thanks. Thanks for joining the call.
+
+Harish   1:34:16
+Alright, thank you guys.
+
+Goutham   1:34:17
+Thank you.
+
+Chandhan ABC/DEF   1:34:22
+Yeah, Neerav, I don't see the IP address.
+On the switch.
+
+Neerav ABC/XYZ   1:34:32
+Which one you are talking about now?
+
+Chandhan ABC/DEF   1:34:34
+These ABC?
+
+Neerav ABC/XYZ   1:34:36
+For Switch 45 and 04.
+
+Chandhan ABC/DEF   1:34:40
+Yeah.
+
+Neerav ABC/XYZ   1:34:42
+OK, I was able to see the IP for.
+
+Chandhan ABC/DEF   1:34:47
+Yeah, no, it is a thing.
+
+Neerav ABC/XYZ   1:34:47
+Switch number AB.
+
+Chandhan ABC/DEF   1:34:48
+It is.
+Reloading again. Now I can able to see.
+
+Neerav ABC/XYZ   1:34:52
+OK.
+
+Aryan   1:35:00
+Neerav, what time we are taking for the restoration time?
+It's 329 EDT.
+
+Neerav ABC/XYZ   1:35:08
+I just wait.
+I'm just confirming that we have sent in.
+We are taking 1929 GMT.
+
+Aryan   1:35:18
+Yeah. OK, fine.
+
+Neerav ABC/XYZ   1:35:21
+OK. And the first incident we received is 1843 GMT.
+
+Aryan   1:35:29
+That is the time mentioned by Praveen.
+That is 242 est.
+
+Neerav ABC/XYZ   1:35:35
+Yes, but we received the 40 at 43. So we can't take the before time.
+
+Aryan   1:35:41
+Yeah, but you can mention it.
+I'm just asking for the outage, yeah.
+
+Neerav ABC/XYZ   1:35:45
+OK, OK, no issues.
+
+Goutham   1:38:00
+Sorry, Chandhan.
+Couldn't hear you.
+
+Chandhan ABC/DEF   1:38:08
+Hello.
+Hello.
+
+Goutham   1:38:23
+I am.
+Can you hear me properly or sorry.
+I think maybe some network issue on my end not able to hear.
+
+Aryan   1:38:29
+No, no, it's it's it's it's fine.
+
+Chandhan ABC/DEF   1:38:29
+Yeah, I can hear you.
+
+Goutham   1:38:38
+Neerav.
+
+Neerav ABC/XYZ   1:38:44
+Yes.
+
+Goutham   1:38:46
+Yeah, Chandhan is asking if there is anything for him.
+
+Neerav ABC/XYZ   1:38:52
+OK, Chandhan.
+We just what about these three ABC?
+
+Chandhan ABC/DEF   1:38:59
+Yeah. So I can see these AB sometime.
+It is learning.
+And again, these AP are continuously reloading it seems.
+
+Neerav ABC/XYZ   1:39:07
+OK so.
+
+Chandhan ABC/DEF   1:39:08
+So we are.
+I'm not even unable to log into the sh inside the AB console.
+
+Neerav ABC/XYZ   1:39:15
+OK.
+
+Chandhan ABC/DEF   1:39:18
+But so we need to check only the if we can get the console of those 3 access points.
+
+Neerav ABC/XYZ   1:39:23
+OK, so you need the console for all these three ABC.
+
+Chandhan ABC/DEF   1:39:27
+Yeah.
+
+Neerav ABC/XYZ   1:39:28
+OK.
+It's OK.
+So what we can do?
+You can drop an e-mail to us and we will ask customer or if customer is unable to provide the console, we'll send the Fe. This site for these three ABC, OK.
+
+Chandhan ABC/DEF   1:39:40
+Yeah.
+
+Neerav ABC/XYZ   1:39:41
+You just drop a mail to us and we'll reply on it accordingly, OK. OK.
+
+Chandhan ABC/DEF   1:39:45
+OK, OK, OK. OK.
+
+Neerav ABC/XYZ   1:39:47
+So that's fine from your side and I'm just putting my final comments over the incident and it will be resolved soon.
+We'll update you, Goutham and Aryan.
+
+Chandhan ABC/DEF   1:39:56
+Yeah. OK.
+
+Neerav ABC/XYZ   1:39:58
+Thank you, Chandhan. Thank you for joining.
+
+Chandhan ABC/DEF   1:39:58
+So for this trip it's is that any new ticket will be raised or I have at least?
+
+Neerav ABC/XYZ   1:40:03
+I will share the new ticket for the time you can share your findings over the same where I have activated you.
+
+Chandhan ABC/DEF   1:40:12
+OK.
+
+Neerav ABC/XYZ   1:40:13
+Will raise a new ticket for. It will continue the troubleshooting for the.
+
+Chandhan ABC/DEF   1:40:15
+OK.
+OK.
+
+Neerav ABC/XYZ   1:40:18
+OK.
+
+Chandhan ABC/DEF   1:40:26
+So should we can drop from this girl?
+
+Neerav ABC/XYZ   1:40:27
+Yes you can. You can drop Chandhan.
+Thank you.
+Thank you for your time.
+Aryan, can you share me those number I was asking initially on the bridge.
+
+Aryan   1:40:42
+Yeah, yeah, I'm. I'm sharing you one one to one.
+
+Neerav ABC/XYZ   1:40:45
+OK, OK.
+
+Goutham   1:42:41
+Just one more request like.
+For the for future, right.
+If you could use the form to engage us, because that's part of our metrics, which goes for a task, we accept the incident directly.
+
+Neerav ABC/XYZ   1:42:56
+Yes, Goutham, why not? No actually.
+What happened? Initially I just told Aryan, we had a number of desk we tried to call on it as usually we did in the past.
+
+Goutham   1:43:07
+Yeah.
+
+Neerav ABC/XYZ   1:43:07
+But today I don't know.
+Maybe the process has changed or what happened. We weren't able to engage a bridge for that incident.
+
+Goutham   1:43:12
+Mm hmm.
+
+Neerav ABC/XYZ   1:43:17
+So I just because on the last few bridge we met many times with Diane.
+
+Goutham   1:43:17
+OK.
+Yeah.
+
+Neerav ABC/XYZ   1:43:23
+So I just.
+Remembered the name and just I just checked with him.
+And he opened the bridge.
+That was very supportive.
+
+Goutham   1:43:31
+Well, that's fine.
+Like I think that's. Yeah, that that was good. But the only thing is like, since we don't been bypass the the form is like it'll take two minutes.
+You can fill it even you know during when you ping Diane. It's a part of the metrics that are that is getting tracked for our team.
+So that's why I assisted.
+
+Neerav ABC/XYZ   1:43:50
+It's completely.
+It's completely OK. I agree with it.
+You can share me the form over the e-mail or you can share me with my on my team's I will.
+
+Goutham   1:44:01
+Yeah.
+
+Neerav ABC/XYZ   1:44:02
+I will inform all my teammates to use that for future.
+
+Goutham   1:44:07
+Sure, sure.
+
+Neerav ABC/XYZ   1:44:08
+Yeah. So with that, I believe the incident is showing result to me.
+Can you just check at your end as well?
+
+Goutham   1:44:17
+Sure.
+
+Aryan   1:44:39
+Yeah, it is showing result.
+
+Goutham   1:44:40
+Yep.
+Thank you.
+We'll just send out. The result comes as well from our end and.
+We think we're going to drop.
+Thank you for your help, yeah.
+
+Neerav ABC/XYZ   1:44:52
+Thank you.
+Thank you but but but but but before dropping. Share me that template and the calling number for the future purpose.
+
+Goutham   1:44:54
+Yeah.
+Yeah, sure, sure.
+
+Aryan   1:45:01
+Yeah, yeah, yeah, I'll share you.
+I'll share you.
+
+Neerav ABC/XYZ   1:45:05
+OK, I am.
+
+Aryan   1:45:06
+Yeah, yeah, I I'll ping you on the chat, OK?
+
+Neerav ABC/XYZ   1:45:10
+Sure, sure.
+It's OK.
+
+Aryan   1:45:11
+Yeah.
+
+Neerav ABC/XYZ   1:45:12
+Thank you, Goutham. Thank you Aryan.
+
+Goutham   1:45:14
+Thank you.
+
+Aryan   1:45:15
+OK. Bye bye.
+
+Neerav ABC/XYZ   1:45:16
+Bye bye.
+
+Aryan   1:45:22
+OK, Goutham. Thanks.
+LL.
+Just paste the Coms on the.
+And.
+
+Goutham   1:45:32
+Just one more.
+
+Aryan   1:45:36
+I'm not able to.
+See the.
+
+Goutham stopped transcription
+
+June 24, 2025, 03:23PM Aryan: Edited
+
+June 24, 2025, 03:38PM Praveen: 
+
+June 24, 2025, 03:58PM Praveen: 
+
+June 24, 2025, 04:06PM Gautham: 
+
+June 24, 2025, 04:34PM Praveen: 
+
+June 24, 2025, 05:10PM Aryan: 

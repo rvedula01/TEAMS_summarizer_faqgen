@@ -1,0 +1,9 @@
+Action Item | Owner
+--- | ---
+Create a problem ticket and assign it to the appropriate team | Sandesh
+Resolve the current ticket and conclude with resolved communication | Anwar
+Inquire with the onsite individual about the last successful login prior to server restart | Sandesh
+All teams must participate in the call for the problem team | All Teams
+
+**Observations/Follow-Up**
+The application team is tasked with identifying the issue that occurred post server reboot. Cloud OPS has provided the timelines and will coordinate with them as needed. Once a ticket is resolved at the P1 level, it cannot be downgraded to P2. A problem record will be created and assigned to the teams, necessitating all teams to participate in the problem team's call.

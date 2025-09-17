@@ -1,0 +1,25 @@
+At 39:02, Ramya asked if a specific point for problem management was needed. At 10:22:10 AM, Gautham stated that the application team needs to identify the issue that occurred after the server reboot. He also mentioned that Cloud OPS had provided the timelines and would coordinate if necessary. Gautham then suggested waiting for Sandesh to resolve the issue. 
+
+At 10:27:56 AM, Sandesh reported that he had spoken with Sharadha and they agreed to classify the issue as P2 and create a problem ticket from the application log. He also mentioned that their onsite person would arrive around 6:00 and that he would check the last successful login before the server restart. Sandesh then asked if they could create and assign the problem ticket.
+
+At 10:28:26 AM, Anwar agreed to create a ticket and assign it to Prakash, Sandesh's team, or anyone else. He emphasized that all teams needed to share their inputs on the problem call and that they could then work on the problem record within the problem team. 
+
+At 10:28:42 AM, Ramya asked if they were creating an incident or problem ticket, to which Anwar replied at 10:28:45 AM that they were creating a problem record. Ramya then asked if it was a P2 incident or P1P2 problem tickets. 
+
+At 10:29:05 AM, Sandesh clarified that the MEM team was supposed to create a new ticket, but an A ticket was created instead. He stated that they couldn't convert it to P2, but they could create a problem ticket and work on it. 
+
+At 10:29:24 AM, Anwar explained that once a P1 ticket was resolved, it couldn't be downgraded to a P2. He stated that they had resolved the issue in the MEM, so they would close it as a P1. For a problem record, they would create one and assign it to the teams. He reiterated that all teams needed to join the problem team call. 
+
+At 10:29:55 AM, Anwar asked for the ticket to be resolved so they could close it with the resolved communication. At 10:30:00 AM, Sandesh mentioned that he had asked the user who created the ticket if it was working fine for him. At 10:30:09 AM, Jaswanth asked Sandesh if the issue was from his end.
+
+**Action Items:**
+- The Application Team needs to identify the issue that occurred after the server reboot.
+- Sandesh is to classify the issue as P2, create a problem ticket from the application log, and check the last successful login before the server restart.
+- Anwar is to create a problem record and assign it to the relevant teams.
+- Sandesh is to resolve the current ticket for closure.
+
+**Observations/Follow-Up:**
+- The issue arose after a server reboot, and the Application Team is tasked with identifying the problem.
+- Sandesh will classify the issue as P2 and create a problem ticket from the application log.
+- Anwar emphasized the need for all teams to join the problem team call and share their inputs.
+- Sandesh is to check with the user who created the ticket to confirm if the issue has been resolved.

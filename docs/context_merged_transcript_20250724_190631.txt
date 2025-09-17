@@ -1,0 +1,437 @@
+
+
+==================================================
+MANUAL TRANSCRIPT CONTENT (No timestamps found):
+==================================================
+
+******************************************************************************************************************************************Timelines (Times are in Eastern time (GMT-5) unless otherwise noted):
+
+06/24/2025, 15:20:29 Aryan Hi, nitish. Neerav ABC/XYZ Hello, Aryan.
+Thank You so much for initiating this bridge.
+
+06/24/2025, 15:20:34 Aryan I think nobody's just tell me one thing like which means you're trying to contact to us. Neerav ABC/XYZ Yes, that was the first thing I wanted to ask you. We have a global number starting with plus one and maybe the Atos desk number that we use to contact in the past.
+
+06/24/2025, 15:20:55 Aryan OK, great. No. You can reach us by calling the service desk. Neerav ABC/XYZ But I.
+
+06/24/2025, 15:21:03 Aryan If you ask them to raise a P1 and initiate a bridge, the service desk can contact us. Also, there is an option to press 7 blindly when calling the service desk number.
+
+06/24/2025, 15:21:17 Aryan Can you share the service number 121 with me? Aryan Yeah, I'll do that after the call.
+
+06/24/2025, 15:21:23 Neerav ABC/XYZ OK. Aryan I'll do that. OK, OK. Tell me what is the issue?
+
+06/24/2025, 15:21:27 Neerav ABC/XYZ OK. So it's a high critical site located in the US. It's a factory site and everyone has an eye on this site. We received an incident and found that both of the AB are not reachable to us.
+
+06/24/2025, 15:21:34 Aryan Mm hmm.
+
+06/24/2025, 15:21:47 Neerav ABC/XYZ We received a notification from Praveen that there is a power issue at the site, causing the AB to be unreachable. We need to initiate a P1 and send notifications as per the process.
+
+06/24/2025, 15:22:50 Aryan OK. Hi, Praveen. Thanks for joining the call. Can you tell me if the entire factory is down right now? Praveen So it's down. The network is down.
+
+06/24/2025, 15:23:00 Aryan Shared the following in the chat: MIM Bridge initiated. Critical Site is isolated with network.-INC02222
+
+06/24/2025, 15:23:03 Praveen The whole plant lost power for 10 or 15 minutes, but when it came back, the telco room where some of the network gear is, the power is still bad. They're trying to figure out why. The factory itself is running, but one room with network equipment is down, impacting the entire network.
+
+06/24/2025, 15:23:27 Aryan OK. So right now, what applications are being impacted by this?
+
+06/24/2025, 15:23:37 Neerav ABC/XYZ All the application.
+
+06/24/2025, 15:23:38 Praveen I think it's for that one site all. All the applications, yeah.
+
+06/24/2025, 15:23:39 Aryan OK.
+
+06/24/2025, 15:23:41 Neerav ABC/XYZ Obl.
+
+06/24/2025, 15:23:47 Aryan OK.
+
+06/24/2025, 15:23:47 Aryan So right now, as you have confirmed that the power is back now and still the Internet is not up. So, Neerav, what are you investigating? Like what else are we doing now?
+
+06/24/2025, 15:24:02 Neerav ABC/XYZ We are just waiting for the confirmation from the onsite users if they have checked everything is back. Now what are the?
+
+06/24/2025, 15:24:10 Praveen No. Yeah, yeah, nothing's back because the entire network is down.
+
+06/24/2025, 15:24:14 Neerav ABC/XYZ Yeah, exactly. I was just referring to the network room, especially in the network devices, yeah.
+
+06/24/2025, 15:24:16 Praveen Yeah. So the electricians are looking into the problem. OK, we're kind of helpless until the electricians get the power back in that room, OK.
+
+06/24/2025, 15:24:29 Neerav ABC/XYZ Mm hmm. Yeah, exactly.
+
+06/24/2025, 15:24:50 Aryan OK, sorry I missed that. So Praveen, you're saying that like the power is up now or it's still the iteration is working on that?
+
+06/24/2025, 15:24:59 Praveen No, no, let me say. I'm gonna say it one more time.
+
+06/24/2025, 15:25:03 Aryan Mm hmm.
+
+06/24/2025, 15:25:03 Praveen The main power in the building is up.
+
+06/24/2025, 15:25:06 Aryan Mm hmm.
+
+06/24/2025, 15:25:09 Praveen It is the room where we have some of our network equipment.
+
+06/24/2025, 15:25:13 Aryan OK.
+
+06/24/2025, 15:25:15 Praveen That's why the whole network is down.
+
+06/24/2025, 15:25:18 Aryan OK, OK.
+
+06/24/2025, 15:25:29 Aryan So for your information for all that I have elevated this ticket to a major incident and will send a notification so.
+
+06/24/2025, 15:25:35 Praveen OK. Very good.
+
+06/24/2025, 15:25:41 Aryan Praveen, can you confirm that as per the electrician, how much time they will take any approx.
+
+06/24/2025, 15:25:41 Praveen They have not given me an ETA.
+
+06/24/2025, 15:25:47 Aryan OK. They've not given me a time yet.
+
+06/24/2025, 15:25:49 Aryan OK, fine. I'll try to find out. Sure. Thank you.
+
+06/24/2025, 15:30:44 Neerav ABC/XYZ A poll I can see the board devices are showing up to me and I'm just logging into the devices to check and by the time you can check with the site users as well, I'm just logging into the devices.
+
+06/24/2025, 15:31:03 Praveen OK. Yeah. I'll do some checking.
+
+06/24/2025, 15:31:11 Aryan Thanks. Thank you, Goutham, for joining the call. So as a recap, I can tell you this is a critical site at us. Actually there is a power failure at the site and when the power came back that there is a room network room that there have still some power issues. And for that, Praveen informed us that the electrician was working on that due to that the network devices went down and site got isolated completely. So that we have raised this up. Even so right now, as Neerav confirmed that the devices are back up.
+
+06/24/2025, 15:31:29 Aryan So all is checking on that and validating.
+
+06/24/2025, 15:31:51 Goutham Carter, thank you.
+
+06/24/2025, 15:31:59 Neerav ABC/XYZ Yes, we have the site ID, it's XXXX.
+
+06/24/2025, 15:32:03 Goutham XXXX, OK. Got it. Thanks.
+
+06/24/2025, 15:36:34 Aryan Praveen, can you confirm when the site went down? The issue occurred.
+
+06/24/2025, 15:37:13 Aryan Is 2:42 Eastern Time correct?
+
+06/24/2025, 15:38:00 Praveen Shared the following in the chat: Started at 2:42 PM local time 18:42 GMT devices started to ping at 3:29 PM (19:29 GMT)
+
+06/24/2025, 15:38:33 Praveen Check all devices on site, Neerav, ensure they all came up.
+
+06/24/2025, 15:38:46 Neerav ABC/XYZ Yes, I'm checking on them.
+
+06/24/2025, 15:39:56 Aryan Praveen, can you confirm that at 3:29 PM, the devices started working and users at the site were able to log in?
+
+06/24/2025, 15:42:04 Praveen Check if the site has one power source or if the devices that went down are connected to one power source.
+
+06/24/2025, 15:42:34 Praveen We'll have to check that later, should be part of the problem ticket.
+
+06/24/2025, 15:42:59 Goutham Do you have the count of users impacted on the site, Praveen?
+
+06/24/2025, 15:48:20 Neerav ABC/XYZ Multiple switches were power rebooted, now reachable. Some switches left, will update soon.
+
+06/24/2025, 15:48:37 Praveen On the test, some Wi-Fi APS don't seem to be joined to a controller, working on getting a list.
+
+06/24/2025, 15:52:38 Neerav ABC/XYZ OK.
+
+06/24/2025, 15:57:01 Goutham Praveen, are you the site contact for Site?
+
+06/24/2025, 15:57:14 Praveen I'm on the global network services team.
+
+06/24/2025, 15:57:17 Goutham Sorry, GBS. Yeah, got it. So Praveen, does the power connectivity fall under your team or is it a general side contact issue?
+
+06/24/2025, 15:57:40 Praveen This will be handled at the local site. Contact, yeah.
+
+06/24/2025, 15:57:44 Goutham Okay. Aryan, can we identify the local side contact and bring them into the call?
+
+06/24/2025, 15:57:52 Aryan Let me involve the user who raised the ticket.
+
+06/24/2025, 15:57:58 Goutham Okay.
+
+06/24/2025, 15:58:00 Praveen Shared details in the chat: ABs not registering to the controller, various switches and IDs provided.
+
+06/24/2025, 16:01:12 Praveen Neerav, are you still present?
+
+06/24/2025, 16:01:17 Neerav ABC/XYZ Yes, Praveen.
+
+06/24/2025, 16:01:19 Praveen Switch XX seems unstable, experiencing fluctuations.
+
+06/24/2025, 16:01:25 Neerav ABC/XYZ Let me investigate. It has been up for the last 36 minutes, matching other switches. I'll check further.
+
+06/24/2025, 16:02:32 Praveen Experiencing packet loss when pinging, suspecting link issues or ether channel problems.
+
+06/24/2025, 16:02:34 Neerav ABC/XYZ Understood.
+
+06/24/2025, 16:02:36 Praveen Concerned about link flapping or other issues affecting connectivity.
+
+06/24/2025, 16:02:41 Neerav ABC/XYZ Agreed, encountering command delays as well.
+
+06/24/2025, 16:06:00 Gautham Shared update in chat: Network devices in Floura Site faced power-related downtime, now confirming stability.
+
+06/24/2025, 16:06:32 Aryan Thanks for joining. What's the current status of the devices?
+
+06/24/2025, 16:06:33 Harish Hey.
+
+06/24/2025, 16:06:36 Aryan Can you provide an update on the device status?
+
+06/24/2025, 16:06:42 Harish Power outage due to external damage, transformer failure, working on UPS backup solution.
+
+06/24/2025, 16:07:17 Goutham Questioning lack of backup power for network devices, planning UPS installation.
+
+06/24/2025, 16:07:28 Harish Telco room relies on main power, upcoming UPS battery replacement and backup power installation.
+
+06/24/2025, 16:07:39 Goutham Understood.
+
+06/24/2025, 16:07:47 Harish Identified issue, contractor scheduled for UPS installation in 3 weeks.
+
+06/24/2025, 16:08:01 Goutham Got it. OK, understood. So. All our annotesha are we still want to check further?
+
+06/24/2025, 16:08:14 Praveen Yeah, I we got we got a couple things kinda going on still, Harish.
+
+06/24/2025, 16:08:20 Praveen Switch 2, which is out in the receiving area. Harish, that one seems to be going up and downesh from ABC is looking at it trying to figure out why I don't know what's going on with it, but it's unstable.
+
+06/24/2025, 16:08:29 Harish Switch switch to is that's. That's the one with the. The bad second stack switch in on it. Yeah, but that was pulled out right? That's not still sitting there, is it?
+
+06/24/2025, 16:08:47 Praveen Oh crap. Yep. OK. Well, I'm not sure if that's why it's having trouble being erratic. Neerav is looking into it.
+
+06/24/2025, 16:08:54 Praveen I've also got three APS that have not joined the controller yet. Let me update that list and see if it's changed. One is that ABCD in the war room still there.
+
+06/24/2025, 16:09:15 Praveen I don't know if you can. I I think it's close to you. I don't know if you can go in there and see what its light status is.
+
+06/24/2025, 16:09:33 Harish I see. I see it. ABCDE blinking green and red. What's the number of the one in the HR area?
+
+06/24/2025, 16:09:59 Neerav ABC/XYZ OK, by any chance do we know about these AP? What is the uplink switch for these APS?
+
+06/24/2025, 16:10:09 Neerav ABC/XYZ OK, OK, let me see. OK.
+
+06/24/2025, 16:10:33 Harish OK. I see the AB&T booster. HR. So there's gotta be over here.
+
+06/24/2025, 16:11:41 Harish Is it? Is it working? No, still not.
+
+06/24/2025, 16:11:48 Praveen Was that a question for me?
+
+06/24/2025, 16:12:21 Neerav ABC/XYZ Write about the switch 02. I can see any e-mail also from the support team. That there was some issue with this tech of that switch. Maybe that's why we are losing. The connectivity for that switch and for the ABCD and 04 I have bounced the port. And. Let's see if they are coming back quickly.
+
+06/24/2025, 16:13:19 Neerav ABC/XYZ Sometimes they got stuck because I can see all the others. I see 43 ABD are up and they are working. Just bounced it because I have seen this in the past; AP got stuck, we bounced it, and they will be back much sooner.
+
+06/24/2025, 16:13:41 Harish Check if ABC is still having issues. I've checked everything in this area, and everything looks great or blue.
+
+06/24/2025, 16:13:55 Praveen I'm still not seeing 4.
+
+06/24/2025, 16:14:12 Harish I see 12 is back, one of the ones that was down and that one came back.
+
+06/24/2025, 16:14:56 Neerav ABC/XYZ 12 is not on the controller, so it's pinging.
+
+06/24/2025, 16:15:04 Harish I found it. It's blinking green and red. They must be downloading new code.
+
+06/24/2025, 16:15:16 Praveen They must have lost their image and they gotta reload. We'll have to wait for them.
+
+06/24/2025, 16:15:27 Harish The Trump server is down right now.
+
+06/24/2025, 16:15:31 Praveen If that's your priority, then work on that. I don't want you being on this call if you've got to work on that.
+
+06/24/2025, 16:15:43 Goutham We'll need somebody to give us the impact numbers and work on the RCA. This will need somebody from your end to work with the telco and fill out the form for this priority ticket.
+
+06/24/2025, 16:16:06 Harish Arrow send me an e-mail. I got stuff to do right now. I can I can. Deal with that in a little bit.
+
+06/24/2025, 16:16:16 Goutham OK.
+
+06/24/2025, 16:16:17 Praveen OK.
+
+06/24/2025, 16:18:10 Neerav ABC/XYZ Praveen AB #12 is on controller. I can see it. Very good.
+
+06/24/2025, 16:24:26 Goutham So Praveen and Neerava, should we send out a repaired com? Let everybody know the network is back up or is still not sure about that.
+
+06/24/2025, 16:24:37 Praveen Yeah. No. Why don't you send it out? Just tell them I'm put in there that you know, there may still be one or two wireless access points that are still down, OK.
+
+06/24/2025, 16:24:48 Goutham Look OK.
+
+06/24/2025, 16:31:54 Praveen Right. I'm not sure there's any value in keeping this open. We have a couple more ABC to their downloading their code, but other than that I'm I'm I'm not. I think everything is back.
+
+06/24/2025, 16:32:06 Neerav ABC/XYZ Yes, Praveen. But for just to check that to make it sure I have invited Chandhan Chaudh who is from the Linux per team and have joined. So I'm just telling him the current situation if he can help us on it. Otherwise we will proceed the way you want to, OK?
+
+06/24/2025, 16:32:30 Praveen OK.
+
+06/24/2025, 16:32:31 Neerav ABC/XYZ So Chandhan, there are some ABC on the I'm just repasting those once again.
+
+06/24/2025, 16:32:40 Chandhan ABC/DEF OK.
+
+06/24/2025, 16:32:43 Neerav ABC/XYZ So these are the APS which are not coming up on the controller and Praveen has verified with the help of Harish who is a local contact for this site and they are just blinking red and green.
+
+06/24/2025, 16:32:56 Chandhan ABC/DEF Thank you.
+
+06/24/2025, 16:32:59 Neerav ABC/XYZ OK, we can see these are up on the DEF and we can ping the IP address of these ABC as well.
+
+06/24/2025, 16:33:08 Neerav ABC/XYZ I have bounced the port, port, switch, #10, port, switch #10. There are two ABC, 45 and 04. I bounced the port around 10 to 15 minutes ago but still they are not up on the controller and.
+
+06/24/2025, 16:33:23 Chandhan ABC/DEF OK. Let me check.
+
+06/24/2025, 16:33:25 Neerav ABC/XYZ The.
+
+06/24/2025, 16:33:27 Neerav ABC/XYZ Yeah, and the switch.
+
+06/24/2025, 16:33:29 Neerav ABC/XYZ The last switch switch 02 is a wellknown issue. There was a running e-mail with the project team as well that there was. It's API. OK, OK. Now let me correct it. Once we one AP is 1212, which is on the switch #2.
+
+06/24/2025, 16:34:00 Praveen Shared the following in the chat: it's ab-02, not ap-07
+
+06/24/2025, 16:34:05 Chandhan ABC/DEF Yeah, it's a big problem, OK. So AB 4:45 and 12:00.
+
+06/24/2025, 16:34:12 Neerav ABC/XYZ Yes. Their respective switches are also mentioned in front of them. OK.
+
+06/24/2025, 16:34:18 Chandhan ABC/DEF Yeah, that will be able to let me just check on the petrol on. Yeah, I'm just logging to the computer. The causer is still loading.
+
+06/24/2025, 16:38:38 Praveen Sorry, we're somebody talking to me.
+
+06/24/2025, 16:38:43 Chandhan ABC/DEF Yeah, I'm just logging to the device. The browser is still loading, just give me a few more minutes, but I will just check from the QWE and.
+
+06/24/2025, 16:38:49 Praveen OK.
+
+06/24/2025, 16:46:00 Chandhan ABC Shared the following in the chat:
+
+06/24/2025, 16:47:50 Chandhan ABC/DEF; S. Praveen What? What does that mean? Do we have to? Yeah, I can see the detail is expired error. Praveen Reconnected or. Details handshake expired the log the last connection failure I can see. I'm just checking some more info on it. Just shared the snap on the chat.
+
+06/24/2025, 16:48:29 Praveen Do you know what we have to do to fix it, or is that what you're looking at now?
+
+06/24/2025, 16:48:59 Aryan Yeah. Hi, hit. Thanks for joining again. Actually, this ticket need to be. Assigned to your group, so we need to close this in your bucket. So can you own this ticket and close it?
+
+06/24/2025, 16:49:45 Neerav ABC/XYZ Aryan till the time I heat is on mute. I just want to add one comment here. Whenever this kind of issue arises and they got resolved. Ticket is always resolved by us and we kept the ticket with us. So I don't think there is a reassignment required for this incident to send it to hit.
+
+06/24/2025, 16:50:13 Aryan OK, OK. Harish What? What? Alright, I'm here. What? What do you need from me?
+
+06/24/2025, 16:50:20 Neerav ABC/XYZ Yeah, Praveen gone. Praveen Yeah, yeah. So yeah, let's leave the ticket with OBS. You can. Just, you know, treat this as power and start a PBI and we'll work with Harish using your process for for the network outage in the ZXC, OK, OK.
+
+06/24/2025, 16:50:29 Neerav ABC/XYZ Hiya. Yeah, exactly right. Yes, yes. So Praveen, we are going to resolve this incident and with that I just want to want to know. I mean the confirmation from you, do we still need to be on this bridge for these AB or we can check in them on the background and we can send the e-mail?
+
+06/24/2025, 16:50:52 Praveen No. Right. I don't think you need to be on the bridge, but I would like to leave the ticket open until the at ABC are fixed. If that's OK, but but I don't think we need the bridge open because the Sev one part is resolved.
+
+06/24/2025, 16:51:08 Neerav ABC/XYZ For for these three ABC, for for I just adding one more comment for these three ABC, I can open one more incident and I think we can work on them on separately, OK and. Does that sound fair? Yeah. OK.
+
+06/24/2025, 16:51:22 Goutham Yeah. Praveen OK.
+
+06/24/2025, 16:51:25 Neerav ABC/XYZ We'll resolve this incident OK. Praveen OK. I'm OK with that.
+
+06/24/2025, 16:51:27 Goutham Anyways.
+
+06/24/2025, 16:51:28 Neerav ABC/XYZ So I'm resolving this.
+
+06/24/2025, 16:51:29 Harish Hey.
+
+06/24/2025, 16:51:30 Neerav ABC/XYZ Yes, anyone saying something?
+
+06/24/2025, 16:51:33 Harish Yeah, I was just asking, Praveen, what? What's wrong with the ABC? Goutham Yeah, no.
+
+06/24/2025, 16:51:37 Harish Are they not downloading their code?
+Praveen 1:31:39 Yeah. So the three ABC have individual issues; we're trying to resolve them and might need your help.
+
+06/24/2025, 16:51:50 Harish OK. Just let me know.
+Praveen 1:31:52 One of them is AB12 in the receiving area, so it's important; we'll see what we can do.
+
+06/24/2025, 16:52:03 Harish Thank you.
+Praveen 1:32:05 OK.
+
+06/24/2025, 16:52:07 Goutham Do you need separate incidents for other issues or can we include them with the power outages?
+Harish 1:32:24 They're all resolved now.
+
+06/24/2025, 16:52:29 Goutham Neerav, will you work on the RCA?
+Neerav Abc/Xyz 1:32:48 I'll resolve this incident and update you soon.
+
+06/24/2025, 16:52:49 Goutham Any lingering customer issues, Harish?
+Harish 1:33:09 No, everything seems good for now.
+
+06/24/2025, 16:53:30 Goutham Thank you. Let us know when it's resolved.
+Neerav Abc/Xyz 1:33:54 I need to drop for another call, but I'll stay on chat for questions.
+
+06/24/2025, 16:54:04 Chandhan ABC/DEF Neerav, I can't see the IP address on the switch.
+Neerav Abc/Xyz 1:34:36 Which one are you referring to?
+Chandhan Abc/Def 1:34:40 Switch 45 and 04.
+
+06/24/2025, 16:54:42 Neerav ABC/XYZ OK, I was able to see the IP for.
+
+06/24/2025, 16:54:47 Chandhan ABC/DEF Yeah, no, it is a thing. Switch number AB. It is. Reloading again. Now I can able to see.
+
+06/24/2025, 16:55:00 Aryan Neerav, what time we are taking for the restoration time? It's 329 EDT.
+
+06/24/2025, 16:55:08 Neerav ABC Shared the following in the chat: obc-7111-sw01#sh crb ne X ------------------------- Device ID: UB-01111ab-45 Entry address(es): IP address: 111.XX.XXX.XX IPv6 address: AB12::7XX1:XXXXAAA:1AAA (link-local) Platform: ABCDE ABC-AB1111-A-B9, Capabilities: OOO Trans Interface: X, Port ID (outgoing port): QQQ Holdtime: 122 sec
+
+06/24/2025, 16:55:21 Neerav ABC/XYZ OK. And the first incident we received is 1843 GMT.
+
+06/24/2025, 16:55:29 Aryan That is the time mentioned by Praveen. That is 242 est.
+
+06/24/2025, 16:55:35 Neerav ABC/XYZ Yes, but we received the 40 at 43. So we can't take the before time.
+
+06/24/2025, 16:55:41 Aryan Yeah, but you can mention it. I'm just asking for the outage, yeah.
+
+06/24/2025, 16:58:00 Goutham Sorry, Chandhan. Couldn't hear you.
+
+06/24/2025, 16:58:08 Chandhan ABC/DEF Hello. Hello.
+
+06/24/2025, 16:58:23 Goutham I am. Can you hear me properly or sorry. I think maybe some network issue on my end not able to hear.
+
+06/24/2025, 16:58:29 Aryan No, no, it's it's it's it's fine.
+
+06/24/2025, 16:58:38 Goutham Neerav.
+
+06/24/2025, 16:58:44 Neerav ABC/XYZ Yes.
+
+06/24/2025, 16:58:46 Goutham Yeah, Chandhan is asking if there is anything for him.
+
+06/24/2025, 16:58:59 Chandhan ABC/DEF Yeah. So I can see these AB sometime. It is learning. And again, these AP are continuously reloading it seems.
+
+06/24/2025, 16:59:23 Neerav ABC/XYZ OK, so you need the console for all these three ABC.
+
+06/24/2025, 16:59:28 Chandhan ABC/DEF Yeah. It's OK. So what we can do? You can drop an e-mail to us and we will ask customer or if customer is unable to provide the console, we'll send the Fe. This site for these three ABC, OK.
+
+06/24/2025, 16:59:47 Neerav ABC/XYZ So that's fine from your side and I'm just putting my final comments over the incident and it will be resolved soon. We'll update you, Goutham and Aryan. Thank you, Chandhan. Thank you for joining.
+
+06/24/2025, 16:59:58 Chandhan ABC/DEF For this trip, any new ticket will be raised or do I have at least? Neerav ABC/XYZ
+
+06/24/2025, 17:00:03 Neerav ABC/XYZ I will share the new ticket for the time you can share your findings over the same where I have activated you; OK. Chandhan ABC/DEF
+
+06/24/2025, 17:00:13 Neerav ABC/XYZ Will raise a new ticket for troubleshooting. Chandhan ABC/DEF
+
+06/24/2025, 17:00:27 Neerav ABC/XYZ Yes, you can drop Chandhan. Thank you. Thank you for your time. Aryan, can you share me those numbers I was asking initially on the bridge. Aryan
+
+06/24/2025, 17:00:42 Aryan I'm sharing you one to one. Neerav ABC/XYZ
+
+06/24/2025, 17:02:41 Goutham Just one more request for the future, if you could use the form to engage us, as it's part of our metrics for tasks, we accept the incident directly. Neerav ABC/XYZ
+
+06/24/2025, 17:03:07 Neerav ABC/XYZ Today, we weren't able to engage a bridge for that incident.
+
+06/24/2025, 17:03:31 Neerav ABC/XYZ Remembered the name and just checked with him. He opened the bridge, which was very supportive.
+
+06/24/2025, 17:03:50 Neerav ABC/XYZ I agree with it. You can share the form over email or with my team. I will inform all my teammates to use that for the future.
+
+06/24/2025, 17:04:08 Neerav ABC/XYZ With that, I believe the incident is showing results to me. Can you check at your end as well? Goutham
+
+06/24/2025, 17:04:40 Goutham It is showing results. Thank you. We'll send out the results from our end. Thank you for your help. Neerav ABC/XYZ
+
+06/24/2025, 17:04:52 Neerav ABC/XYZ Thank you. Before dropping, share me that template and the calling number for future purposes. Goutham
+
+06/24/2025, 17:05:01 Aryan I'll share with you. Neerav ABC/XYZ
+
+06/24/2025, 17:05:06 Aryan Yeah, I I'll ping you on the chat, OK? Neerav ABC/XYZ
+
+06/24/2025, 17:05:10 Neerav ABC/XYZ Sure, sure. It's OK.
+
+06/24/2025, 17:05:11 Aryan Yeah. Neerav ABC/XYZ
+
+06/24/2025, 17:05:12 Neerav ABC/XYZ Thank you, Goutham. Thank you Aryan. Goutham
+
+06/24/2025, 17:05:14 Goutham Thank you. Aryan
+
+06/24/2025, 17:05:15 Aryan OK. Bye bye. Neerav ABC/XYZ
+
+06/24/2025, 17:05:16 Neerav ABC/XYZ Bye bye.
+
+06/24/2025, 17:05:22 Aryan OK, Goutham. Thanks. LL. Just paste the Coms on the. And. Goutham
+
+06/24/2025, 17:05:32 Goutham Just one more. Aryan
+
+06/24/2025, 17:05:36 Aryan I'm not able to. See the. Goutham stopped transcription
+
+06/24/2025, 17:10:00 Aryan Shared the following in the chat: Issue resolved MIM Closed. Problem ticket - PRB001111
+Action Items
+No team action items found.
+Key Observations
+If you ask the service desk to raise a P1 and initiate a bridge, they can contact the team.
+A high critical site in the US is experiencing a network issue due to a power problem, requiring a P1 initiation.
+The MIM Bridge has been initiated for the critical site with network isolation, as per ticket INC02222.
+Aryan has elevated the ticket to a major incident and will send a notification.
+Praveen suggested checking if the site has one power source or if the devices that went down are connected to one power source, to be included in the problem ticket.
+Goutham mentioned the need for impact numbers and an RCA for a priority ticket, requiring collaboration with the telco.
+Aryan mentioned that a ticket needs to be assigned to a specific group for closure.
+Neerav stated that tickets are usually resolved and kept by their team, suggesting no reassignment is needed.
+Neerav suggested leaving the ticket with OBS and starting a PBI for the network outage in ZXC.
+Praveen agreed to leave the ticket open until the issues at ABC are fixed.
+A new ticket will be raised for troubleshooting as confirmed by Neerav.
+Chandhan will share findings over the existing ticket where Neerav has activated him.
+Issue resolved MIM Closed. Problem ticket - PRB001111.

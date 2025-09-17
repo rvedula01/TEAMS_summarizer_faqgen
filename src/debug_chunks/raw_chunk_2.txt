@@ -1,0 +1,9 @@
+| Action Item                                                      | Owner            |
+|------------------------------------------------------------------|------------------|
+| • Create a problem ticket and assign it to the right team | Sandesh |
+| • Resolve the current ticket and close it out with the resolved communication | Anwar |
+| • Check with the onsite person about the last successful login before the server restart time | Sandesh |
+| • All teams are required to join the call for the problem team | All Teams |
+
+**Observations/Follow-Up**
+• The application team needs to figure out what went wrong after the server rebooted. • The timelines have been given by cloud OPS and they will coordinate work with them if required. • Once a ticket is resolved at the P1 level, it cannot be downgraded to P2. • A problem record will be created and assigned to the teams, and all teams are required to join the call for the problem team.
