@@ -1,4 +1,4 @@
-# Transcript Summarizer & Comparator
+# Transcript Summarizer & QA Generator
 
 A Streamlit application that:
 1. “Pulls” a Microsoft Teams call transcript from a local `.docx` (as if from a source),
