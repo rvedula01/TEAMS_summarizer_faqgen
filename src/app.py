@@ -11,6 +11,7 @@ import re
 import json
 import ast
 import platform
+import threading
 from datetime import datetime, timedelta
 from openai_client import call_openai_chat
 import base64
@@ -20,7 +21,6 @@ import tempfile
 if platform.system() == 'Windows':
     import pythoncom
     import win32com.client
-    import threading
 
 
 import streamlit as st
