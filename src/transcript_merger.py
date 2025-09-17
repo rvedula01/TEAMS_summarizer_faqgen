@@ -1,12 +1,15 @@
 
 
 # Initialize OpenAI client
-api_key = "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"
 import os
 import re
 from datetime import datetime
 from typing import Dict, List, Tuple, Optional
+from dotenv import load_dotenv
 import openai
+
+# Load environment variables from .env file
+load_dotenv()
 from docx import Document
 from docx.document import Document as DocumentType
 from docx.oxml.table import CT_Tbl
@@ -945,12 +948,13 @@ def main():
     """
     Main function to demonstrate complete merging with perfect format extraction.
     """
-    # Configuration - REPLACE WITH YOUR ACTUAL API KEY
-    API_KEY = api_key # Replace with your actual OpenAI API key
+    # Get API key from environment variables
+    API_KEY = os.getenv("OPENAI_API_KEY")
     
-    if not API_KEY or API_KEY == "your-openai-api-key-here":
-        print("Error: Please set your OpenAI API key")
-        print("Update the API_KEY variable in the main() function")
+    if not API_KEY:
+        print("Error: OPENAI_API_KEY not found in environment variables")
+        print("Please create a .env file with your OpenAI API key:")
+        print("OPENAI_API_KEY=your_api_key_here")
         return
     
     # File paths - UPDATE THESE WITH YOUR ACTUAL FILE PATHS
