@@ -9,8 +9,20 @@ Created on Fri Jun  6 15:17:13 2025
 from typing import Any
 from typing import List, Generator
 import nltk
-from openai_client import call_openai_chat
 import os
+
+# Ensure all required NLTK data is downloaded
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt', quiet=True)
+
+try:
+    nltk.data.find('tokenizers/punkt_tab')
+except LookupError:
+    nltk.download('punkt_tab', quiet=True)
+
+from openai_client import call_openai_chat
 
 def clean_transcript(raw_transcript: str) -> str:
     """
@@ -211,10 +223,8 @@ def summarize_transcript(cleaned_transcript: str, include_header: bool = False) 
     #     return f"**Timelines (Times are in Eastern time (GMT-5) unless otherwise noted):**\n\n{summarized}"
     return summarized
 
-nltk.download("punkt", quiet=True)
-
 # Approximate max characters per chunk (~token limit proxy)
-MAX_CHARS_PER_CHUNK = 3000  
+MAX_CHARS_PER_CHUNK = 3000
 
 def _split_raw_into_chunks(raw: str, max_chars: int = MAX_CHARS_PER_CHUNK) -> List[str]:
     """

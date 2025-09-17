@@ -13,9 +13,20 @@ import ast
 import platform
 import threading
 from datetime import datetime, timedelta
-from openai_client import call_openai_chat
 import base64
 import tempfile
+import nltk
+
+# Download NLTK data if not already downloaded
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt', quiet=True)
+
+try:
+    nltk.data.find('tokenizers/punkt_tab')
+except LookupError:
+    nltk.download('punkt_tab', quiet=True)
 
 # Windows-specific imports
 if platform.system() == 'Windows':
@@ -25,7 +36,6 @@ if platform.system() == 'Windows':
 
 import streamlit as st
 import glob
-import nltk
 from PyPDF2 import PdfReader
 from docx import Document
 from docx.shared import Inches, Pt, RGBColor
