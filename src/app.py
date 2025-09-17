@@ -7,15 +7,20 @@ Created on Fri Jun  6 15:18:14 2025
 
 import os
 import sys
-import pythoncom
-import threading
 import re
 import json
 import ast
+import platform
 from datetime import datetime, timedelta
 from openai_client import call_openai_chat
 import base64
 import tempfile
+
+# Windows-specific imports
+if platform.system() == 'Windows':
+    import pythoncom
+    import win32com.client
+    import threading
 
 
 import streamlit as st
@@ -565,7 +570,17 @@ class COMWrapper:
 
 # Function to safely convert docx to pdf with COM initialization
 def convert_docx_to_pdf(docx_path, pdf_path):
-    with COMWrapper():
+    if platform.system() == 'Windows':
+        # Use Word on Windows
+        with COMWrapper() as wrapper:
+            word = win32com.client.DispatchEx('Word.Application')
+            doc = word.Documents.Open(os.path.abspath(docx_path))
+            doc.SaveAs(os.path.abspath(pdf_path), FileFormat=17)  # 17 is the code for PDF format
+            doc.Close()
+            word.Quit()
+    else:
+        # Use docx2pdf on Linux/Streamlit Cloud
+        import docx2pdf
         docx2pdf.convert(docx_path, pdf_path)
 
 def extract_meeting_datetime(text):
@@ -680,26 +695,37 @@ SOURCE_TRANSCRIPT_PATH = "INC0671705 -- Transcript.docx"
 MAX_CHARS_PER_CHUNK = 3000
 
 def count_pages_in_docx(docx_path):
-    """Safely count pages in a Word document by converting to PDF first"""
+    """Count pages in a Word document using a cross-platform approach"""
     try:
-        # Create a temporary PDF file
-        temp_pdf = "temp.pdf"
-        convert_docx_to_pdf(docx_path, temp_pdf)
-        
-        # Count pages in the PDF
-        with open(temp_pdf, 'rb') as f:
-            pdf = PdfReader(f)
-            return len(pdf.pages)
+        # On Windows, we can use the COM approach for better accuracy
+        if platform.system() == 'Windows':
+            with tempfile.NamedTemporaryFile(suffix='.pdf', delete=False) as temp_pdf:
+                temp_pdf_path = temp_pdf.name
+            
+            # Convert DOCX to PDF
+            convert_docx_to_pdf(docx_path, temp_pdf_path)
+            
+            # Count pages in the PDF
+            with open(temp_pdf_path, 'rb') as f:
+                pdf = PdfReader(f)
+                num_pages = len(pdf.pages)
+            
+            # Clean up the temporary PDF
+            if os.path.exists(temp_pdf_path):
+                os.remove(temp_pdf_path)
+                
+            return num_pages
+        else:
+            # On Linux/Streamlit Cloud, use python-docx for a rough estimate
+            # This is less accurate but doesn't require Word
+            from docx import Document
+            doc = Document(docx_path)
+            # This is a rough estimate - 500 words per page
+            word_count = sum(len(para.text.split()) for para in doc.paragraphs)
+            return max(1, (word_count // 500) + 1)
     except Exception as e:
         print(f"Error counting pages: {e}")
         return 1  # Default to 1 page if there's an error
-    finally:
-        # Clean up the temporary PDF
-        if os.path.exists(temp_pdf):
-            try:
-                os.remove(temp_pdf)
-            except:
-                pass
 
 def filter_team_actions(action_items: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """
