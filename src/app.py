@@ -731,37 +731,59 @@ SOURCE_TRANSCRIPT_PATH = "INC0671705 -- Transcript.docx"
 MAX_CHARS_PER_CHUNK = 3000
 
 def count_pages_in_docx(docx_path):
-    """Count pages in a Word document using a cross-platform approach"""
+    """
+    Count pages in a Word document using a cross-platform approach.
+    On Windows, uses Word for accurate count via PDF conversion.
+    On Linux/Streamlit Cloud, estimates based on content length and formatting.
+    """
     try:
-        # On Windows, we can use the COM approach for better accuracy
+        # On Windows, use the COM approach for better accuracy
         if platform.system() == 'Windows':
             with tempfile.NamedTemporaryFile(suffix='.pdf', delete=False) as temp_pdf:
                 temp_pdf_path = temp_pdf.name
             
-            # Convert DOCX to PDF
-            convert_docx_to_pdf(docx_path, temp_pdf_path)
-            
-            # Count pages in the PDF
-            with open(temp_pdf_path, 'rb') as f:
-                pdf = PdfReader(f)
-                num_pages = len(pdf.pages)
-            
-            # Clean up the temporary PDF
-            if os.path.exists(temp_pdf_path):
-                os.remove(temp_pdf_path)
+            try:
+                # Convert DOCX to PDF
+                convert_docx_to_pdf(docx_path, temp_pdf_path)
                 
-            return num_pages
-        else:
-            # On Linux/Streamlit Cloud, use python-docx for a rough estimate
-            # This is less accurate but doesn't require Word
-            from docx import Document
-            doc = Document(docx_path)
-            # This is a rough estimate - 500 words per page
-            word_count = sum(len(para.text.split()) for para in doc.paragraphs)
-            return max(1, (word_count // 500) + 1)
+                # Count pages in the PDF
+                with open(temp_pdf_path, 'rb') as f:
+                    pdf = PdfReader(f)
+                    return len(pdf.pages)
+            finally:
+                # Clean up the temporary PDF
+                if os.path.exists(temp_pdf_path):
+                    try:
+                        os.remove(temp_pdf_path)
+                    except:
+                        pass
+        
+        # For Linux/Streamlit Cloud, use a more sophisticated estimation
+        from docx import Document
+        from docx.oxml import parse_xml
+        from docx.oxml.ns import nsdecls
+        
+        doc = Document(docx_path)
+        
+        # Count words in paragraphs
+        word_count = sum(len(para.text.split()) for para in doc.paragraphs if para.text.strip())
+        
+        # Count images and tables (each takes up space)
+        image_count = len(doc.inline_shapes)
+        table_count = len(doc.tables)
+        
+        # Estimate pages based on content
+        # - Assume ~500 words per page
+        # - Each image/table is roughly equivalent to 100 words
+        estimated_pages = (word_count + (image_count * 100) + (table_count * 100)) / 500
+        
+        # Ensure at least 1 page and round up
+        return max(1, int(estimated_pages) + (1 if estimated_pages % 1 > 0.1 else 0))
+        
     except Exception as e:
-        print(f"Error counting pages: {e}")
-        return 1  # Default to 1 page if there's an error
+        print(f"Warning: Could not count pages accurately: {e}")
+        # Fallback: Return a default of 1 page
+        return 1
 
 def filter_team_actions(action_items: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """

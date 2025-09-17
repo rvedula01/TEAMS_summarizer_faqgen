@@ -1,5 +1,5 @@
 streamlit>=1.22.0
-python-docx>=0.8.11
+python-docx>=0.8.11,<1.0.0  # Version 1.0.0+ has breaking changes
 docx2pdf>=0.1.8
 PyPDF2>=2.10.0
 nltk>=3.7
