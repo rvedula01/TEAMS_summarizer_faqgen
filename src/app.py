@@ -925,17 +925,12 @@ def count_pages_in_docx(docx_path):
             table_count = len(doc.tables) if hasattr(doc, 'tables') else 0
             
             # Estimate pages based on content
-            # - Assume ~500 words per page (reduced from 500 to be more accurate for typical meeting transcripts)
+            # - Assume ~500 words per page
             # - Each image/table is roughly equivalent to 100 words
-            estimated_pages = (word_count + (image_count * 150) + (table_count * 150)) / 400
+            estimated_pages = (word_count + (image_count * 100) + (table_count * 100)) / 500
             
             # Ensure at least 1 page and round up
-            page_count = max(1, int(estimated_pages) + (1 if estimated_pages % 1 > 0.1 else 0))
-            
-            # Debug information
-            print(f"Document analysis - Words: {word_count}, Images: {image_count}, Tables: {table_count}, Estimated pages: {page_count}")
-            
-            return page_count
+            return max(1, int(estimated_pages) + (1 if estimated_pages % 1 > 0.1 else 0))
             
         except Exception as e:
             print(f"Warning: Could not estimate pages using python-docx: {e}")
@@ -947,7 +942,7 @@ def count_pages_in_docx(docx_path):
         
     except Exception as e:
         print(f"Warning: Could not count pages accurately: {e}")
-        return default_pages  # Return default instead of None
+        # Fallback: Return a default of 1 page
         return 1
 
 def filter_team_actions(action_items: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
@@ -1740,16 +1735,16 @@ def main():
                             # Get total_pages from session state or default to 1
                             total_pages = st.session_state.get('total_pages', 1)
                             
-                            # Calculate current page based on progress through chunks
-                            # Make sure we don't exceed the total number of pages
-                            current_page = min(round((i + 1) * (total_pages / num_chunks)), total_pages)
+                            # Calculate current page and progress
+                            # Use min to ensure we don't exceed the total number of pages
+                            current_page = min((i + 1) * pages_per_chunk, total_pages)
                             
-                            # Calculate progress percentage (0.0 to 1.0)
+                            # Ensure we don't show more than 100% progress
                             progress_percentage = min(1.0, (i + 1) / num_chunks)
                             progress_bar.progress(progress_percentage)
                             
-                            # Show current progress with accurate page numbers
-                            status_placeholder.info(f"⚡ Processed {current_page}/{total_pages} pages of transcript")
+                            # Show actual page count instead of estimated
+                            status_placeholder.info(f"⚡ Processed {min((i + 1) * pages_per_chunk, total_pages)}/{total_pages} pages of transcript")
                             
                         except Exception as e:
                             status_placeholder.error(f"Error processing section {i}: {str(e)}")
