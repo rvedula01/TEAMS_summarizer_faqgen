@@ -1053,12 +1053,18 @@ def main():
     """
     import re  # Add regex import for image processing
     
-    # Initialize COM once for the main thread
-    if not hasattr(threading.current_thread(), "_com_initialized"):
-        pythoncom.CoInitialize()
-        threading.current_thread()._com_initialized = True
-        
+    # Set up the Streamlit page
     st.set_page_config(layout="wide", page_title="Transcript Summarizer")
+    
+    # Initialize COM for the main thread if on Windows
+    if platform.system() == 'Windows' and not hasattr(threading.current_thread(), "_com_initialized"):
+        try:
+            pythoncom.CoInitialize()
+            threading.current_thread()._com_initialized = True
+        except Exception as e:
+            st.warning(f"Warning: Could not initialize COM: {e}")
+            if not hasattr(threading.current_thread(), "_com_initialized"):
+                threading.current_thread()._com_initialized = False
     st.title("📝 TEAMS Whiteboard & Knowledge Base Generator")
     
     # Add application description
