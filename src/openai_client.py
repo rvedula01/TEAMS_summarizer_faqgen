@@ -26,7 +26,7 @@ def call_openai_chat(prompt: str, model: str = "gpt-3.5-turbo") -> str:
     
     try:
         # Get API key from environment variable
-        api_key = "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"
+        api_key = os.getenv("OPENAI_API_KEY")
         if not api_key:
             raise ValueError("OPENAI_API_KEY environment variable not set. Please set it in a .env file or your environment.")
         _client = openai.OpenAI(api_key=api_key)

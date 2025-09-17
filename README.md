@@ -30,5 +30,7 @@ transcript_summarizer/
 
    ```bash
    pip install -r requirements.txt
-   python -m nltk.downloader punkt
+   ```
+
+4. The application will automatically download the required NLTK data on first run.
 
