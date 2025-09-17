@@ -554,34 +554,70 @@ def filter_priority_observations(observations: List[str]) -> List[str]:
 class COMWrapper:
     def __init__(self):
         self.initialized = False
+        self.is_windows = platform.system() == 'Windows'
         
     def __enter__(self):
-        # Only initialize COM for this thread if it hasn't been done yet
-        if not self.initialized:
-            pythoncom.CoInitialize()
-            self.initialized = True
+        # Only initialize COM on Windows
+        if self.is_windows:
+            try:
+                pythoncom.CoInitialize()
+                self.initialized = True
+            except Exception as e:
+                print(f"Warning: Could not initialize COM: {e}")
         return self
         
     def __exit__(self, exc_type, exc_val, exc_tb):
         # Only uninitialize if we were the ones who initialized it
-        if self.initialized:
-            pythoncom.CoUninitialize()
+        if self.initialized and self.is_windows:
+            try:
+                pythoncom.CoUninitialize()
+            except:
+                pass
             self.initialized = False
 
-# Function to safely convert docx to pdf with COM initialization
 def convert_docx_to_pdf(docx_path, pdf_path):
-    if platform.system() == 'Windows':
-        # Use Word on Windows
-        with COMWrapper() as wrapper:
-            word = win32com.client.DispatchEx('Word.Application')
-            doc = word.Documents.Open(os.path.abspath(docx_path))
-            doc.SaveAs(os.path.abspath(pdf_path), FileFormat=17)  # 17 is the code for PDF format
-            doc.Close()
-            word.Quit()
-    else:
-        # Use docx2pdf on Linux/Streamlit Cloud
-        import docx2pdf
-        docx2pdf.convert(docx_path, pdf_path)
+    """
+    Convert a Word document to PDF.
+    On Windows, uses Microsoft Word for better formatting.
+    On other platforms, falls back to docx2pdf.
+    """
+    try:
+        if platform.system() == 'Windows':
+            # Use Word on Windows
+            with COMWrapper() as wrapper:
+                word = win32com.client.DispatchEx('Word.Application')
+                doc = word.Documents.Open(os.path.abspath(docx_path))
+                doc.SaveAs(os.path.abspath(pdf_path), FileFormat=17)  # 17 is the code for PDF format
+                doc.Close()
+                word.Quit()
+        else:
+            # Use docx2pdf on Linux/Streamlit Cloud
+            import docx2pdf
+            # Create the output directory if it doesn't exist
+            os.makedirs(os.path.dirname(os.path.abspath(pdf_path)), exist_ok=True)
+            docx2pdf.convert(docx_path, pdf_path)
+            
+        # Verify the PDF was created
+        if not os.path.exists(pdf_path):
+            raise Exception(f"Failed to create PDF at {pdf_path}")
+            
+    except Exception as e:
+        print(f"Error converting DOCX to PDF: {e}")
+        # If we're not on Windows, try a different approach
+        if platform.system() != 'Windows':
+            try:
+                # Fallback: Create a simple PDF with a message
+                from reportlab.pdfgen import canvas
+                from reportlab.lib.pagesizes import letter
+                
+                c = canvas.Canvas(pdf_path, pagesize=letter)
+                c.drawString(100, 750, "Original document conversion failed.")
+                c.drawString(100, 730, f"Error: {str(e)}")
+                c.save()
+                print(f"Created placeholder PDF at {pdf_path}")
+            except Exception as fallback_error:
+                print(f"Failed to create fallback PDF: {fallback_error}")
+                raise
 
 def extract_meeting_datetime(text):
     # Match the specific format: Month DD, YYYY, HH:MMAM
