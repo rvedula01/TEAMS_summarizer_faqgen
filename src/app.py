@@ -26,7 +26,6 @@ if platform.system() == 'Windows':
 import streamlit as st
 import glob
 import nltk
-import docx2pdf
 from PyPDF2 import PdfReader
 from docx import Document
 from docx.shared import Inches, Pt, RGBColor
@@ -579,45 +578,81 @@ def convert_docx_to_pdf(docx_path, pdf_path):
     """
     Convert a Word document to PDF.
     On Windows, uses Microsoft Word for better formatting.
-    On other platforms, falls back to docx2pdf.
+    On other platforms, creates a simple PDF with the text content.
     """
     try:
+        # Create the output directory if it doesn't exist
+        os.makedirs(os.path.dirname(os.path.abspath(pdf_path)), exist_ok=True)
+        
         if platform.system() == 'Windows':
-            # Use Word on Windows
-            with COMWrapper() as wrapper:
-                word = win32com.client.DispatchEx('Word.Application')
-                doc = word.Documents.Open(os.path.abspath(docx_path))
-                doc.SaveAs(os.path.abspath(pdf_path), FileFormat=17)  # 17 is the code for PDF format
-                doc.Close()
-                word.Quit()
-        else:
-            # Use docx2pdf on Linux/Streamlit Cloud
-            import docx2pdf
-            # Create the output directory if it doesn't exist
-            os.makedirs(os.path.dirname(os.path.abspath(pdf_path)), exist_ok=True)
-            docx2pdf.convert(docx_path, pdf_path)
-            
-        # Verify the PDF was created
-        if not os.path.exists(pdf_path):
-            raise Exception(f"Failed to create PDF at {pdf_path}")
-            
-    except Exception as e:
-        print(f"Error converting DOCX to PDF: {e}")
-        # If we're not on Windows, try a different approach
-        if platform.system() != 'Windows':
+            # Use Word on Windows if available
             try:
-                # Fallback: Create a simple PDF with a message
-                from reportlab.pdfgen import canvas
-                from reportlab.lib.pagesizes import letter
+                with COMWrapper() as wrapper:
+                    word = win32com.client.DispatchEx('Word.Application')
+                    doc = word.Documents.Open(os.path.abspath(docx_path))
+                    doc.SaveAs(os.path.abspath(pdf_path), FileFormat=17)  # 17 is the code for PDF format
+                    doc.Close()
+                    word.Quit()
                 
-                c = canvas.Canvas(pdf_path, pagesize=letter)
-                c.drawString(100, 750, "Original document conversion failed.")
-                c.drawString(100, 730, f"Error: {str(e)}")
-                c.save()
-                print(f"Created placeholder PDF at {pdf_path}")
-            except Exception as fallback_error:
-                print(f"Failed to create fallback PDF: {fallback_error}")
-                raise
+                # Verify the PDF was created
+                if os.path.exists(pdf_path):
+                    return
+                
+            except Exception as e:
+                print(f"Warning: Could not use Word for PDF conversion: {e}")
+                # Fall through to the cross-platform method
+        
+        # Cross-platform fallback: Create a simple PDF with the text content
+        from reportlab.lib.pagesizes import letter
+        from reportlab.lib.styles import getSampleStyleSheet
+        from reportlab.platypus import SimpleDocTemplate, Paragraph
+        from reportlab.lib.units import inch
+        from docx import Document
+        
+        # Read the DOCX file
+        doc = Document(docx_path)
+        
+        # Create PDF
+        doc_pdf = SimpleDocTemplate(pdf_path, pagesize=letter,
+                                  rightMargin=72, leftMargin=72,
+                                  topMargin=72, bottomMargin=72)
+        
+        # Container for the 'Flowable' objects
+        story = []
+        styles = getSampleStyleSheet()
+        
+        # Add each paragraph from the docx to the PDF
+        for para in doc.paragraphs:
+            if para.text.strip():  # Skip empty paragraphs
+                # Convert docx paragraph to a PDF paragraph
+                p = Paragraph(para.text, styles['Normal'])
+                story.append(p)
+        
+        # Add each table from the docx to the PDF
+        for table in doc.tables:
+            for row in table.rows:
+                for cell in row.cells:
+                    for para in cell.paragraphs:
+                        if para.text.strip():
+                            p = Paragraph(para.text, styles['Normal'])
+                            story.append(p)
+        
+        # Build the PDF
+        doc_pdf.build(story)
+        
+    except Exception as e:
+        print(f"Error in convert_docx_to_pdf: {e}")
+        # Create a minimal PDF with an error message
+        try:
+            from reportlab.pdfgen import canvas
+            c = canvas.Canvas(pdf_path, pagesize=letter)
+            c.drawString(100, 750, "Document Conversion Notice")
+            c.drawString(100, 730, "The original document could not be converted with formatting.")
+            c.drawString(100, 710, "Please check the original document for proper formatting.")
+            c.save()
+        except Exception as fallback_error:
+            print(f"Failed to create fallback PDF: {fallback_error}")
+            raise
 
 def extract_meeting_datetime(text):
     # Match the specific format: Month DD, YYYY, HH:MMAM
@@ -1409,30 +1444,12 @@ def main():
                         
                     except Exception as e:
                         status_placeholder.error(f"Error loading document: {str(e)}")
-                        return
-                        
-                    # Count pages using PDF conversion
-                    try:
-                        status_placeholder.info("📊 Counting pages...")
-                        
-                        # Convert DOCX to PDF
-                        pdf_path = temp_path.replace('.docx', '.pdf')
-                        docx2pdf.convert(temp_path, pdf_path)
-                        
-                        # Count pages in PDF
-                        with open(pdf_path, 'rb') as pdf_file:
-                            pdf_reader = PdfReader(pdf_file)
-                            total_pages = len(pdf_reader.pages)
-                            st.session_state["total_pages"] = total_pages
-                        
-                        # Clean up temp PDF
-                        os.remove(pdf_path)
-                        
-                        # Show page count message
-                        page_count_placeholder.markdown(f"<div style='font-size: 18px; margin-top: 10px;'>Total {total_pages} pages found to summarize</div>", unsafe_allow_html=True)
-                            
-                    except Exception as e:
-                        status_placeholder.error(f"Error counting pages: {str(e)}")
+                        # Clean up temporary files if they exist
+                        if 'processed_path' in locals() and os.path.exists(processed_path):
+                            try:
+                                os.remove(processed_path)
+                            except:
+                                pass
                         return
                     
                     # Extract meeting information
@@ -1473,7 +1490,11 @@ def main():
                     status_placeholder.info("✂️ Preparing text for processing...")
                     chunks = _split_raw_into_chunks(all_text)
                     num_chunks = len(chunks)
-                    pages_per_chunk = max(1, round(total_pages / len(chunks)))
+                    
+                    # Estimate total pages based on content length
+                    total_words = len(all_text.split())
+                    estimated_pages = max(1, total_words // 500)  # Roughly 500 words per page
+                    pages_per_chunk = max(1, round(estimated_pages / len(chunks)))
                     
                     # Initialize progress bar
                     progress_bar = progress_placeholder.progress(0)
