@@ -244,23 +244,31 @@ def _process_chunk_for_faqs(chunk: str) -> List[Dict[str, str]]:
 You are a technical incident data extraction assistant. Your task is to extract comprehensive **technical questions** and their corresponding **answers** from incident call transcripts or technical discussions.
 
 Requirements:
-- Extract at least 3-5 key question-answer pairs from the provided text
-- Focus on the most important technical information
-- Questions should be clear and specific
-- Answers should be concise but complete
-- Format as a JSON array of objects with 'question' and 'answer' keys
+- Include complete and clearly related question-answer pairs from technical discussions
+- Focus on incident-related queries: root cause, timeline, impact, resolution steps, preventive measures
+- Capture both explicit Q&A exchanges and implicit information requests with their responses
+- Include questions about system status, troubleshooting steps, user impact, and technical details
+- Exclude non-technical content (greetings, casual conversation, administrative matters)
+- Exclude partial, ambiguous, or rhetorical questions without clear technical answers
+- Maintain original wording where possible, but ensure clarity and completeness
+- If technical information is provided in response to implied questions, formulate appropriate questions
+- Include context-rich answers that would be useful for future reference
+- Capture timeline information, impact scope, and resolution details
+- Include any preventive measures or follow-up actions discussed
 
-Example output format:
-[
-    {{
-        "question": "What was the root cause of the incident?",
-        "answer": "The root cause was a database connection timeout due to high load."
-    }},
-    {{
-        "question": "What was the impact of the incident?",
-        "answer": "The system was down for 2 hours, affecting 100% of users."
-    }}
-]
+Special Considerations:
+- Verify technical terms and avoid obvious transcription errors
+- Ensure answers provide sufficient context to be standalone useful
+- Include incident numbers, site IDs, and other reference information where mentioned
+- Capture both immediate troubleshooting and long-term resolution plans
+- Use the ':' whenever the time is mentioned in the transcript
+
+Output Format:
+Return a valid JSON array where each element is an object with two fields:
+- "question": the technical question (exact wording or appropriately formulated)
+- "answer": the complete, relevant answer with sufficient context
+
+Output only the JSON. Do not include any other explanation or text.
 
 Text to analyze:
 {chunk}
@@ -271,33 +279,31 @@ Text to analyze:
         # Print raw response for debugging
         print(f"\nRaw response content: {response}")
         
-        # Clean the response
-        cleaned_content = response.strip()
+        # Remove any code block markers and trim whitespace
+        cleaned_content = response.replace("```json", "").replace("```", "").strip()
         
-        # Try to extract JSON from the response
-        json_start = cleaned_content.find('[')
-        json_end = cleaned_content.rfind(']') + 1
-        
-        if json_start >= 0 and json_end > json_start:
-            json_str = cleaned_content[json_start:json_end]
+        # Try multiple parsing methods
+        try:
+            # Try json.loads first
+            faqs = json.loads(cleaned_content)
+            if isinstance(faqs, list) and all(isinstance(item, dict) and 'question' in item and 'answer' in item for item in faqs):
+                return faqs
+            print(f"JSON parsed content doesn't match expected format: {faqs}")
+        except Exception as e:
+            print(f"json.loads failed: {e}")
+            
+            # Try ast.literal_eval as backup
             try:
-                faqs = json.loads(json_str)
-                if isinstance(faqs, list) and len(faqs) > 0:
-                    # Ensure each item has the required fields
-                    valid_faqs = []
-                    for item in faqs:
-                        if isinstance(item, dict) and 'question' in item and 'answer' in item:
-                            valid_faqs.append({
-                                'question': str(item['question']).strip(),
-                                'answer': str(item['answer']).strip()
-                            })
-                    if valid_faqs:
-                        print(f"Extracted {len(valid_faqs)} valid FAQs from response")
-                        return valid_faqs
-            except json.JSONDecodeError as e:
-                print(f"Failed to parse JSON: {e}")
-        
-        print(f"No valid FAQs found in response")
+                faqs = ast.literal_eval(cleaned_content)
+                if isinstance(faqs, list) and all(isinstance(item, dict) and 'question' in item and 'answer' in item for item in faqs):
+                    return faqs
+                print(f"ast.literal_eval parsed content doesn't match expected format: {faqs}")
+            except Exception as e2:
+                print(f"ast.literal_eval failed: {e2}")
+                
+        # If all parsing attempts fail, return empty list
+        print(f"\nFailed to parse FAQ response after all attempts:")
+        print(f"Cleaned content: {cleaned_content}")
         return []
             
     except Exception as e:
