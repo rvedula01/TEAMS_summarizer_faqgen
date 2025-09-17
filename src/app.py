@@ -1603,6 +1603,7 @@ def main():
                                 unsafe_allow_html=True
                             )
                             
+                            total_pages = total_pages if 'total_pages' in locals() or 'total_pages' in globals() else 1
                             # Update progress
                             current_page = min((i + 1) * pages_per_chunk, total_pages)
                             progress_percentage = current_page / total_pages
