@@ -73,7 +73,7 @@ os.environ['STREAMLIT_SERVER_FILE_WATCHER_TYPE'] = 'none'
 
 os.environ['STREAMLIT_FILE_WATCHER'] = 'none'
 
-st.write("API Key exists:", os.getenv("OPENAI_API_KEY") is not None)
+#st.write("API Key exists:", os.getenv("OPENAI_API_KEY") is not None)
 
 def replace_png_placeholder_fixed(match):
     """
@@ -1328,7 +1328,7 @@ def main():
     
     <div class="description-container">
         <p class="description-text">
-            Hi there! Ready to transform your enterprise incident meeting transcripts into Smart & Actionable Summaries in a jiffy!
+            Hi there! Ready to transform your enterprise incident meetings into Smart & Actionable Summaries in a jiffy!
         </p>
         <p class="description-text">
             <strong>Steps to use the application:</strong>
@@ -1396,7 +1396,9 @@ def main():
                         f.write(file.getbuffer())
                     
                     # Calculate and store total pages in session state
-                    st.session_state['total_pages'] = count_pages_in_docx(temp_path)
+                    total_pages = count_pages_in_docx(temp_path)
+                    st.session_state['total_pages'] = total_pages
+                    print(f"Total pages in document: {total_pages}")  # Debug log
                     
                     # Clean up the temporary file
                     try:
@@ -1734,17 +1736,21 @@ def main():
                             total_pages = st.session_state.get('total_pages', 1)
                             
                             # Calculate current page and progress
+                            # Use min to ensure we don't exceed the total number of pages
                             current_page = min((i + 1) * pages_per_chunk, total_pages)
-                            progress_percentage = current_page / total_pages
+                            
+                            # Ensure we don't show more than 100% progress
+                            progress_percentage = min(1.0, (i + 1) / num_chunks)
                             progress_bar.progress(progress_percentage)
                             
-                            completion_percent = int((i + 1) / num_chunks * 100)
-                            status_placeholder.info(f"⚡ Processed {current_page}/{total_pages} pages of transcript")
+                            # Show actual page count instead of estimated
+                            status_placeholder.info(f"⚡ Processed {min((i + 1) * pages_per_chunk, total_pages)}/{total_pages} pages of transcript")
                             
                         except Exception as e:
                             status_placeholder.error(f"Error processing section {i}: {str(e)}")
                             break
                     
+                    # Update the final status to show completion
                     page_status_placeholder.text(f"Processed {total_pages}/{total_pages} pages")
                     
                     # Final processing
