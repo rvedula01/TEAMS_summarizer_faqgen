@@ -14,8 +14,10 @@ import ast
 
 load_dotenv()
 
-openai.api_key = os.getenv('OPENAI_API_KEY')
-_client = openai.OpenAI()
+api_key = os.getenv('OPENAI_API_KEY')
+if not api_key:
+    raise ValueError("OPENAI_API_KEY environment variable not set. Please set it in a .env file or your environment.")
+_client = openai.OpenAI(api_key=api_key)
 
 
 def extract_faqs(text: str, max_chunk_size: int = 3000) -> List[Dict[str, str]]:
