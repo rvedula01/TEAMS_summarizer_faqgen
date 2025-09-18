@@ -257,16 +257,27 @@ def chunked_clean_and_summarize(
       - Preserves image placeholders in the output.
       - After all chunks, if final_merge is True and combined is too large,
         yields the final merged summary as one last item.
+      - Ensures no duplicate entries in the output.
     Returns:
       The final combined summary (same as before), but through StopIteration.value.
     """
     os.makedirs("debug_chunks", exist_ok=True)
-
-    raw_chunks = _split_raw_into_chunks(raw_transcript)
+    
+    # Track seen entries to prevent duplicates
+    seen_entries = set()
+    
+    # Pre-process the entire transcript to handle timestamps and speakers first
+    processed_transcript = clean_transcript(raw_transcript)
+    
+    # Split into chunks after initial cleaning
+    raw_chunks = _split_raw_into_chunks(processed_transcript)
     full_summary_parts: List[str] = []
 
     # Process each chunk, preserving image placeholders
     for idx, raw_chunk in enumerate(raw_chunks, start=1):
+        if not raw_chunk.strip():
+            continue
+            
         if debug:
             with open(f"debug_chunks/raw_chunk_{idx}.txt", "w", encoding="utf-8") as f:
                 f.write(raw_chunk)
@@ -274,28 +285,58 @@ def chunked_clean_and_summarize(
         # Process the chunk, handling images and text
         summary_part = process_chunk_with_images(raw_chunk)
         
+        # Skip empty or whitespace-only parts
+        if not summary_part or not summary_part.strip():
+            continue
+            
+        # Remove any duplicate lines within the chunk
+        lines = []
+        for line in summary_part.split('\n'):
+            line = line.strip()
+            if not line:
+                continue
+                
+            # Skip duplicate entries
+            if line in seen_entries:
+                continue
+                
+            seen_entries.add(line)
+            lines.append(line)
+            
+        summary_part = '\n'.join(lines)
+        
         if debug:
             with open(f"debug_chunks/summary_chunk_{idx}.txt", "w", encoding="utf-8") as f:
                 f.write(summary_part)
 
-        full_summary_parts.append(summary_part)
-        # Yield this chunk's summary immediately:
-        yield summary_part
+        if summary_part:  # Only add non-empty summaries
+            full_summary_parts.append(summary_part)
+            # Yield this chunk's summary immediately:
+            yield summary_part
 
-    # 4: Concatenate all parts
-    combined = "\n".join(full_summary_parts)
+    # Concatenate all parts, ensuring no duplicate lines
+    combined = []
+    seen_lines = set()
+    
+    for part in full_summary_parts:
+        for line in part.split('\n'):
+            line = line.strip()
+            if line and line not in seen_lines:
+                seen_lines.add(line)
+                combined.append(line)
+    
+    combined = '\n'.join(combined)
 
-    # 5: Optionally do a final merge and yield that as well
+    # Optionally do a final merge if needed
     if final_merge and len(combined) > MAX_CHARS_PER_CHUNK:
         merge_prompt = (
             "You are an expert at merging multiple transcript summaries into one concise summary. "
-            "Preserve all timestamps, NER, numbers, and Active Voice format.\n\n"
+            "Preserve all timestamps, NER, numbers, and Active Voice format. "
+            "Remove any duplicate entries.\n\n"
             f"PARTIAL_SUMMARIES:\n{combined}"
         )
         combined = call_openai_chat(merge_prompt)
         # Clean up any triple backticks from the final merged response
-        combined = combined.replace("```", "").strip()
-        # Clean up any markdown formatting from the final merged response
         combined = combined.replace("```", "").strip()
         
         # Add the timeline header to the final merged output
