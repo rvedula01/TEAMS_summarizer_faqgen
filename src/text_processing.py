@@ -27,70 +27,77 @@ from openai_client import call_openai_chat
 def clean_transcript(raw_transcript: str) -> str:
     """
     Clean the transcript by:
-        1. Maintaining original question structure and tone
-        2. Removing unnecessary filler words
-        3. Handling questions and confirmations properly
-        4. Preserving numeric values and team mentions
-        5. Fixing grammar and punctuation
+        1. Pre-processing the input to handle timestamp and speaker format
+        2. Maintaining original question structure and tone
+        3. Removing unnecessary filler words and duplicate words
+        4. Handling questions and confirmations properly
+        5. Preserving numeric values and team mentions
+        6. Fixing grammar and punctuation
     """
-    # print("raw_transcript", raw_transcript)
+    # Pre-process the input to handle the timestamp and speaker format
+    lines = raw_transcript.split('\n')
+    processed_lines = []
+    i = 0
+    
+    while i < len(lines):
+        line = lines[i].strip()
+        if not line:
+            i += 1
+            continue
+            
+        # Check if line starts with a date (MM/DD/YYYY or YYYY-MM-DD)
+        if any(line.startswith(fmt) for fmt in ['01/', '02/', '03/', '04/', '05/', '06/', '07/', '08/', '09/', '10/', '11/', '12/']):
+            # This is a timestamp line, next line is the speaker and content
+            if i + 1 < len(lines):
+                timestamp = line
+                speaker_content = lines[i+1].strip()
+                # Split speaker and content (first word is speaker, rest is content)
+                parts = speaker_content.split(' ', 1)
+                if len(parts) == 2:
+                    speaker, content = parts
+                    # Format as MM:SS Speaker Content
+                    processed_line = f"{timestamp.split(', ')[1]} {speaker} {content}"
+                    processed_lines.append(processed_line)
+                i += 2  # Skip the next line as we've processed it
+                continue
+        i += 1
+    
+    # Join the processed lines with newlines
+    pre_processed = '\n\n'.join(processed_lines)
+    
     prompt = (
         "You are a professional transcript cleaner. Follow these rules EXACTLY:\n\n"
-        "** Input format:  Speaker MM:SS or H:MM:SS \n Content**\n"
-        "**Locate every speaker and timestamp within the line and create a new entry for each individual timestamp.**"
-        
+        "## INPUT FORMAT:\n"
+        "- Each line contains: Timestamp Speaker Content\n\n"
         "## CRITICAL OUTPUT FORMAT REQUIREMENTS:\n"
-        "- Each line MUST follow this EXACT format: MM:SS Speaker Content\n"
-        "- No line shall end with a Speaker name of next line\n"
+        "- Each line MUST follow this EXACT format: Timestamp Speaker Content\n"
+        "- Preserve the original timestamp format exactly as provided\n"
         "- Use EXACTLY ONE space between timestamp and speaker name\n"
         "- Use EXACTLY ONE space between speaker name and content\n"
         "- Add EXACTLY ONE blank line between each entry\n"
         "- NO headers, footers, explanations, or additional text\n"
-        "- Preserve timestamp format exactly as provided (0:16, 02:44, 1:23:45, etc.)\n\n"
-
-        "***## MANDATORY RULE FOR IMAGE PLACEHOLDERS:\n***"
-        "***- If a line contains an image placeholder like [IMAGE:temp_images\\image_x.png], DO NOT modify the content in any way.\n***"
-        "***- Retain such lines EXACTLY as they appear, including speaker, timestamp, and image text.\n***"
-        "***- DO NOT clean, merge, format, or edit these lines.\n***"
-        "***- Example: '03:15 Speaker content [IMAGE:temp_images\\image_x.png]' → keep exactly like that strictly without any modification.\n\n***"
-        
-        "***Retain the sentence If you find 'Shared the following in the chat' in the transcript, do not remove it.\n\n***"
-        "***If a word is repeated more than once, keep only one.(example: but but but but but should be but)\n\n***"
-
-        "***Text cleaning rules:***\n\n"
-        "Remove any single-word sentences, except 'Yes' or 'No'.\n\n"
-        "Merge consecutive notes by the same speaker, using the earliest timestamp, and separate statements with semicolons.\n\n"
-        "Keep all original questions and confirmation phrases. Do not change their tone or structure.\n\n"
-        "Remove filler words and speech disfluencies such as 'um', 'uh', 'hmm', 'ah', 'you know', 'like', 'so'. If the whole line is filler, remove it. If fillers appear with other words, remove only the fillers. Remove duplicate words or phrases.\n\n"
-
-        "Keep all numbers and team/role mentions unchanged.\n\n"
-        "Correct grammar, capitalization, and punctuation.\n\n"
-        "Eliminate redundant or repeated information, but keep important context and timelines.\n\n"
-
-        "Preserve critical technical details and activity context. Remove statements that blame or criticize another person.\n\n"
-
-        "Make sure country and region mentions use correct names (e.g., 'India' instead of 'all countries in India').\n\n"
-
-        "Each entry must start with its timestamp, followed by the speaker name and the cleaned content.\n\n"
-
-        "Output each entry in the format:\nMM:SS Speaker Content\n\n"
-
-        "Leave a blank line between each entry.\n\n"
-
-        "Output format example:\n\n"
-
-        "01:23 Gautham There is a chance it got rebooted last night; We need to check the logs; The system was down yesterday\n\n"
-
-        "02:17 Anil Yes\n\n"
-
-        "02:29 ABC Team No activity observed, but deployment on Thursday affected the entire system.\n\n"
-        
-        "Process this transcript:\n"
-        f"{raw_transcript}"
+        "- DO NOT end any line with a speaker name\n\n"
+        "## TEXT CLEANING RULES:\n"
+        "1. Remove duplicate words or phrases (e.g., 'but but but' → 'but')\n"
+        "2. Remove filler words: um, uh, hmm, ah, you know, like, so\n"
+        "3. Remove any single-word sentences, except 'Yes' or 'No'\n"
+        "4. Keep all original questions and confirmation phrases\n"
+        "5. Correct grammar, capitalization, and punctuation\n"
+        "6. Remove redundant or repeated information\n"
+        "7. Keep all numbers and team/role mentions unchanged\n"
+        "8. If a line contains '[IMAGE:...]', keep it exactly as is\n\n"
+        "## EXAMPLES:\n"
+        "Input:\n"
+        "15:21:23 Aryan I'll do that. OK, OK. Tell me what is the issue?\n"
+        "15:21:27 Neerav ABC OK.\n\n"
+        "Output:\n"
+        "15:21:23 Aryan I'll do that. Please tell me what is the issue?\n\n"
+        "15:21:27 Neerav ABC OK.\n\n"
+        "Now clean this transcript:\n"
+        f"{pre_processed}"
     )
     
     result = call_openai_chat(prompt)
-    # print("cleaned_transcript", result)
     return result
 
 
