@@ -86,13 +86,20 @@ def clean_transcript(raw_transcript: str) -> str:
         "6. Remove redundant or repeated information\n"
         "7. Keep all numbers and team/role mentions unchanged\n"
         "8. If a line contains '[IMAGE:...]', keep it exactly as is\n\n"
-        "## EXAMPLES:\n"
+        "## EXAMPLES:\n\n"
         "Input:\n"
-        "15:21:23 Aryan I'll do that. OK, OK. Tell me what is the issue?\n"
+        "15:21:23 Aryan I'll do that. OK, OK. Tell me what is the issue? Neerav ABC\n"
         "15:21:27 Neerav ABC OK.\n\n"
         "Output:\n"
         "15:21:23 Aryan I'll do that. Please tell me what is the issue?\n\n"
         "15:21:27 Neerav ABC OK.\n\n"
+
+        "***## MANDATORY RULE FOR IMAGE PLACEHOLDERS:\n***"
+        "***- If a line contains an image placeholder like [IMAGE:temp_images\\image_x.png], DO NOT modify the content in any way.\n***"
+        "***- Retain such lines EXACTLY as they appear, including speaker, timestamp, and image text.\n***"
+        "***- DO NOT clean, merge, format, or edit these lines.Ad there should be only one line for each image placeholder\n ***"
+        "***- Example: '03:15 Speaker content [IMAGE:temp_images\\image_x.png]' → keep exactly like that strictly without any modification.\n\n***"
+        
         "Now clean this transcript:\n"
         f"{pre_processed}"
     )
