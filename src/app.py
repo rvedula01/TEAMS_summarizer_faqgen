@@ -281,7 +281,7 @@ Text to analyze:
 """
         
         print("Sending request to OpenAI...")
-        response = call_openai_chat(prompt=prompt, model="gpt-4o")
+        response = call_openai_chat(prompt=prompt, model="gpt-4o-mini")
         
         if not response:
             print("ERROR: Empty response from OpenAI")
@@ -561,7 +561,7 @@ def _process_chunk_for_action_items(chunk):
     {chunk}
     """
     
-    response = call_openai_chat(prompt=prompt, model="gpt-4o")
+    response = call_openai_chat(prompt=prompt, model="gpt-4o-mini")
     response = response.replace("```json", "").replace("```", "").strip()
     
     import json
@@ -644,7 +644,7 @@ def _process_chunk_for_observations(chunk):
     {chunk}
     """.format(chunk=chunk)
     
-    response = call_openai_chat(prompt=prompt, model="gpt-4o")
+    response = call_openai_chat(prompt=prompt, model="gpt-4o-mini")
     response = response.replace("```json", "").replace("```", "").strip()
     
     import json
