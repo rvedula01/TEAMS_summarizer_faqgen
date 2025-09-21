@@ -1271,7 +1271,7 @@ def main():
             st.warning(f"Warning: Could not initialize COM: {e}")
             if not hasattr(threading.current_thread(), "_com_initialized"):
                 threading.current_thread()._com_initialized = False
-    st.title("📝 TEAMS Whiteboard & Knowledge Base Generator")
+    st.title("📝 Meeting Summarizer & Knowledge Base Generator")
     
     # Add application description
     st.markdown("""
@@ -1352,7 +1352,7 @@ def main():
     
     <div class="description-container">
         <p class="description-text">
-            Hi there! Ready to transform your enterprise incident meetings into Smart & Actionable Summaries in a jiffy!
+            Hi there! Ready to transform your team huddles into Smart & Actionable Summaries in a jiffy!
         </p>
         <p class="description-text">
             <strong>Steps to use the application:</strong>
