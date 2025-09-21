@@ -1260,7 +1260,7 @@ def main():
     import re  # Add regex import for image processing
     
     # Set up the Streamlit page
-    st.set_page_config(layout="wide", page_title="Transcript Summarizer")
+    st.set_page_config(layout="wide", page_title="Meeting Summarizer")
     
     # Initialize COM for the main thread if on Windows
     if platform.system() == 'Windows' and not hasattr(threading.current_thread(), "_com_initialized"):
