@@ -1366,15 +1366,23 @@ def main():
                 </ol>
             </div>
             <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
-                <img src="https://raw.githubusercontent.com/rvedula01/TEAMS_summarizer_faqgen/main/unnamed.png" 
-                     alt="Meeting Summary" 
-                     style="max-width: 100%; max-height: 300px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <!-- Image will be added by Streamlit -->
             </div>
         </div>
     </div>
     """,
     unsafe_allow_html=True
     )
+    
+    # Add the image using Streamlit
+    col1, col2 = st.columns([1, 1])
+    with col1:
+        st.write(" ")  # Empty column for alignment
+    with col2:
+        st.image("src/unnamed.png", 
+                width=300, 
+                caption="Meeting Summary",
+                use_column_width='auto')
     
     # Create tabs
     tab1, tab2 = st.tabs(["📋 Summary", "❓ Q&A"])
