@@ -247,32 +247,56 @@ def _process_chunk_for_faqs(chunk: str) -> List[Dict[str, str]]:
             
         # If no direct Q&A pairs found, use the LLM to generate them
         prompt = f"""
-You are a technical incident data extraction assistant. Your task is to extract comprehensive **technical questions** and their corresponding **answers** from incident call transcripts or technical discussions.
+You are a technical incident data extraction assistant. Your task is to extract high-quality, technical questions and their corresponding answers from incident call transcripts or technical discussions.
 
-Requirements:
-- Include complete and clearly related question-answer pairs from technical discussions
-- Focus on incident-related queries: root cause, timeline, impact, resolution steps, preventive measures
-- Capture both explicit Q&A exchanges and implicit information requests with their responses
-- Include questions about system status, troubleshooting steps, user impact, and technical details
-- Exclude non-technical content (greetings, casual conversation, administrative matters)
-- Exclude partial, ambiguous, or rhetorical questions without clear technical answers
-- Maintain original wording where possible, but ensure clarity and completeness
-- If technical information is provided in response to implied questions, formulate appropriate questions
-- Include context-rich answers that would be useful for future reference
-- Capture timeline information, impact scope, and resolution details
-- Include any preventive measures or follow-up actions discussed
+## INCLUSION CRITERIA:
+- Technical questions about systems, services, or processes
+- Incident-related queries about root causes, impacts, or resolutions
+- Questions about system status, configurations, or behaviors
+- Technical troubleshooting steps and their outcomes
+- Questions about error messages or system logs
+- Technical decisions and their rationales
 
-Special Considerations:
-- Verify technical terms and avoid obvious transcription errors
-- Ensure answers provide sufficient context to be standalone useful
-- Include incident numbers, site IDs, and other reference information where mentioned
-- Capture both immediate troubleshooting and long-term resolution plans
-- Use the ':' whenever the time is mentioned in the transcript
+## EXCLUSION CRITERIA (DO NOT INCLUDE):
+- Greetings, casual conversation, or social pleasantries
+- Administrative or logistical discussions
+- Simple confirmations (e.g., "Is the system up?" - "Yes")
+- Incomplete or ambiguous questions without clear technical answers
+- Questions where the answer is just "yes", "no", or "I don't know"
+- Questions about meeting logistics or scheduling
+- Questions where the answer is just "I'm checking" or similar non-answers
+- Questions that are actually statements or requests
+- Questions about non-technical topics
 
-Output Format:
+## QUALITY REQUIREMENTS:
+1. Questions must be complete and technically specific
+2. Answers must provide substantial technical information or context
+3. Both question and answer should be clear and understandable on their own
+4. Remove any filler words or phrases from both questions and answers
+5. If a question is technical but the answer is non-substantive (e.g., "I'll check"), exclude it
+6. For yes/no questions, only include if the answer provides detailed technical explanation
+
+## EXAMPLES OF WHAT TO EXCLUDE:
+- Q: "Is the database up?" 
+  A: "Yes"
+  
+- Q: "Can you check the logs?"
+  A: "I'm looking at them now"
+  
+- Q: "Are we ready to start?"
+  A: "Yes, let's begin"
+
+## EXAMPLES OF WHAT TO INCLUDE:
+- Q: "What was the root cause of the database outage?"
+  A: "The primary database server ran out of disk space due to unrotated log files. We've added monitoring and automated log rotation to prevent recurrence."
+
+- Q: "Which services were affected by the network partition?"
+  A: "The authentication service and payment processing were impacted between 14:30 and 15:45 UTC. We've implemented circuit breakers to limit blast radius in future events."
+
+## OUTPUT FORMAT:
 Return a valid JSON array where each element is an object with two fields:
 - "question": the technical question (exact wording or appropriately formulated)
-- "answer": the complete, relevant answer with sufficient context
+- "answer": the complete, relevant answer with sufficient technical context
 
 Output only the JSON. Do not include any other explanation or text.
 
