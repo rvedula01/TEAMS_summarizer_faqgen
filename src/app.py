@@ -1351,38 +1351,35 @@ def main():
     </style>
     
     <div class="description-container">
-        <div style="display: flex; align-items: flex-start; gap: 40px;">
-            <div style="flex: 1;">
-                <p class="description-text">
-                    Hi there! Ready to transform your team huddles into Smart & Actionable Summaries in a jiffy!
-                </p>
-                <p class="description-text" style="margin-top: 20px;">
-                    <strong>Steps to use the application:</strong>
-                </p>
-                <ol class="steps-list" style="padding-left: 20px;">
-                    <li style="margin-bottom: 10px;">📁 Upload your meeting transcript and chat files</li>
-                    <li style="margin-bottom: 10px;">👆 Click on Generate Summary button</li>
-                    <li>📥 Download the summarized file</li>
-                </ol>
-            </div>
-            <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
-                <!-- Image will be added by Streamlit -->
-            </div>
-        </div>
+        <p class="description-text">
+            Hi there! Ready to transform your team huddles into Smart & Actionable Summaries in a jiffy!
+        </p>
     </div>
     """,
     unsafe_allow_html=True
     )
     
-    # Add the image using Streamlit
-    col1, col2 = st.columns([1, 1])
+    # Create two columns for side-by-side layout
+    col1, col2 = st.columns(2)
+    
+    # Left column - Steps
     with col1:
-        st.write(" ")  # Empty column for alignment
+        st.markdown("""
+        <div style="margin-top: 20px;">
+            <p style="font-weight: bold; font-size: 18px;">Steps to use the application:</p>
+            <ol style="padding-left: 20px; font-size: 16px; line-height: 2;">
+                <li>📁 Upload your meeting transcript and chat files</li>
+                <li>👆 Click on Generate Summary button</li>
+                <li>📥 Download the summarized file</li>
+            </ol>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # Right column - Image
     with col2:
         st.image("src/unnamed.png", 
-                width=300, 
-                caption="Meeting Summary",
-                use_container_width=True)
+                use_container_width=True,
+                caption="Meeting Summary")
     
     # Create tabs
     tab1, tab2 = st.tabs(["📋 Summary", "❓ Q&A"])
