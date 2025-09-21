@@ -1361,6 +1361,8 @@ def main():
             <li>📁 Upload your meeting transcript and chat files</li>
             <li><span style="color: #D2B48C; text-shadow: 0 0 2px rgba(0,0,0,0.2);">👆</span> Click on Generate Whiteboard button</li>
             <li>📥 Download the summarized file</li>
+            <li><span style="color: #D2B48C; text-shadow: 0 0 2px rgba(0,0,0,0.2);">👆</span> Under Q&A tab, click Extract Q&A button</li>
+            <li>📥 Download the Q&A file</li>
         </ul>
     </div>
     """,
