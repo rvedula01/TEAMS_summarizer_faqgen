@@ -57,7 +57,7 @@ from file_io import (
     extract_images_from_paragraph,
     iter_block_items
 )
-from text_processing import clean_transcript, summarize_transcript, chunked_clean_and_summarize
+from text_processing import clean_transcript, summarize_transcript, chunked_clean_and_summarize, docx_to_text
 from text_processing import chunked_clean_and_summarize, _split_raw_into_chunks
 from aggregator import read_chunk_summaries, summarize_timeline, summarize_table, extract_single_markdown_table
 from openai_client import call_openai_chat

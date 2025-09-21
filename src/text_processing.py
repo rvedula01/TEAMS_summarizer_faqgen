@@ -6,10 +6,12 @@ Created on Fri Jun  6 15:17:13 2025
 """
 
 
-from typing import Any
+from typing import Any, Union, BinaryIO
 from typing import List, Generator
 import nltk
 import os
+from docx import Document
+import io
 
 # Ensure all required NLTK data is downloaded
 try:
@@ -42,6 +44,28 @@ IMAGE_PLACEHOLDER_RULES = (
     "- DO NOT clean, merge, format, or edit these lines.\n"
     "- Example: '03:15 Speaker content [IMAGE:temp_images\\image_x.png]' → keep exactly like that strictly without any modification.\n\n"
 )
+
+def docx_to_text(docx_content: Union[bytes, BinaryIO]) -> str:
+    """Extract text content from a DOCX file.
+    
+    Args:
+        docx_content: Either bytes content of the DOCX file or a file-like object
+        
+    Returns:
+        str: Extracted text content
+    """
+    try:
+        # If content is bytes, convert to file-like object
+        if isinstance(docx_content, bytes):
+            docx_file = io.BytesIO(docx_content)
+        else:
+            docx_file = docx_content
+            
+        doc = Document(docx_file)
+        return '\n'.join([paragraph.text for paragraph in doc.paragraphs if paragraph.text])
+    except Exception as e:
+        raise Exception(f"Error extracting text from DOCX: {str(e)}")
+
 
 def clean_transcript(raw_transcript: str) -> str:
     """
