@@ -57,7 +57,7 @@ from file_io import (
     extract_images_from_paragraph,
     iter_block_items
 )
-from text_processing import clean_transcript, summarize_transcript, chunked_clean_and_summarize, docx_to_text
+from text_processing import clean_transcript, summarize_transcript, chunked_clean_and_summarize
 from text_processing import chunked_clean_and_summarize, _split_raw_into_chunks
 from aggregator import read_chunk_summaries, summarize_timeline, summarize_table, extract_single_markdown_table
 from openai_client import call_openai_chat
@@ -1380,7 +1380,7 @@ def main():
         
         st.header("Meeting Summarization")
 
-        # File upload section
+        # Single file upload section for both transcript and chat files
         st.markdown("### File Upload")
         
         # Define file type detection function
@@ -1394,10 +1394,10 @@ def main():
             return None  # Unknown type
             
         uploaded_files = st.file_uploader(
-            "📂 Upload Transcript (Required) and Chat (Optional) Files",
+            "📂 Upload Transcript and Chat Files",
             type=['docx'],
             accept_multiple_files=True,
-            help="Upload your transcript file (.docx) and optionally a chat file. Files will be automatically detected as transcript or chat based on their filenames.",
+            help="Upload your transcript and chat files (.docx). Files will be automatically detected as transcript or chat based on their filenames.",
             key="file_upload"
         )
         
@@ -1436,95 +1436,69 @@ def main():
             if transcript_file and chat_file:
                 st.success("✅ Both transcript and chat files detected!")
             elif transcript_file:
-                st.info("ℹ️ Only transcript file detected. The summary will be generated from the transcript only.")
-            elif chat_file and not transcript_file:
-                st.error("❌ Please upload a transcript file. Chat file alone is not sufficient.")
-                st.stop()
+                st.warning("ℹ️ Only transcript file detected. Please upload a chat file as well.")
+            elif chat_file:
+                st.warning("ℹ️ Only chat file detected. Please upload a transcript file as well.")
             else:
                 st.error("❌ Could not determine file types. Please ensure filenames contain 'transcript' or 'chat'.")
-                st.stop()
         
-        # Process files when at least transcript is uploaded
-        if transcript_file is not None:
+        # Process files when both are uploaded
+        if transcript_file is not None and chat_file is not None:
             try:
-                # Save uploaded transcript file temporarily
+                # Save uploaded files temporarily
                 transcript_temp_path = "temp_transcript.docx"
+                chat_temp_path = "temp_chat.docx"
+                merged_temp_path = "temp_merged.docx"
                 
                 with open(transcript_temp_path, "wb") as f:
-                    f.write(transcript_file.getbuffer())
+                    f.write(transcript_file.getvalue())
+                    
+                with open(chat_temp_path, "wb") as f:
+                    f.write(chat_file.getvalue())
                 
-                # Process based on whether chat file is provided
-                if chat_file is not None:
-                    # Both files provided - merge them
-                    chat_temp_path = "temp_chat.docx"
-                    merged_temp_path = "temp_merged.docx"
-                    
-                    with open(chat_temp_path, "wb") as f:
-                        f.write(chat_file.getbuffer())
-                    
-                    # Merge chat and transcript
-                    with st.spinner("🔍 Processing and merging files..."):
-                        merge_chat_and_transcript(transcript_temp_path, chat_temp_path, merged_temp_path)
-                    
-                    # Read the merged content
-                    with open(merged_temp_path, "rb") as f:
-                        processed_content = f.read()
-                    
-                    # Clean up temporary files
-                    for temp_file in [chat_temp_path, merged_temp_path]:
-                        try:
-                            os.remove(temp_file)
-                        except:
-                            pass
-                else:
-                    # Only transcript provided - use it directly
-                    with open(transcript_temp_path, "rb") as f:
-                        processed_content = f.read()
+                # Create status placeholder for file processing
+                file_status_placeholder = st.empty()
                 
-                # Save the processed content to session state for download
-                st.session_state.merged_content = processed_content
+                file_status_placeholder.info("📂 Loading transcript file...")
+                # Load individual file contents for display
+                transcript_content = load_text_from_docx(transcript_temp_path, encoding='utf-8-sig')
                 
-                # Clean up transcript temp file
-                try:
+                file_status_placeholder.info("💬 Loading chat file...")
+                chat_content = load_text_from_docx(chat_temp_path, encoding='utf-8-sig')
+                
+                file_status_placeholder.info("🔄 Merging transcript and chat files...")
+                # Merge the files using merge_chat_transcript.py functions
+                merge_chat_and_transcript(transcript_temp_path, chat_temp_path, merged_temp_path)
+                
+                file_status_placeholder.info("📋 Loading merged content...")
+                # Load the merged text
+                raw = load_text_from_docx(merged_temp_path, encoding='utf-8-sig')
+                st.session_state["raw"] = raw
+                st.session_state["transcript_content"] = transcript_content
+                st.session_state["chat_content"] = chat_content
+                st.session_state.pop("streamed", None)
+                st.session_state.pop("final", None)
+                st.session_state["temp_path"] = merged_temp_path
+                
+                file_status_placeholder.success("✅ Files merged and processed successfully!")
+                
+                # Clear status after 2 seconds (optional - you can remove this if you want it to stay)
+                import time
+                time.sleep(1)
+                file_status_placeholder.empty()
+                
+                # Clean up individual temp files
+                if os.path.exists(transcript_temp_path):
                     os.remove(transcript_temp_path)
-                except:
-                    pass
-                
-                # Process the content
-                with st.spinner("📝 Extracting text..."):
-                    raw_text = docx_to_text(processed_content)
-                
-                # Clean the transcript
-                with st.spinner("🧹 Cleaning transcript..."):
-                    cleaned_transcript = clean_transcript(raw_text)
-                
-                # Generate summary
-                with st.spinner("📊 Generating summary..."):
-                    summary = summarize_transcript(cleaned_transcript)
-                
-                # Display the summary
-                st.subheader("📝 Meeting Summary")
-                st.markdown(summary)
-                
-                # Generate FAQs
-                with st.spinner("❓ Generating FAQs..."):
-                    faqs = process_text_for_faqs(cleaned_transcript)
-                
-                # Display FAQs
-                st.subheader("❓ Key Questions & Answers")
-                if faqs:
-                    for i, faq in enumerate(faqs, 1):
-                        with st.expander(f"{i}. {faq['question']}"):
-                            st.write(faq['answer'])
-                else:
-                    st.info("No FAQs could be generated from the content.")
-                
-                # Set flag for download button
-                st.session_state.download_doc = True
-                
+                if os.path.exists(chat_temp_path):
+                    os.remove(chat_temp_path)
+                    
             except Exception as e:
-                st.error(f"❌ An error occurred while processing the files: {str(e)}")
-                st.error(traceback.format_exc())
+                st.error(f"Error processing the files: {str(e)}")
+                # Clean up temp files if they exist
+                for temp_file in [transcript_temp_path, chat_temp_path, merged_temp_path]:
+                    if 'temp_file' in locals() and os.path.exists(temp_file):
+                        os.remove(temp_file)
 
         # Main layout with three columns (after file upload)
         left_col, middle_col, right_col = st.columns([2, 1, 2])
