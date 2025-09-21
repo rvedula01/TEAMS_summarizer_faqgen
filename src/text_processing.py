@@ -24,6 +24,25 @@ except LookupError:
 
 from openai_client import call_openai_chat
 
+# Common prompt sections
+TIMESTAMP_FORMAT_RULES = (
+    "## CRITICAL OUTPUT FORMAT REQUIREMENTS:\n"
+    "- Each line MUST follow this EXACT format: MM:SS Speaker Content\n"
+    "- Use EXACTLY ONE space between timestamp and speaker name\n"
+    "- Use EXACTLY ONE space between speaker name and content\n"
+    "- Add EXACTLY ONE blank line between each entry\n"
+    "- NO headers, footers, explanations, or additional text\n"
+    "- Preserve timestamp format exactly as provided (0:16, 02:44, 1:23:45, etc.)\n\n"
+)
+
+IMAGE_PLACEHOLDER_RULES = (
+    "## MANDATORY RULE FOR IMAGE PLACEHOLDERS:\n"
+    "- If a line contains an image placeholder like [IMAGE:temp_images\\image_x.png], DO NOT modify the content in any way.\n"
+    "- Retain such lines EXACTLY as they appear, including speaker, timestamp, and image text.\n"
+    "- DO NOT clean, merge, format, or edit these lines.\n"
+    "- Example: '03:15 Speaker content [IMAGE:temp_images\\image_x.png]' → keep exactly like that strictly without any modification.\n\n"
+)
+
 def clean_transcript(raw_transcript: str) -> str:
     """
     Clean the transcript by:
@@ -33,62 +52,77 @@ def clean_transcript(raw_transcript: str) -> str:
         4. Preserving numeric values and team mentions
         5. Fixing grammar and punctuation
     """
-    # print("raw_transcript", raw_transcript)
-    prompt = (
-        "You are a professional transcript cleaner. Follow these rules EXACTLY:\n\n"
-        "** Input format:  Speaker MM:SS or H:MM:SS \n Content**\n"
-        "**Locate every speaker and timestamp within the line and create a new entry for each individual timestamp.**"
-        
-        "## CRITICAL OUTPUT FORMAT REQUIREMENTS:\n"
-        "- Each line MUST follow this EXACT format: MM:SS Speaker Content\n"
-        "- No line shall end with a Speaker name of next line\n"
-        "- Use EXACTLY ONE space between timestamp and speaker name\n"
-        "- Use EXACTLY ONE space between speaker name and content\n"
-        "- Add EXACTLY ONE blank line between each entry\n"
-        "- NO headers, footers, explanations, or additional text\n"
-        "- Preserve timestamp format exactly as provided (0:16, 02:44, 1:23:45, etc.)\n\n"
+    prompt = (f"""You are a professional transcript cleaner. Follow these rules EXACTLY:
 
-        "***## MANDATORY RULE FOR IMAGE PLACEHOLDERS:\n***"
-        "***- If a line contains an image placeholder like [IMAGE:temp_images\\image_x.png], DO NOT modify the content in any way.\n***"
-        "***- Retain such lines EXACTLY as they appear, including speaker, timestamp, and image text.\n***"
-        "***- DO NOT clean, merge, format, or edit these lines.\n***"
-        "***- Example: '03:15 Speaker content [IMAGE:temp_images\\image_x.png]' → keep exactly like that strictly without any modification.\n\n***"
-        
-        "***Retain the sentence If you find 'Shared the following in the chat' in the transcript, do not remove it.\n\n***"
-        "***If a word is repeated more than once, keep only one.(example: but but but but but should be but)\n\n***"
+## INPUT FORMAT:
+- Speaker MM:SS or H:MM:SS
+  Content line 1
+  Content line 2
 
-        "***Text cleaning rules:***\n\n"
-        "Remove any single-word sentences, except 'Yes' or 'No'.\n\n"
-        "Merge consecutive notes by the same speaker, using the earliest timestamp, and separate statements with semicolons.\n\n"
-        "Keep all original questions and confirmation phrases. Do not change their tone or structure.\n\n"
-        "Remove filler words and speech disfluencies such as 'um', 'uh', 'hmm', 'ah', 'you know', 'like', 'so'. If the whole line is filler, remove it. If fillers appear with other words, remove only the fillers. Remove duplicate words or phrases.\n\n"
+## CRITICAL OUTPUT FORMAT REQUIREMENTS:
+- Each line MUST follow this EXACT format: MM:SS Speaker Content
+- No line shall end with a Speaker name of next line
+- Use EXACTLY ONE space between timestamp and speaker name
+- Use EXACTLY ONE space between speaker name and content
+- Add EXACTLY ONE blank line between each entry
+- NO headers, footers, explanations, or additional text
+- Preserve timestamp format exactly as provided (0:16, 02:44, 1:23:45, etc.)
 
-        "Keep all numbers and team/role mentions unchanged.\n\n"
-        "Correct grammar, capitalization, and punctuation.\n\n"
-        "Eliminate redundant or repeated information, but keep important context and timelines.\n\n"
+## MANDATORY RULE FOR IMAGE PLACEHOLDERS:
+- If a line contains an image placeholder like [IMAGE:temp_images\image_x.png], DO NOT modify the content in any way.
+- Retain such lines EXACTLY as they appear, including speaker, timestamp, and image text.
+- DO NOT clean, merge, format, or edit these lines.
+- Example: '03:15 Speaker content [IMAGE:temp_images\image_x.png]' → keep exactly like that strictly without any modification.
 
-        "Preserve critical technical details and activity context. Remove statements that blame or criticize another person.\n\n"
+## TEXT CLEANING RULES:
+1. **Filler Word Removal**:
+   - REMOVE ALL filler words and phrases: 'um', 'uh', 'hmm', 'ah', 'you know', 'like', 'so', 'basically', 'actually', 'literally', 'I mean', 'sort of', 'kind of', 'you see', 'you know what I mean', 'or something', 'right?', 'okay', 'alright'.
+   - If the entire line is just filler words, remove the entire line.
+   - Example: 'Um, I think we should, you know, maybe check the logs' → 'We should check the logs'
 
-        "Make sure country and region mentions use correct names (e.g., 'India' instead of 'all countries in India').\n\n"
+2. **Duplicate Word Removal**:
+   - Remove repeated words that appear consecutively, keeping only one instance.
+   - Example: 'The the system is down' → 'The system is down'
+   - Example: 'But but but we need to check' → 'But we need to check'
 
-        "Each entry must start with its timestamp, followed by the speaker name and the cleaned content.\n\n"
+3. **Sentence Structure**:
+   - Remove any single-word sentences, except 'Yes' or 'No'.
+   - Merge short, related sentences by the same speaker using semicolons.
+   - Correct any obvious grammatical errors.
+   - Fix run-on sentences by adding appropriate punctuation.
 
-        "Output each entry in the format:\nMM:SS Speaker Content\n\n"
+4. **Content Preservation**:
+   - Keep all original questions and confirmation phrases. Do not change their tone or structure.
+   - Preserve all numbers, technical terms, team/role mentions, and proper nouns exactly as they appear.
+   - Keep all timestamps and speaker names unchanged.
+   - Preserve important context and technical details.
 
-        "Leave a blank line between each entry.\n\n"
+5. **Repetition Removal**:
+   - Remove redundant information that is repeated within the same speaker's turn.
+   - If the same information is repeated by different speakers, keep the most complete version.
+   - Remove unnecessary qualifiers like 'I think', 'I believe', 'maybe', 'perhaps' when they don't add value.
 
-        "Output format example:\n\n"
+## EXAMPLES:
+Input:
+John 1:23 Um, I was thinking that, you know, the the system might be down because, like, the server is not responding, not responding at all.
 
-        "01:23 Gautham There is a chance it got rebooted last night; We need to check the logs; The system was down yesterday\n\n"
+Output:
+01:23 John The system might be down because the server is not responding.
 
-        "02:17 Anil Yes\n\n"
+Input:
+Sarah 2:45 So, basically, I mean, we need to, we need to check the logs, you know what I mean?
 
-        "02:29 ABC Team No activity observed, but deployment on Thursday affected the entire system.\n\n"
-        
-        "Process this transcript:\n"
-        f"{raw_transcript}"
-    )
-    
+Output:
+02:45 Sarah We need to check the logs.
+
+Input:
+Mike 3:15 The the database is showing errors, errors in the connection pool.
+
+Output:
+03:15 Mike The database is showing errors in the connection pool.
+
+## TRANSCRIPT TO CLEAN:
+{raw_transcript}""")
     result = call_openai_chat(prompt)
     # print("cleaned_transcript", result)
     return result
@@ -99,70 +133,45 @@ def summarize_transcript(cleaned_transcript: str, include_header: bool = False) 
     Summarize a cleaned transcript into professional, active-voice statements
     with consistent formatting and proper grammar.
     """
-    
     prompt = (
         "You are a professional transcript summarizer. Create summaries following these EXACT rules:\n\n"
-        
-        "## CRITICAL OUTPUT FORMAT REQUIREMENTS:\n"
-        "- Each line MUST follow this EXACT format: MM:SS Speaker Content\n"
-        "- Use EXACTLY ONE space between timestamp and speaker name\n"
-        "- Use EXACTLY ONE space between speaker name and content\n"
-        "- Add EXACTLY ONE blank line between each entry\n"
-        "- NO headers, footers, explanations, or additional text\n"
-        "- Preserve timestamp format exactly as provided (0:08, 02:44, 1:23:45, etc.)\n\n"
-        
-        "***## MANDATORY RULE FOR IMAGE PLACEHOLDERS:\n***"
-        "***- If a line contains an image placeholder like [IMAGE:temp_images\\image_x.png], DO NOT modify the content in any way.\n***"
-        "***- Retain such lines EXACTLY as they appear, including speaker, timestamp, and image text.\n***"
-        "***- DO NOT clean, merge, format, or edit these lines.Ad there should be only one line for each image placeholder\n ***"
-        "***- Example: '03:15 Speaker content [IMAGE:temp_images\\image_x.png]' → keep exactly like that strictly without any modification.\n\n***"
-        
+        f"{TIMESTAMP_FORMAT_RULES}"
+        f"{IMAGE_PLACEHOLDER_RULES}"
         "## CONTENT RULES:\n"
         "1. **Grammar and Voice:**\n"
         "   - Use ACTIVE VOICE exclusively\n"
         "   - Write complete, grammatically correct sentences\n"
-        "   - Proper punctuation and capitalization\n"
+        "   - Use proper punctuation and capitalization\n"
         "   - Example: 'System was restarted' → 'Team restarted the system'\n\n"
         
-        "2. **Consecutive speaker handling:**\n"
+        "2. **Consecutive Speaker Handling:**\n"
         "   - Merge consecutive same-speaker entries\n"
         "   - Use EARLIEST timestamp from the sequence\n"
         "   - Separate merged content with semicolons\n"
         "   - Example: 'Chin 0:16 First point; Second point; Third point'\n\n"
         
-        "3. **Content preservation:**\n"
+        "3. **Content Preservation:**\n"
         "   - Keep ALL numeric values exactly (500+, P1, P2, server names)\n"
         "   - Preserve team/role mentions exactly (Admin team, Cloud OPS Team)\n"
         "   - Maintain technical terminology and identifiers\n"
         "   - Keep important process steps and troubleshooting actions\n\n"
         
-        "4. **Semantic accuracy:**\n"
+        "4. **Semantic Accuracy:**\n"
         "   - Fix illogical statements\n"
         "   - Correct country/region references\n"
         "   - Clarify unclear technical references\n"
         "   - Example: 'all countries in India' → 'all regions in India'\n\n"
         
-        "5. **Professional summarization:**\n"
+        "5. **Professional Summarization:**\n"
         "   - Convert lengthy explanations into clear statements\n"
         "   - Remove redundant information while preserving key details\n"
         "   - Maintain chronological flow of events\n"
         "   - Transform unclear questions into professional inquiries\n\n"
-        
-        "## MANDATORY OUTPUT FORMAT:\n"
-        "MM:SS Speaker Content\n"
-        "\n"
-        "MM:SS Speaker Content\n"
-        "\n"
-        "MM:SS Speaker Content\n\n"
-        
-        "## EXAMPLE OUTPUT:\n"
-        "0:00 Speaker1 Team identified API latency spike; logs show increased Server A load.\n"
-        "\n"
-        "0:08 Speaker2 We restarted backend service to reduce response times.\n"
-        "\n"
+        "## OUTPUT EXAMPLE:\n"
+        "0:00 Speaker1 Team identified API latency spike; logs show increased Server A load.\n\n"
+        "0:08 Speaker2 We restarted backend service to reduce response times.\n\n"
         "1:23:45 Speaker3 Can you confirm cache node impact status?\n\n"
-        
-        "Summarize this transcript:\n"
+        "## TRANSCRIPT TO SUMMARIZE:\n"
         f"{cleaned_transcript}"
     )
     
