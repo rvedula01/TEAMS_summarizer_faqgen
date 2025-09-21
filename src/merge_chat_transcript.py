@@ -432,49 +432,91 @@ def convert_chat_only(input_path: str, output_path: str) -> None:
         print(f"✅ Chat conversion completed: {output_path}")
         if images_data:
             print(f"   📷 {len(images_data)} images embedded")
-        
     except Exception as e:
         print(f"❌ Error: {str(e)}")
         raise
 
-def merge_chat_and_transcript(transcript_path: str, chat_path: str, output_path: str) -> None:
-    """Merge chat and transcript files chronologically using enhanced chat parsing."""
-    try:
-        debug_print(f"Reading transcript: {transcript_path}")
-        transcript_text = read_docx(transcript_path)
+def merge_chat_and_transcript(transcript_path: str, chat_path: Optional[str] = None, output_path: str = None) -> str:
+    """
+    Merge chat and transcript files chronologically using enhanced chat parsing.
+    If chat_path is None, only the transcript will be processed.
+    
+    Args:
+        transcript_path: Path to the transcript file (required)
+        chat_path: Path to the chat file (optional)
+        output_path: Path to save the merged output. If None, a temporary file will be created.
         
-        debug_print(f"Reading and parsing chat with images: {chat_path}")
-        # Use enhanced chat parsing with image extraction
-        formatted_chat, images_data = parse_chat_with_images(chat_path)
+    Returns:
+        Path to the merged output file
+    """
+    try:
+        debug_print("\n" + "="*50)
+        debug_print("STARTING MERGE PROCESS")
+        debug_print("="*50)
+
+        # 1. Read and process transcript
+        debug_print("\nReading transcript file...")
+        with open(transcript_path, 'rb') as f:
+            transcript_text = f.read().decode('utf-8', errors='ignore')
+        
+        debug_print("Extracting base time from transcript...")
+        base_time = extract_transcript_base_time(transcript_text)
         
         debug_print("Extracting transcript segments...")
         transcript_segments = extract_transcript_segments(transcript_text)
-        
-        debug_print("Extracting chat entries...")
-        base_time = extract_transcript_base_time(transcript_text)
-        chat_entries = extract_chat_entries_with_timestamps(formatted_chat, base_time)
-        
-        debug_print("Merging chronologically...")
-        merged_text = merge_chronologically(transcript_segments, chat_entries)
+        debug_print(f"Found {len(transcript_segments)} transcript segments")
 
-        # Prepend document title and event date/time in requested format if base_time is available
-        header = "Transcript and chat history\n\n"
-        if base_time:
-            header += base_time.strftime("%B %d, %Y, %I:%M%p") + "\n\n"
-        merged_text = header + merged_text
+        # If no chat file provided, just process the transcript
+        if not chat_path:
+            debug_print("\nNo chat file provided, processing transcript only...")
+            # Create output path if not provided
+            if not output_path:
+                import tempfile
+                _, output_path = tempfile.mkstemp(suffix='.docx')
+            
+            # Save the transcript directly
+            with open(transcript_path, 'rb') as src, open(output_path, 'wb') as dst:
+                dst.write(src.read())
+            
+            debug_print("\n" + "="*50)
+            debug_print("TRANSCRIPT PROCESSING COMPLETED")
+            debug_print("="*50)
+            
+            return output_path
 
-        debug_print(f"Saving merged result to: {output_path}")
-        merged_text = reformat_merged_output(merged_text, base_time)
-        write_docx(merged_text, output_path, images_data)
+        # 2. Read and process chat
+        debug_print("\nProcessing chat file...")
+        chat_text, chat_images = parse_chat_with_images(chat_path)
+        chat_entries = extract_chat_entries_with_timestamps(chat_text, base_time)
+        debug_print(f"Found {len(chat_entries)} chat entries")
+
+        # 3. Merge chronologically
+        debug_print("\nMerging content chronologically...")
+        merged_entries = merge_chronologically(transcript_segments, chat_entries)
         
-        print(f"✅ Successfully merged document saved to: {output_path}")
-        if images_data:
-            print(f"   📷 {len(images_data)} images embedded")
+        # 4. Reformat and save
+        debug_print("Reformatting output...")
+        merged_text = '\n\n'.join(entry[1] for entry in merged_entries)
+        reformatted_text = reformat_merged_output(merged_text, base_time)
+        
+        # 5. Save the merged document with images
+        debug_print("Saving merged document...")
+        if not output_path:
+            import tempfile
+            _, output_path = tempfile.mkstemp(suffix='.docx')
+        
+        write_docx(reformatted_text, output_path, chat_images)
+        
+        debug_print("\n" + "="*50)
+        debug_print("MERGE COMPLETED SUCCESSFULLY")
+        debug_print("="*50)
+        
+        return output_path
         
     except Exception as e:
-        print(f"❌ Error: {str(e)}")
-        import traceback
-        traceback.print_exc()
+        debug_print("\n" + "!"*50)
+        debug_print(f"ERROR: {str(e)}")
+        debug_print("!"*50)
         raise
 
 def main():
@@ -485,39 +527,58 @@ def main():
         print("Usage:")
         print("  Convert chat only:")
         print("    python merge_chat_transcript.py convert <chat.docx> <output.txt|output.docx>")
-        print("  Merge chat and transcript:")
-        print("    python merge_chat_transcript.py merge <transcript.docx> <chat.docx> <output.docx>")
+        print("  Merge chat and transcript (chat is optional):")
+        print("    python merge_chat_transcript.py merge <transcript.docx> [chat.docx] <output.docx>")
+        print("\nNote: For merging, output must be a .docx file to support images.")
         sys.exit(1)
     
     command = sys.argv[1].lower()
     
     try:
-        if command == "convert":
+        if command == 'convert':
             if len(sys.argv) != 4:
-                print("Usage: python merge_chat_transcript.py convert <chat.docx> <output.txt|output.docx>")
-                sys.exit(1)
+                raise ValueError("Incorrect number of arguments for convert command")
             
-            chat_path = sys.argv[2]
+            input_path = sys.argv[2]
             output_path = sys.argv[3]
-            convert_chat_only(chat_path, output_path)
             
-        elif command == "merge":
-            if len(sys.argv) != 5:
-                print("Usage: python merge_chat_transcript.py merge <transcript.docx> <chat.docx> <output.docx>")
-                sys.exit(1)
+            print(f"Converting chat file: {input_path}")
+            print(f"Output will be saved to: {output_path}")
             
+            convert_chat_only(input_path, output_path)
+            
+        elif command == 'merge':
+            # Check if the last argument is the output file (must be .docx)
+            if not sys.argv[-1].lower().endswith('.docx'):
+                raise ValueError("Output file must be a .docx file to support images")
+                
+            output_path = sys.argv[-1]
             transcript_path = sys.argv[2]
-            chat_path = sys.argv[3]
-            output_path = sys.argv[4]
-            merge_chat_and_transcript(transcript_path, chat_path, output_path)
+            
+            # Check if a chat file was provided
+            if len(sys.argv) == 5:  # merge transcript chat output
+                chat_path = sys.argv[3]
+                print(f"Merging transcript: {transcript_path}")
+                print(f"With chat: {chat_path}")
+                print(f"Output will be saved to: {output_path}")
+                
+                merge_chat_and_transcript(transcript_path, chat_path, output_path)
+            else:  # merge transcript output only
+                print(f"Processing transcript only: {transcript_path}")
+                print(f"Output will be saved to: {output_path}")
+                
+                merge_chat_and_transcript(transcript_path, None, output_path)
             
         else:
-            print(f"Unknown command: {command}")
-            print("Available commands: convert, merge")
-            sys.exit(1)
+            raise ValueError(f"Unknown command: {command}")
             
+        print("✅ Operation completed successfully!")
+        
     except Exception as e:
-        print(f"❌ Error: {str(e)}", file=sys.stderr)
+        print(f"❌ Error: {str(e)}")
+        if DEBUG:
+            import traceback
+            traceback.print_exc()
         sys.exit(1)
 
 if __name__ == "__main__":
