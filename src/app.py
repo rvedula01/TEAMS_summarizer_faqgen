@@ -1382,7 +1382,7 @@ def main():
         st.image("src/unnamed.png", 
                 width=300, 
                 caption="Meeting Summary",
-                use_column_width='auto')
+                use_container_width=True)
     
     # Create tabs
     tab1, tab2 = st.tabs(["📋 Summary", "❓ Q&A"])
