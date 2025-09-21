@@ -1359,28 +1359,27 @@ def main():
     unsafe_allow_html=True
     )
     
-    # Create two columns for side-by-side layout with adjusted spacing
-    col1, col2 = st.columns([1.2, 1])
+    # Create two columns for side-by-side layout
+    col1, col2 = st.columns(2)
     
     # Left column - Steps
     with col1:
         st.markdown("""
-        <div style="margin: 0; padding: 20px 0;">
-            <p style="font-weight: bold; font-size: 18px; margin-bottom: 15px;">Steps to use the application:</p>
-            <ul style="padding-left: 20px; font-size: 16px; line-height: 2.2; margin: 0;">
+        <div style="margin-top: 20px;">
+            <p style="font-weight: bold; font-size: 18px;">Steps to use the application:</p>
+            <ol style="padding-left: 20px; font-size: 16px; line-height: 2;">
                 <li>📁 Upload your meeting transcript and chat files</li>
                 <li>👆 Click on Generate Summary button</li>
                 <li>📥 Download the summarized file</li>
-            </ul>
+            </ol>
         </div>
         """, unsafe_allow_html=True)
     
-    # Right column - Image with fixed height to match steps
+    # Right column - Image
     with col2:
-        st.image("src/unnamed.png",
-                width=250,  # Fixed width for better control
-                use_column_width=False,  # Override container width
-                output_format='PNG',
+        st.image("src/unnamed.png", 
+                width=250,  # Reduced width
+                use_container_width=False,  # Disable container width to respect the width parameter
                 caption="Meeting Summary")
     
     # Create tabs
