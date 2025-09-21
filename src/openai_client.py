@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 dotenv_path = Path(__file__).parent.parent / '.env'
 load_dotenv(dotenv_path=dotenv_path)
 
-def call_openai_chat(prompt: str, model: str = "gpt-3.5-turbo") -> str:
+def call_openai_chat(prompt: str, model: str = "gpt-4o") -> str:
     """
     Send `prompt` to OpenAI's chat completions (v1+ style).
     Returns only the generated text.
