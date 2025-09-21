@@ -1354,33 +1354,18 @@ def main():
         <p class="description-text">
             Hi there! Ready to transform your team huddles into Smart & Actionable Summaries in a jiffy!
         </p>
+        <p class="description-text">
+            <strong>Steps to use the application:</strong>
+        </p>
+        <ul class="steps-list">
+            <li>📁 Upload your meeting transcript and chat files</li>
+            <li><span style="color: #D2B48C; text-shadow: 0 0 2px rgba(0,0,0,0.2);">👆</span> Click on Generate Whiteboard button</li>
+            <li>📥 Download the summarized file</li>
+        </ul>
     </div>
     """,
     unsafe_allow_html=True
     )
-    
-    # Create two columns for side-by-side layout
-    col1, col2 = st.columns(2)
-    
-    # Left column - Steps
-    with col1:
-        st.markdown("""
-        <div style="margin-top: 20px;">
-            <p style="font-weight: bold; font-size: 18px;">Steps to use the application:</p>
-            <ol style="padding-left: 20px; font-size: 16px; line-height: 2;">
-                <li>📁 Upload your meeting transcript and chat files</li>
-                <li>👆 Click on Generate Summary button</li>
-                <li>📥 Download the summarized file</li>
-            </ol>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    # Right column - Image
-    with col2:
-        st.image("src/unnamed.png", 
-                width=250,  # Reduced width
-                use_container_width=False,  # Disable container width to respect the width parameter
-                caption="Meeting Summary")
     
     # Create tabs
     tab1, tab2 = st.tabs(["📋 Summary", "❓ Q&A"])
