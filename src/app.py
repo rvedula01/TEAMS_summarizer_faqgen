@@ -1351,17 +1351,26 @@ def main():
     </style>
     
     <div class="description-container">
-        <p class="description-text">
-            Hi there! Ready to transform your team huddles into Smart & Actionable Summaries in a jiffy!
-        </p>
-        <p class="description-text">
-            <strong>Steps to use the application:</strong>
-        </p>
-        <ul class="steps-list">
-            <li>📁 Upload your meeting transcript and chat files</li>
-            <li><span style="color: #D2B48C; text-shadow: 0 0 2px rgba(0,0,0,0.2);">👆</span> Click on Generate Whiteboard button</li>
-            <li>📥 Download the summarized file</li>
-        </ul>
+        <div style="display: flex; align-items: flex-start; gap: 40px;">
+            <div style="flex: 1;">
+                <p class="description-text">
+                    Hi there! Ready to transform your team huddles into Smart & Actionable Summaries in a jiffy!
+                </p>
+                <p class="description-text" style="margin-top: 20px;">
+                    <strong>Steps to use the application:</strong>
+                </p>
+                <ol class="steps-list" style="padding-left: 20px;">
+                    <li style="margin-bottom: 10px;">📁 Upload your meeting transcript and chat files</li>
+                    <li style="margin-bottom: 10px;">👆 Click on Generate Summary button</li>
+                    <li>📥 Download the summarized file</li>
+                </ol>
+            </div>
+            <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
+                <img src="https://raw.githubusercontent.com/rvedula01/TEAMS_summarizer_faqgen/main/unnamed.png" 
+                     alt="Meeting Summary" 
+                     style="max-width: 100%; max-height: 300px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            </div>
+        </div>
     </div>
     """,
     unsafe_allow_html=True
