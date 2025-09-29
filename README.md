@@ -5,7 +5,7 @@ A Streamlit application that transforms meeting transcripts and chat logs into s
 1. **Ingests Multiple Inputs**:
    - Microsoft Teams meeting transcripts (`.docx`)
    - Chat logs from meetings (`.docx` or `.txt`)
-   - Supports single or multiple file uploads
+   - Supports multiple file uploads
 
 2. **Data Processing**:
    - Merges transcript and chat data chronologically
