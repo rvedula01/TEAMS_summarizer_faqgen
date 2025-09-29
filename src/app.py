@@ -1569,7 +1569,7 @@ def main():
     
     <div class="description-container">
         <p class="description-text">
-            Hi there! Ready to transform your team huddles into Smart & Actionable Summaries in a jiffy!
+            Hi there! I am your AI Assistant ready to transform your team huddles into Smart & Actionable Summaries in a jiffy!
         </p>
         <p class="description-text">
             <strong>Steps to use the application:</strong>
