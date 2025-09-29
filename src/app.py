@@ -190,52 +190,230 @@ def process_first_image_only_for_display(text_content, for_word_doc=False):
     
     return '\n'.join(processed_lines)
 
+def _is_meaningful_text(text: str, min_words: int = 5) -> bool:
+    """Check if text is meaningful (contains more than min_words words)."""
+    if not text or not text.strip():
+        return False
+    words = text.split()
+    return len(words) > min_words
+
+def _is_mostly_code_or_gibberish(text: str) -> bool:
+    """Check if text is mostly code or gibberish."""
+    if not text:
+        return True
+    
+    # Count non-alphabetic characters
+    alpha_chars = sum(c.isalpha() for c in text)
+    total_chars = max(1, len(text) - text.count(' '))  # Exclude spaces
+    alpha_ratio = alpha_chars / total_chars
+    
+    # If less than 30% alphabetic, likely code or gibberish
+    return alpha_ratio < 0.3
+
+def _split_text_into_chunks(text: str, max_chunk_size: int = 4000) -> List[str]:
+    """
+    Split text into meaningful chunks, trying to keep related content together.
+    
+    Args:
+        text: The text to split into chunks
+        max_chunk_size: Maximum size of each chunk in characters (default: 4000)
+        
+    Returns:
+        List of meaningful text chunks, each <= max_chunk_size
+    """
+    if not text or not text.strip():
+        return []
+    
+    # First, split by major sections (double newlines)
+    sections = [s.strip() for s in text.split('\n\n') if s.strip()]
+    chunks = []
+    current_chunk = []
+    current_size = 0
+    
+    for section in sections:
+        if not _is_meaningful_text(section) or _is_mostly_code_or_gibberish(section):
+            continue
+            
+        section_size = len(section)
+        
+        # If section is too large, try to split by sentences
+        if section_size > max_chunk_size:
+            sentences = nltk.sent_tokenize(section)
+            current_sent_chunk = []
+            current_sent_size = 0
+            
+            for sent in sentences:
+                sent = sent.strip()
+                if not _is_meaningful_text(sent):
+                    continue
+                    
+                sent_size = len(sent)
+                
+                # If adding this sentence would exceed the chunk size, finalize current chunk
+                if current_sent_size + sent_size > max_chunk_size and current_sent_chunk:
+                    chunk_text = ' '.join(current_sent_chunk)
+                    if _is_meaningful_text(chunk_text):
+                        chunks.append(chunk_text)
+                    current_sent_chunk = []
+                    current_sent_size = 0
+                    
+                current_sent_chunk.append(sent)
+                current_sent_size += sent_size + 1
+            
+            # Add remaining sentences if any
+            if current_sent_chunk:
+                chunk_text = ' '.join(current_sent_chunk)
+                if _is_meaningful_text(chunk_text):
+                    chunks.append(chunk_text)
+        
+        # If section fits in current chunk, add it
+        elif current_size + section_size <= max_chunk_size:
+            current_chunk.append(section)
+            current_size += section_size + 2  # +2 for newlines
+        
+        # Otherwise, finalize current chunk and start a new one
+        else:
+            if current_chunk:
+                chunk_text = '\n\n'.join(current_chunk)
+                if _is_meaningful_text(chunk_text):
+                    chunks.append(chunk_text)
+            current_chunk = [section]
+            current_size = section_size
+    
+    # Add the last chunk if not empty
+    if current_chunk:
+        chunk_text = '\n\n'.join(current_chunk)
+        if _is_meaningful_text(chunk_text):
+            chunks.append(chunk_text)
+    
+    # Log chunk statistics
+    print(f"\n=== Chunking Statistics ===")
+    print(f"Original text length: {len(text)} characters")
+    print(f"Number of chunks: {len(chunks)}")
+    print(f"Average chunk size: {sum(len(c) for c in chunks) / max(1, len(chunks)):.0f} characters")
+    
+    if chunks:
+        print("\nSample chunks:")
+        for i, chunk in enumerate(chunks[:3], 1):
+            preview = chunk[:100].replace('\n', ' ')
+            print(f"Chunk {i} ({len(chunk)} chars): {preview}...")
+        if len(chunks) > 3:
+            print(f"... and {len(chunks) - 3} more chunks")
+    
+    return chunks
+
 # FAQ Extraction Functions
-def extract_faqs(text: str, max_chunk_size: int = 3000) -> List[Dict[str, str]]:
+def extract_faqs(text: str, max_chunk_size: int = 4000) -> List[Dict[str, str]]:
     """
     Extract FAQs (questions and answers) from the given text using OpenAI with chunking.
+    Uses a more efficient chunking strategy to reduce the number of API calls.
     
     Args:
         text: The text to extract FAQs from
-        max_chunk_size: Maximum size of each chunk in characters
+        max_chunk_size: Maximum size of each chunk in characters (default: 4000)
         
     Returns:
         List of dictionaries containing questions and their corresponding answers
     """
+    if not text or not text.strip():
+        print("Warning: Empty text provided to extract_faqs")
+        return []
+    
     try:
-        # Split text into chunks using the existing text_processing function
-        chunks = _split_raw_into_chunks(text, max_chunk_size)
-        print(f"\nTotal chunks to process: {len(chunks)}")
-        if chunks:
-            print(f"First chunk preview: {chunks[0][:100]}...")
+        print("\n=== Starting FAQ Extraction ===")
+        print(f"Input text length: {len(text)} characters")
         
-        # Process each chunk and collect results
-        faqs = []
+        # Split text into meaningful chunks
+        chunks = _split_text_into_chunks(text, max_chunk_size)
+        
+        if not chunks:
+            print("Warning: No meaningful chunks could be created from the text")
+            return []
+        
+        all_faqs = []
+        total_chunks = len(chunks)
+        
+        print(f"\nProcessing {total_chunks} chunks...")
+        
         for idx, chunk in enumerate(chunks, 1):
-            print(f"\nProcessing chunk {idx}/{len(chunks)} for FAQs...")
-            print(f"Chunk size: {len(chunk)} characters")
-            print(f"Chunk preview: {chunk[:50]}...")
-            chunk_faqs = _process_chunk_for_faqs(chunk)
-            print(f"Found {len(chunk_faqs)} FAQs in this chunk")
-            if chunk_faqs:
-                print(f"First FAQ in chunk: {chunk_faqs[0]}")
-            faqs.extend(chunk_faqs)
+            try:
+                print(f"\n=== Chunk {idx}/{total_chunks} ===")
+                print(f"Size: {len(chunk):,} characters")
+                
+                # Process the chunk
+                chunk_faqs = _process_chunk_for_faqs(chunk)
+                
+                if chunk_faqs:
+                    print(f"Found {len(chunk_faqs)} FAQs in this chunk")
+                    all_faqs.extend(chunk_faqs)
+                else:
+                    print("No FAQs found in this chunk")
+                
+            except Exception as chunk_error:
+                print(f"Error processing chunk {idx}: {str(chunk_error)}")
+                import traceback
+                traceback.print_exc()
+                continue
         
-        print(f"\nTotal FAQs found: {len(faqs)}")
-        if faqs:
-            print(f"First FAQ overall: {faqs[0]}")
-        return faqs
+        # Remove duplicates while preserving order
+        unique_faqs = []
+        seen_questions = set()
+        
+        for faq in all_faqs:
+            if not isinstance(faq, dict) or 'question' not in faq:
+                continue
+                
+            question = faq['question'].strip().lower()
+            if question and question not in seen_questions:
+                seen_questions.add(question)
+                unique_faqs.append(faq)
+        
+        # Sort FAQs by the order they first appeared in the text
+        def get_first_occurrence(faq):
+            question = faq['question'].lower()
+            return text.lower().find(question)
+            
+        unique_faqs.sort(key=get_first_occurrence)
+        
+        print(f"\n=== FAQ Extraction Complete ===")
+        print(f"Total unique FAQs found: {len(unique_faqs)}")
+        
+        if unique_faqs:
+            print("\nSample FAQs:")
+            for i, faq in enumerate(unique_faqs[:3], 1):
+                print(f"{i}. Q: {faq.get('question', '')}")
+                print(f"   A: {faq.get('answer', '')[:100]}...")
+            if len(unique_faqs) > 3:
+                print(f"... and {len(unique_faqs) - 3} more")
+        
+        return unique_faqs
+        
     except Exception as e:
-        print(f"Error in extract_faqs: {e}")
+        print(f"\n!!! CRITICAL ERROR in extract_faqs: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return []
         raise
 
 def _process_chunk_for_faqs(chunk: str) -> List[Dict[str, str]]:
     """
     Helper function to process a single chunk of text for FAQs using OpenAI.
     """
+    if not chunk or not chunk.strip():
+        print("Warning: Empty chunk provided to _process_chunk_for_faqs")
+        return []
+        
     try:
         print("\n=== Starting FAQ Extraction ===")
         print(f"Chunk size: {len(chunk)} characters")
+        
+        # Safety check - if chunk is still too large, truncate it with a warning
+        max_allowed = 3000  # Conservative limit
+        if len(chunk) > max_allowed:
+            print(f"Warning: Chunk size ({len(chunk)}) exceeds maximum allowed size ({max_allowed}). Truncating...")
+            chunk = chunk[:max_allowed] + "\n[Content truncated due to length]"
+            
+        print(f"Processing chunk (first 100 chars): {chunk[:100]}...")
         
         # First, try to extract any existing Q&A pairs directly from the text
         qa_pairs = _extract_existing_qa_pairs(chunk)

@@ -1,55 +1,9 @@
-12:04 Neerav ABC Devices have been up for the last 7 minutes; adjacency is established, and most tunnels are up.
+01:14:00 Praveen Shared the following in the chat: it's ab-02, not ap-07
 
-16:34 Aryan Praveen, can you confirm when the site went down?
+01:26:00 Chandhan ABC Shared the following in the chat: [IMAGE:temp_images\image_170.png]
 
-16:45 Praveen Stand by. I'll put it in the chat.
+01:35:00 Neerav ABC Shared the following in the chat: obc-7111-sw01#sh crb ne X ------------------------- Device ID: UB-01111ab-45 Entry address(es): IP address: 111.XX.XXX.XX IPv6 address: AB12::7XX1:XXXXAAA:1AAA (link-local) Platform: ABCDE ABC-AB1111-A-B9, Capabilities: OOO Trans Interface: X, Port ID (outgoing port): QQQ Holdtime : 122 sec
 
-17:13 Aryan This 2:42, that is Eastern Time, correct?
+01:50:00 Aryan Shared the following in the chat: Issue resolved; MIM Closed; Problem ticket - PRB001111
 
-17:57 Praveen Yes, I just put the GMT in the chat; started at 2:42 PM local time, 18:42 GMT; devices started to ping at 3:29 PM (19:29 GMT).
-
-18:01 Aryan So I'll put this as a start time.
-
-18:33 Praveen Can you check all devices on site, Neerav, to ensure they all came up?
-
-18:46 Neerav ABC Yes, I'm just checking on them.
-
-18:52 Praveen Thank you.
-
-19:56 Aryan So Praveen, you're confirming that at 3:29 PM, the devices started working, and users at the site can log in or use their operations?
-
-20:09 Praveen I'll have to check with them. I haven't talked to the end users. I've been looking at the network, but let me try to reach out to a couple of guys.
-
-22:04 Praveen They are checking all their services, so just stand by.
-
-22:10 Goutham Is the site having just one power source, or are the devices that went down connected to one power source? Can we check that in parallel?
-
-22:34 Praveen We'll have to check that. We'll have to ask them afterwards. That should be part of the problem ticket. I think it was a major issue from the substation that caused the power to be down.
-
-22:43 Goutham OK.
-
-22:51 Praveen We have to check on the demo. We'll have to ask them, but that should be part of the problem ticket.
-
-22:59 Goutham Got it. Praveen, do you have the count of users impacted on the particular site?
-
-27:23 Praveen I do not know.
-
-27:26 Goutham OK.
-
-28:20 Neerav ABC I have seen multiple switches; all were power rebooted, but now they are reachable. Some are left, and I will update soon.
-
-28:36 Goutham Thanks, Neerav.
-
-28:37 Praveen On the test, I see a couple of Wi-Fi APs don't seem to be joined to a controller. I'm trying to get a list right now.
-
-32:38 Neerav ABC OK.
-
-37:01 Goutham Just for my understanding, Praveen, you're the site contact for the site, right?
-
-37:08 Praveen No, I am on the network team. I'm on the global network services team.
-
-37:13 Goutham Oh, it's GBS.
-
-37:14 Praveen Yeah, GBS.
-
-37:17 Goutham Sorry, GBS.
+[IMAGE:temp_images\image_170.png]
