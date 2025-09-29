@@ -922,51 +922,90 @@ MAX_CHARS_PER_CHUNK = 3000
 
 def count_pages_in_docx(docx_path):
     """
-    Estimate the number of pages in a Word document.
+    Count the number of pages in a Word document by detecting page breaks.
     
-    This function provides a cross-platform way to estimate the number of pages
-    by analyzing the document's content (words, images, tables) rather than
-    relying on platform-specific features.
+    This function attempts to count pages by looking for explicit page breaks
+    in the document, which provides a more accurate count than estimation.
     """
     try:
         from docx import Document
-        import docx.oxml
+        from docx.oxml.ns import qn
+        from docx.oxml import OxmlElement
+        import zipfile
+        import os
         
         # Default to 1 page if anything goes wrong
         default_pages = 1
         
         try:
+            # First try to extract page count from document properties if available
+            try:
+                with zipfile.ZipFile(docx_path) as z:
+                    # Look for the app.xml file which might contain page count
+                    if 'docProps/app.xml' in z.namelist():
+                        with z.open('docProps/app.xml') as f:
+                            import xml.etree.ElementTree as ET
+                            tree = ET.parse(f)
+                            root = tree.getroot()
+                            # Look for Pages element in app.xml
+                            pages_elem = root.find('{http://schemas.openxmlformats.org/officeDocument/2006/extended-properties}Pages')
+                            if pages_elem is not None and pages_elem.text.isdigit():
+                                return int(pages_elem.text)
+            except Exception as e:
+                print(f"Could not extract page count from document properties: {e}")
+            
+            # If we couldn't get page count from properties, try counting page breaks
             doc = Document(docx_path)
+            page_count = 1  # Start with 1 page (the first page doesn't need a page break)
             
-            # Count words in paragraphs (only non-empty paragraphs)
-            word_count = 0
+            # Look for explicit page breaks in paragraphs
             for para in doc.paragraphs:
-                if para.text.strip():
-                    word_count += len(para.text.split())
+                # Check for page break in paragraph properties
+                pPr = para._p.get_or_add_pPr()
+                if pPr.pageBreakBefore is not None:
+                    page_count += 1
+                
+                # Check for page breaks in runs
+                for run in para.runs:
+                    if run._element is not None and run._element.get_or_add_rPr().get_or_add_lastRenderedPageBreak() is not None:
+                        page_count += 1
             
-            # Count images and tables (each takes up space)
-            image_count = len(doc.inline_shapes) if hasattr(doc, 'inline_shapes') else 0
-            table_count = len(doc.tables) if hasattr(doc, 'tables') else 0
+            # Also check section breaks which might indicate page breaks
+            for section in doc.sections:
+                # If section starts on a new page, increment page count
+                if hasattr(section, 'start_type') and str(section.start_type) == 'NEW_PAGE':
+                    page_count += 1
             
-            # Estimate pages based on content
-            # - Assume ~500 words per page
-            # - Each image/table is roughly equivalent to 100 words
-            estimated_pages = (word_count + (image_count * 100) + (table_count * 100)) / 500
+            # If we still only have 1 page but the document is large, try a different approach
+            if page_count == 1 and os.path.getsize(docx_path) > 102400:  # If file > 100KB
+                # Estimate based on word count as fallback
+                word_count = sum(len(para.text.split()) for para in doc.paragraphs)
+                estimated_pages = max(1, word_count // 250)  # Rough estimate: 250 words per page
+                print(f"Using word count fallback: {word_count} words ≈ {estimated_pages} pages")
+                return estimated_pages
             
-            # Ensure at least 1 page and round up
-            return max(1, int(estimated_pages) + (1 if estimated_pages % 1 > 0.1 else 0))
+            print(f"Detected {page_count} pages in document")
+            return max(1, page_count)  # Ensure at least 1 page
             
         except Exception as e:
-            print(f"Warning: Could not estimate pages using python-docx: {e}")
-            return default_pages
+            print(f"Warning: Could not count pages using page breaks: {e}")
+            # Fallback to a simple word count estimate
+            try:
+                doc = Document(docx_path)
+                word_count = sum(len(para.text.split()) for para in doc.paragraphs)
+                estimated_pages = max(1, word_count // 250)  # Rough estimate: 250 words per page
+                print(f"Using word count fallback: {word_count} words ≈ {estimated_pages} pages")
+                return estimated_pages
+            except:
+                return default_pages
             
     except ImportError:
         print("Warning: python-docx not available, using default page count")
         return 1  # Default to 1 page if python-docx is not available
         
     except Exception as e:
-        print(f"Warning: Could not count pages accurately: {e}")
-        # Fallback: Return a default of 1 page
+        print(f"Warning: Could not count pages: {e}")
+        return 1  # Fallback: Return a default of 1 page
         return 1
 
 def filter_team_actions(action_items: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
