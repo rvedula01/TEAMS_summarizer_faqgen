@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Fri Jun  6 15:18:14 2025
-
-@author: ShivakrishnaBoora
 """
 
 import os
